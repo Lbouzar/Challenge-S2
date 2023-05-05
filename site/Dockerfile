@@ -16,6 +16,6 @@ RUN  docker-php-ext-install gd
 
 RUN pecl install yamL
 
-RUN usermod -u 1000 app-data
+RUN usermod -u 1000 www-data
 
 RUN a2enmod rewrite
