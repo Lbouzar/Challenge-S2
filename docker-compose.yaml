@@ -15,7 +15,7 @@ services:
     ports:
       - ${APP_PORT}:80
     volumes:
-      - ./app:/var/app/html/
+      - ./Cookr/:/var/app/html/
       - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - ./server/apache2.conf:/etc/apache2/apache2.conf
       - ./server/php.ini:/usr/local/etc/php/php.ini
