@@ -33,7 +33,7 @@ abstract class Sql
             foreach ($columns as $key => $value) {
                 $columnsUpdate[] = $key . "=:" . $key;
             }
-            $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id=" . $this->getId());
+            $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id =" . $this->getId());
         } else {
             $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
                             VALUES (:" . implode(",:", array_keys($columns)) . ")");
@@ -42,11 +42,34 @@ abstract class Sql
         $queryPrepared->execute($columns);
     }
 
-    public function select(): void
-    {
-    }
-
     public function delete(): void
     {
+        $queryPrepared = $this->pdo->prepare("DELETE FROM " .$this->table . " WHERE id =" . $this->getId());
     }
+
+    public function select($request): void 
+    {
+        $queryPrepared = $this->pdo->prepare("SELECT " .$request. "FROM " .$this->table);
+    }
+
+    public function where($field, $operator ,$value): void
+    {
+        $queryPrepared = $this->pdo->prepare("WHERE ".$field. " ".$operator. " ".$value  );
+    }
+
+    public function join($joinType, $newTable, $request): void 
+    {
+        $queryPrepared = $this->pdo->prepare($joinType . "JOIN " .$newTable. " ON " .$request);
+    }
+
+    /**
+     * ok, le plan est "simple" :
+     * Dans un select, j'ai besoin de savoir la rêquete
+     * Dans un select, je peux avoir une ou plusieurs conditions (where, group by, order by, limit)
+     * Dans un select, je peux avoir une ou plusieurs jointures (inner, cross, left, right)
+     * Résultat attendu :
+     * $user = new User();
+     * $user->select(*)->join(inner, role, role.id = user.role_id)->where(role.id, = ,4)
+     */
+
 }
