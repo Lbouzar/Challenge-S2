@@ -18,4 +18,8 @@ RUN pecl install yamL
 
 RUN usermod -u 1000 www-data
 
+# Enable error reporting and other development-specific configurations
+RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini
+RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini
+
 RUN a2enmod rewrite
