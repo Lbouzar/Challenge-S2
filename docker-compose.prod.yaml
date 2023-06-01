@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: site/Dockerfile.prod
 
     container_name: ${APP_CONTAINER_NAME}
     restart: unless-stopped
@@ -47,4 +47,4 @@ services:
 
 volumes:
   pgdata:
-# setting the docker compose: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# setting the docker compose: docker-compose -f docker-compose.ymal -f docker-compose.prod.yaml up -d
