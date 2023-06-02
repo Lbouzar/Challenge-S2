@@ -39,7 +39,7 @@ services:
     depends_on:
       - db
     ports:
-      - ${ADMINER_PORT}:80
+      - ${ADMINER_PORT}:8080
 
 volumes:
   pgdata:
