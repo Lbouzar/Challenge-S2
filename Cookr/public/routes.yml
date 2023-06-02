@@ -1,0 +1,16 @@
+/:
+  controller: Home 
+  action: index
+
+# Connexion
+/login:
+  controller: Security
+  action: login
+
+/logout:
+  controller: Security
+  action: logout 
+
+/register:
+  controller: Security
+  action: register
