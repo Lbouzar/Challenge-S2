@@ -38,11 +38,11 @@ $uri = (empty($uri))?"/":$uri;
 // $controller = new Security();
 // $controller->login();
 
-if(!file_exists("routes.yml")) {
+if(!file_exists("../app/config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
 
-$routes = yaml_parse_file("routes.yml");
+$routes = yaml_parse_file("../app/config/routes.yml");
 
 //Page 404
 if(empty($routes[$uri])) {
@@ -57,11 +57,11 @@ $controller = $routes[$uri]["controller"];
 $action = $routes[$uri]["action"];
 
 //Vérification de l'existance de la classe
-if(!file_exists("Controllers/".$controller.".php")){
+if(!file_exists("../app/controllers/".$controller.".php")){
     die("Le fichier Controllers/".$controller.".php n'existe pas");
 }
 
-include "Controllers/".$controller.".php";
+include "../app/controllers/".$controller.".php";
 
 //Le fichier existe mais est-ce qu'il possède la bonne classe
 //bien penser à ajouter le namespace \App\Controllers\Security

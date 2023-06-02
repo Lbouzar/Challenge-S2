@@ -6,7 +6,7 @@
 /login:
   controller: Security
   action: login
-
+  
 /logout:
   controller: Security
   action: logout 
