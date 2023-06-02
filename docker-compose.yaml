@@ -2,16 +2,12 @@ version: "3"
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-
+    build: site
     container_name: ${APP_CONTAINER_NAME}
     restart: unless-stopped
     depends_on:
       - db
     environment:
-      ENVIRONMENT: development
       DB_HOST: ${DB_HOST}
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
