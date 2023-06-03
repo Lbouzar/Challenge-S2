@@ -1,5 +1,8 @@
 <?php
 namespace App;
+
+use App\Config\View;
+
 //Contrainte : utilisation des Namespace
 
 
@@ -46,7 +49,8 @@ $routes = yaml_parse_file("../app/config/routes.yml");
 
 //Page 404
 if(empty($routes[$uri])) {
-    die("Page 404");
+    http_response_code(404);
+    new View("404","front");
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
