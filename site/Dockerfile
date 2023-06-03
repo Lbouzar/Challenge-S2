@@ -23,3 +23,13 @@ RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini
 RUN echo "display_errors = On" >> /usr/local/etc/php/php.ini
 
 RUN a2enmod rewrite
+
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
+# Install SASS
+RUN npm install -g sass
+
+# Starting SASS
+CMD ["sass", "--watch", "/var/app/html/public/assets/scss/main.scss:/var/app/html/public/assets/scss/main.css"]
