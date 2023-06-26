@@ -1,0 +1,58 @@
+.card {
+    border: 2px solid $orange;
+    border-radius: 8px;
+    width: 335px;
+    position: relative;
+    overflow: hidden;
+}
+.card-image {
+    overflow: hidden;
+    img {
+        width: 100%;
+        min-height: 189px;
+        transition: 0.3s;
+    }
+    &:hover img {
+        transform: scale(1.1);
+        transition: 0.3s;
+    }
+}
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 12px;
+    h2 {
+        margin-top: 4px;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    
+}
+
+.recipe-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 12px;
+    h2 {
+        font-weight: 600;
+        font-size: 20px;
+    }
+}
+
+.card-body {
+    padding-left: 12px;
+    p {
+        font-weight: 400;
+        font-size: 14px;
+    }
+}
+.card-footer {
+    padding-left: 12px;
+    p {
+        margin: 20px 0 12px 0;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 14px;
+    }
+}

@@ -19,7 +19,7 @@ class View {
 
     public function setView(String $view): void 
     {
-        $view = "views/".trim($view).".view.php";
+        $view = "../app/views/".trim($view).".view.php";
         if(!file_exists($view)) {
             die("La vue ".$view." n'existe pas");
         }
@@ -28,11 +28,16 @@ class View {
 
     public function setTemplate(String $template): void 
     {
-        $template = "views/".trim($template).".tpl.php";
+        $template = "../app/views/".trim($template).".tpl.php";
         if(!file_exists($template)){
             die("Le template ".$template." n'existe pas");
         }
         $this->template = $template;
+    }
+
+    public function modal($name, $config):void 
+    {
+        include "../app/views/Modals/".$name.".modal.php";
     }
 
     public function __destruct()
