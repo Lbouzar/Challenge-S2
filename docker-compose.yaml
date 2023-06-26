@@ -6,12 +6,7 @@ services:
     container_name: ${APP_CONTAINER_NAME}
     restart: unless-stopped
     depends_on:
-      - db
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      - database
     ports:
       - ${APP_PORT}:80
     volumes:
@@ -20,26 +15,23 @@ services:
       - ./server/apache2.conf:/etc/apache2/apache2.conf
       - ./server/php.ini:/usr/local/etc/php/php.ini
 
-  db:
+  database:
     image: postgres
-    container_name: ${DB_CONTAINER_NAME}
     restart: always
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - ${DB_PORT}:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer
-    restart: always
-    depends_on:
-      - db
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "cookr.compagny@yahoo.com"
+      PGADMIN_DEFAULT_PASSWORD: "@CookrWithTheGoodFood08"
     ports:
-      - ${ADMINER_PORT}:8080
+      - ${ADMINER_PORT}:80
+    depends_on:
+      - database
 
 volumes:
   pgdata:

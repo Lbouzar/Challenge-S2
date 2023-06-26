@@ -1,6 +1,23 @@
+# -----------------FRONT SIDE---------------------------
 /:
   controller: Home 
   action: index
+
+# Articles
+/articles:
+  controller: Article
+  action: allArticles
+
+/article/$i:
+  # ROUTE DYNAMIQUE A FAIRE
+
+#Recettes
+/recipes:
+  controller: Recipe
+  action: allRecipes
+
+/recipe/$i:
+  # ROUTE DYNAMIQUE A FAIRE
 
 # Connexion
 /login:
@@ -14,3 +31,8 @@
 /register:
   controller: Security
   action: register
+
+# -----------------FRONT SIDE---------------------------
+
+# -----------------BACK SIDE----------------------------
+# -----------------BACK SIDE----------------------------

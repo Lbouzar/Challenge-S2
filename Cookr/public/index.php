@@ -5,17 +5,22 @@ use App\Config\View;
 
 //Contrainte : utilisation des Namespace
 
-
 spl_autoload_register(function ($class) {
-    //Core/View.php
-    $class = str_replace("App\\","", $class);
-    $class = str_replace("\\","/", $class).".php";
-    if(file_exists($class)){
-        include $class;
+    $class = "../" . str_replace("\\", "/", $class);
+    
+    //Config files
+    $config = $class . ".php";
+
+    //Forms files
+    $form = $class . ".form.php";
+
+    if (file_exists($config)) {
+        include $config;
+    } else if (file_exists($form)) {
+        include $form;
     }
+    
 });
-
-
 
 //Récupérer dans l'url l'uri /login ou /user/toto
 //Nettoyer la donnée
@@ -50,7 +55,7 @@ $routes = yaml_parse_file("../app/config/routes.yml");
 //Page 404
 if(empty($routes[$uri])) {
     http_response_code(404);
-    new View("404","front");
+    new View("404/404","front");
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
@@ -69,7 +74,8 @@ include "../app/controllers/".$controller.".php";
 
 //Le fichier existe mais est-ce qu'il possède la bonne classe
 //bien penser à ajouter le namespace \App\Controllers\Security
-$controller = "\\App\\Controllers\\".$controller;
+$controller = "App\\Controllers\\".$controller;
+
 if(!class_exists($controller)){
     die("La class ".$controller." n'existe pas");
 }

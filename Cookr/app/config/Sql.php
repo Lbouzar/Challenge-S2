@@ -7,11 +7,14 @@ abstract class Sql
 
     private $pdo;
     private $table;
+    private $dbDEV = new \PDO("pgsql:host=" . getenv('DB_HOST_DEV') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_DEV'), getenv('POSTGRES_USER_DEV'), getenv('POSTGRES_PASSWORD_DEV'));
+    private $dbPROD = new \PDO("pgsql:host=" . getenv('DB_HOST_PROD') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_PROD'), getenv('POSTGRES_USER_PROD'), getenv('POSTGRES_PASSWORD_PROD'));
 
     public function __construct()
     {
         try {
-            $this->pdo = new \PDO("pgsql:host=" . getenv('DB_HOST') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('DB_DATABASE'), getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+
+            $this->pdo = (getenv('CK_ENVIRONMENT') == "production") ? $this->dbPROD : $this->dbDEV;
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }
