@@ -26,8 +26,8 @@ services:
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "cookr.compagny@yahoo.com"
-      PGADMIN_DEFAULT_PASSWORD: "@CookrWithTheGoodFood08"
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     ports:
       - ${ADMINER_PORT}:80
     depends_on:
