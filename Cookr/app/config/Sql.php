@@ -2,27 +2,44 @@
 
 namespace App\Config;
 
-abstract class Sql
+class Sql
 {
+    private $PDO = null;
+    private $table = null;
+    private static $instances = array();
 
-    private $pdo;
-    private $table;
-    private $dbDEV;
-    private $dbPROD;
-
-    public function __construct()
+    private function __construct()
     {
-        $this->dbDEV = new \PDO("pgsql:host=" . getenv('DB_HOST_DEV') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_DEV'), getenv('POSTGRES_USER_DEV'), getenv('POSTGRES_PASSWORD_DEV'));
-        $this->dbPROD = new \PDO("pgsql:host=" . getenv('DB_HOST_PROD') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_PROD'), getenv('POSTGRES_USER_PROD'), getenv('POSTGRES_PASSWORD_PROD'));
         try {
-            $this->pdo = (getenv('CK_ENVIRONMENT') == "production") ? $this->dbPROD : $this->dbDEV;
+            if (getenv('CK_ENVIRONMENT') == "production") {
+                $this->PDO = new \PDO("pgsql:host=" . getenv('DB_HOST_PROD') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_PROD'), getenv('POSTGRES_USER_PROD'), getenv('POSTGRES_PASSWORD_PROD'));
+            } else {
+                $this->PDO = new \PDO("pgsql:host=" . getenv('DB_HOST_DEV') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_DEV'), getenv('POSTGRES_USER_DEV'), getenv('POSTGRES_PASSWORD_DEV'));
+            }
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
         }
-
         $classExploded = explode("\\", get_called_class());
         $this->table = end($classExploded);
         $this->table = "ckr_" . strtolower($this->table);
+    }
+
+    protected function __clone()
+    {
+    }
+
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
+    }
+
+    public static function getInstance()
+    {
+        $subClass = static::class;
+        if (!isset(self::$instances[$subClass])) {
+            self::$instances[$subClass] = new static();
+        }
+        return self::$instances[$subClass];
     }
 
     public function save(): void
@@ -37,22 +54,22 @@ abstract class Sql
             foreach ($columns as $key => $value) {
                 $columnsUpdate[] = $key . "=:" . $key;
             }
-            $queryPrepared = $this->pdo->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id =" . $this->getId());
+            $queryPrepared = $this->PDO->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id =" . $this->getId());
         } else {
-            $queryPrepared = $this->pdo->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
+            $queryPrepared = $this->PDO->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
                             VALUES (:" . implode(",:", array_keys($columns)) . ")");
         }
 
         $queryPrepared->execute($columns);
     }
 
-    public function selectWhere(array $array): array 
+    public function selectWhere(array $array): array
     {
         $where = [];
-        foreach ($array as $column=>$value) {
-            $where[] = $column." = :".$column;
+        foreach ($array as $column => $value) {
+            $where[] = $column . " = :" . $column;
         }
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM " .$this->table. " WHERE ".implode(" AND ", $where));
+        $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " WHERE " . implode(" AND ", $where));
         $queryPrepared->setFetchMode(\PDO::FETCH_ASSOC);
         $queryPrepared->execute($array);
         return $queryPrepared->fetchAll();
@@ -61,7 +78,7 @@ abstract class Sql
 
     public function delete($id): void
     {
-        $queryPrepared = $this->pdo->prepare("DELETE FROM " .$this->table . " WHERE id =" . $id);
+        $queryPrepared = $this->PDO->prepare("DELETE FROM " . $this->table . " WHERE id =" . $id);
     }
 
     // public function select($request): void 
@@ -88,5 +105,4 @@ abstract class Sql
      * $user = new User();
      * $user->select(*)->join(inner, role, role.id = user.role_id)->where(role.id, = ,4)
      */
-
 }
