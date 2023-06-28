@@ -63,7 +63,7 @@ class Sql
         $queryPrepared->execute($columns);
     }
 
-    public function selectWhere(array $array): array
+    public function selectWhere(?array $array): array
     {
         $where = [];
         foreach ($array as $column => $value) {
@@ -75,6 +75,27 @@ class Sql
         return $queryPrepared->fetchAll();
     }
 
+    public function getUserPassword(array $array): array
+    {
+        $where = [];
+        foreach ($array as $column => $value) {
+            $where[] = $column . " = :" . $column;
+        }
+        $queryPrepared = $this->PDO->prepare("SELECT password FROM " . $this->table . " WHERE " . implode(" AND ", $where));
+        $queryPrepared->execute($array);
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getTableId(array $array): array
+    {
+        $where = [];
+        foreach ($array as $column => $value) {
+            $where[] = $column . " = :" . $column;
+        }
+        $queryPrepared = $this->PDO->prepare("SELECT id FROM " . $this->table . " WHERE " . implode(" AND ", $where));
+        $queryPrepared->execute($array);
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
     public function delete($id): void
     {

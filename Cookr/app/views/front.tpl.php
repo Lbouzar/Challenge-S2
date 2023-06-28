@@ -41,7 +41,6 @@
             <i class="icon-user icon-medium" aria-label="user button"></i>
         </a>
     </header>
-
     <?php include $this->view; ?>
 
     <footer>

@@ -29,19 +29,22 @@ class Verificator
             if (!isset($this->data[$name])) {
                 die("Tentative de Hack");
             }
-            if (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
+            elseif (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
                 die("Tentative de Hack");
             }
-            if (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
+            elseif (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
                 $this->errors[] = $configInput["error"];
             }
-            if (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
+            elseif (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
                 $this->errors[] = $configInput["error"];
             }
-            if ($name == "email" && !self::checkEmail($this->data[$name])) {
+            elseif ($name == "email" && !self::checkEmail($this->data[$name])) {
                 $this->errors[] = $configInput["error"];
             }
-            if ($name == "pwdConfirm" && !self::isSamePWD($this->data["pwd"], $this->data[$name])) {
+            elseif ($name == "pwd" && !self::isStrongPWD($this->data["pwd"])) {
+                $this->errors[] = $configInput["error"];
+            }
+            elseif ($name == "pwdConfirm" && !self::isSamePWD($this->data["pwd"], $this->data[$name])) {
                 $this->errors[] = $configInput["error"];
             }
         }
@@ -71,5 +74,14 @@ class Verificator
     public static function isSamePWD(String $pwd, String $pwdConfirm): bool
     {
         return $pwd == $pwdConfirm;
+    }
+
+    public static function isStrongPWD(String $pwd): bool
+    {
+        if (preg_match('@[A-Z]@', $pwd) && preg_match('@[a-z]@', $pwd) && preg_match('@[0-9]@', $pwd) && preg_match('@[^\w]@', $pwd)){
+            return true;
+        }
+
+        return false;
     }
 }

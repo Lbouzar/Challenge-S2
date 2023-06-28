@@ -10,7 +10,9 @@
     </aside>
     <section>
         <h1>Connexion</h1>
-        <?php $this->modal("form", $form, $formErrors); ?>
+        <?php if (isset($formErrors))
+            $this->modal("errors", $formErrors); ?>
+        <?php $this->modal("form", $form); ?>
         <div class="register">
             <p>Pas de compte ?</p>
             <a href="/register">Inscrivez-vous !</a>

@@ -51,14 +51,17 @@ class Register extends Verificator
                     "type" => "password",
                     "class" => "input-regular--small",
                     "placeholder" => "Votre mot de passe",
-                    "error" => "Votre mot de passe est incorrect",
+                    "min" => 8,
+                    "max" => 120,
+                    "error" => "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial",
                     "required" => true
                 ],
                 "pwdConfirm" => [
                     "type" => "password",
                     "class" => "input-regular--small",
                     "placeholder" => "Confirmation",
-                    "confirm" => "pwd",
+                    "min" => 8,
+                    "max" => 120,
                     "error" => "Mot de passe de confirmation incorrect",
                     "required" => true
                 ],
