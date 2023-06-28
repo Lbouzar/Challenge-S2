@@ -12,9 +12,10 @@ class User extends Sql
     protected String $email;
     protected String $password;
     protected Int $status = 0;
-    protected $date_inserted;
-    protected $date_updated;
+    protected $created_at;
+    protected $updated_at;
     protected Int $role = 4;
+    protected String $token;
 
     /**
      * @return int
@@ -22,6 +23,14 @@ class User extends Sql
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param Int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -134,5 +143,21 @@ class User extends Sql
     public function setRole(int $role): void
     {
         $this->role = $role;
+    }
+
+    /**
+     * @return String
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param String $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
     }
 }

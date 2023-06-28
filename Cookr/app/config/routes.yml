@@ -32,6 +32,10 @@
   controller: Security
   action: register
 
+/confirm:
+  controller: Security
+  action: Confirm
+
 # -----------------FRONT SIDE---------------------------
 
 # -----------------BACK SIDE----------------------------

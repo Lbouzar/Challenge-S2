@@ -1,5 +1,3 @@
-<?php print_r($errors ?? null); ?>
-
 <form method="<?= $config["config"]["method"] ?>" action="<?= $config["config"]["action"] ?>" enctype="<?= $config["config"]["enctype"] ?>" id="<?= $config["config"]["id"] ?>" class="<?= $config["config"]["class"] ?>">
     <?php foreach ($config["inputs"] as $name => $input) : ?>
         <input type="<?= $input["type"] ?>" name="<?= $name ?>" class="<?= $input["class"] ?>" placeholder="<?= $input["placeholder"] ?>" <?= $input["required"] ? "required" : "" ?>>

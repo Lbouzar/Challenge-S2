@@ -11,7 +11,9 @@
     <section>
         <h1>Inscription</h1>
         <div id="form-display">
-            <?php $this->modal("form", $form, $formErrors); ?>
+            <?php if (isset($formErrors)) 
+                $this->modal("errors", $formErrors); ?>
+            <?php $this->modal("form", $form); ?>
         </div>
         <div class="register">
             <p>Déjà un compte ?</p>

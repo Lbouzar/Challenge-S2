@@ -15,7 +15,7 @@ class Register extends Verificator
         return $this->config = [
             "config" => [
                 "method" => $this->method,
-                "action" => "/",
+                "action" => "",
                 "enctype" => "",
                 "id" => "",
                 "class" => "",
@@ -45,13 +45,6 @@ class Register extends Verificator
                     "class" => "input-regular--small",
                     "placeholder" => "Votre adresse email",
                     "error" => "Le format de votre email est incorrect",
-                    "required" => true
-                ],
-                "emailConfirm" => [
-                    "type" => "email",
-                    "class" => "input-regular--small",
-                    "placeholder" => "Votre adresse email",
-                    "error" => "Email de confirmation incorrect",
                     "required" => true
                 ],
                 "pwd" => [

@@ -7,6 +7,12 @@ RUN apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
+#Install zip extensions 
+RUN apt-get install -y \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install zip
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN apt-get update -y && apt-get install -y libpng-dev libfreetype6-dev libyaml-dev
@@ -37,5 +43,3 @@ RUN npm install -g sass
 # Starting SASS and Apache
 CMD apachectl start \
     && sass --watch /var/app/html/public/assets/scss/main.scss:/var/app/html/public/assets/css/main.css 
-
-

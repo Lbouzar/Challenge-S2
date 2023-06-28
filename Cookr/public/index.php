@@ -3,8 +3,6 @@ namespace App;
 
 use App\Config\View;
 
-//Contrainte : utilisation des Namespace
-
 spl_autoload_register(function ($class) {
     $class = "../" . str_replace("\\", "/", $class);
     
@@ -19,8 +17,8 @@ spl_autoload_register(function ($class) {
     } else if (file_exists($form)) {
         include $form;
     }
-    
 });
+
 
 //Récupérer dans l'url l'uri /login ou /user/toto
 //Nettoyer la donnée
