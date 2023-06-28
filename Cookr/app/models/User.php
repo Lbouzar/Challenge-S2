@@ -6,7 +6,7 @@ use App\Config\Sql;
 
 class User extends Sql
 {
-    protected Int $id;
+    protected Int $id = 0;
     protected String $firstname;
     protected String $lastname;
     protected String $email;
@@ -118,7 +118,7 @@ class User extends Sql
      */
     public function getDateInserted()
     {
-        return $this->date_inserted;
+        return $this->created_at;
     }
 
     /**
@@ -126,7 +126,7 @@ class User extends Sql
      */
     public function getDateUpdated()
     {
-        return $this->date_updated;
+        return $this->updated_at;
     }
 
     /**
