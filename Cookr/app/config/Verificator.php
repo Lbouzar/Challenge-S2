@@ -10,21 +10,20 @@ class Verificator
     public function isSubmit(): bool
     {
         $this->data = ($this->method == "POST") ? $_POST : $_GET;
-        if (isset($this->data["submit"])) {
-            return true;
-        }
-        return false;
+        return isset($this->data);
+    }
+
+    public function getData($key): string
+    {
+        return $this->data[$key];
     }
 
     public function isValid(): bool
     {
-        if ($_SERVER["REQUEST_METHOD"] != $this->method) {
+        if ($this->method != $_SERVER["REQUEST_METHOD"])
             die("Tentative de Hack");
-        }
-
-        if (count($this->config["inputs"]) + 1 != count($this->data)) {
+        if (count($this->config["inputs"]) != count($this->data))
             die("Tentative de Hack");
-        }
 
         foreach ($this->config["inputs"] as $name => $configInput) {
             if (!isset($this->data[$name])) {
@@ -39,12 +38,14 @@ class Verificator
             if (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
                 $this->errors[] = $configInput["error"];
             }
-            
+            if ($name == "email" && !self::checkEmail($this->data[$name])) {
+                $this->errors[] = $configInput["error"];
+            }
+            if ($name == "pwdConfirm" && !self::isSamePWD($this->data["pwd"], $this->data[$name])) {
+                $this->errors[] = $configInput["error"];
+            }
         }
-        if (empty($this->errors)) {
-            return true;
-        }
-        return false;
+        return empty($this->errors);
     }
 
     public static function isEmpty(String $string): bool
@@ -65,5 +66,10 @@ class Verificator
     public static function checkEmail($email): bool
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    public static function isSamePWD(String $pwd, String $pwdConfirm): bool
+    {
+        return $pwd == $pwdConfirm;
     }
 }

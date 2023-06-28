@@ -7,13 +7,14 @@ abstract class Sql
 
     private $pdo;
     private $table;
-    private $dbDEV = new \PDO("pgsql:host=" . getenv('DB_HOST_DEV') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_DEV'), getenv('POSTGRES_USER_DEV'), getenv('POSTGRES_PASSWORD_DEV'));
-    private $dbPROD = new \PDO("pgsql:host=" . getenv('DB_HOST_PROD') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_PROD'), getenv('POSTGRES_USER_PROD'), getenv('POSTGRES_PASSWORD_PROD'));
+    private $dbDEV;
+    private $dbPROD;
 
     public function __construct()
     {
+        $this->dbDEV = new \PDO("pgsql:host=" . getenv('DB_HOST_DEV') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_DEV'), getenv('POSTGRES_USER_DEV'), getenv('POSTGRES_PASSWORD_DEV'));
+        $this->dbPROD = new \PDO("pgsql:host=" . getenv('DB_HOST_PROD') . ";port=" . getenv('DB_PORT') . ";dbname=" . getenv('POSTGRES_DB_PROD'), getenv('POSTGRES_USER_PROD'), getenv('POSTGRES_PASSWORD_PROD'));
         try {
-
             $this->pdo = (getenv('CK_ENVIRONMENT') == "production") ? $this->dbPROD : $this->dbDEV;
         } catch (\Exception $e) {
             die("Erreur SQL : " . $e->getMessage());
@@ -21,7 +22,7 @@ abstract class Sql
 
         $classExploded = explode("\\", get_called_class());
         $this->table = end($classExploded);
-        $this->table = "ckr_" . $this->table;
+        $this->table = "ckr_" . strtolower($this->table);
     }
 
     public function save(): void
@@ -45,25 +46,38 @@ abstract class Sql
         $queryPrepared->execute($columns);
     }
 
-    public function delete(): void
+    public function selectWhere(array $array): array 
     {
-        $queryPrepared = $this->pdo->prepare("DELETE FROM " .$this->table . " WHERE id =" . $this->getId());
+        $where = [];
+        foreach ($array as $column=>$value) {
+            $where[] = $column." = :".$column;
+        }
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM " .$this->table. " WHERE ".implode(" AND ", $where));
+        $queryPrepared->setFetchMode(\PDO::FETCH_ASSOC);
+        $queryPrepared->execute($array);
+        return $queryPrepared->fetchAll();
     }
 
-    public function select($request): void 
+
+    public function delete($id): void
     {
-        $queryPrepared = $this->pdo->prepare("SELECT " .$request. "FROM " .$this->table);
+        $queryPrepared = $this->pdo->prepare("DELETE FROM " .$this->table . " WHERE id =" . $id);
     }
 
-    public function where($field, $operator ,$value): void
-    {
-        $queryPrepared = $this->pdo->prepare("WHERE ".$field. " ".$operator. " ".$value  );
-    }
+    // public function select($request): void 
+    // {
+    //     $queryPrepared = $this->pdo->prepare("SELECT " .$request. "FROM " .$this->table);
+    // }
 
-    public function join($joinType, $newTable, $request): void 
-    {
-        $queryPrepared = $this->pdo->prepare($joinType . "JOIN " .$newTable. " ON " .$request);
-    }
+    // public function where($field, $operator ,$value): void
+    // {
+    //     $queryPrepared = $this->pdo->prepare("WHERE ".$field. " ".$operator. " ".$value  );
+    // }
+
+    // public function join($joinType, $newTable, $request): void 
+    // {
+    //     $queryPrepared = $this->pdo->prepare($joinType . "JOIN " .$newTable. " ON " .$request);
+    // }
 
     /**
      * ok, le plan est "simple" :
