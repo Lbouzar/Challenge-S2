@@ -7,8 +7,6 @@ class Article extends Sql
     protected Int $id;
     protected String $title;
     protected String $description;
-    protected $created_at;
-    protected $updated_at;
     // protected $mots_clés
 
     /**
@@ -51,19 +49,4 @@ class Article extends Sql
         $this->description = trim($description);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
 }

@@ -40,6 +40,10 @@
   controller: Security
   action: logout 
 
+/contact:
+  controller: Security 
+  action: contact
+
 
 # -----------------FRONT SIDE---------------------------
 

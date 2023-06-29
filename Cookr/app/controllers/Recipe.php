@@ -4,7 +4,7 @@ use App\Config\View;
 
 class Recipe {
     public function allRecipes() {
-        $view = new View("Recipes/recipes", "front");
+        $view = View::getInstance("Recipes/recipes", "front");
         // récupérer la data dans la bdd
     }
 }

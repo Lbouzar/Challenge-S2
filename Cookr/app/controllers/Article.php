@@ -4,7 +4,7 @@ use App\Config\View;
 
 class Article {
     public function allArticles() {
-        $view = new View("Articles/articles", "front");
+        $view = View::getInstance("Articles/articles", "front");
         // récupérer la data dans la bdd
     }
 }

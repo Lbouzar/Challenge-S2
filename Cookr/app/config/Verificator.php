@@ -6,6 +6,30 @@ class Verificator
 {
     private array $data = [];
     public array $errors = [];
+    private static $instances = [];
+
+    private function __construct()
+    {
+        
+    }
+
+    protected function __clone()
+    {
+    }
+
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize a singleton.");
+    }
+    
+    public static function getInstance()
+    {
+        $subClass = static::class;
+        if (!isset(self::$instances[$subClass])) {
+            self::$instances[$subClass] = new static();
+        }
+        return self::$instances[$subClass];
+    }
 
     public function isSubmit(): bool
     {
@@ -20,31 +44,23 @@ class Verificator
 
     public function isValid(): bool
     {
-        if ($this->method != $_SERVER["REQUEST_METHOD"])
-            die("Tentative de Hack");
-        if (count($this->config["inputs"]) != count($this->data))
-            die("Tentative de Hack");
-
+        if (count($this->config["inputs"]) != count($this->data) || $_SERVER['REQUEST_METHOD'] != $this->method) {
+            $this->errors[] = "Veuillez remplir le formulaire";
+        }
         foreach ($this->config["inputs"] as $name => $configInput) {
             if (!isset($this->data[$name])) {
-                die("Tentative de Hack");
-            }
-            elseif (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
-                die("Tentative de Hack");
-            }
-            elseif (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
+                $this->errors[] = " ";
+            } elseif (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
+                $this->errors[] = "Tous les champs sont obligatoires";
+            } elseif (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
                 $this->errors[] = $configInput["error"];
-            }
-            elseif (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
+            } elseif (isset($configInput["max"]) && !self::isMaxLength($this->data[$name], $configInput["max"])) {
                 $this->errors[] = $configInput["error"];
-            }
-            elseif ($name == "email" && !self::checkEmail($this->data[$name])) {
+            } elseif ($name == "email" && !self::checkEmail($this->data[$name])) {
                 $this->errors[] = $configInput["error"];
-            }
-            elseif ($name == "pwd" && !self::isStrongPWD($this->data["pwd"])) {
+            } elseif ($name == "pwd" && !self::isStrongPWD($this->data["pwd"])) {
                 $this->errors[] = $configInput["error"];
-            }
-            elseif ($name == "pwdConfirm" && !self::isSamePWD($this->data["pwd"], $this->data[$name])) {
+            } elseif ($name == "pwdConfirm" && !self::isSamePWD($this->data["pwd"], $this->data[$name])) {
                 $this->errors[] = $configInput["error"];
             }
         }
@@ -78,7 +94,7 @@ class Verificator
 
     public static function isStrongPWD(String $pwd): bool
     {
-        if (preg_match('@[A-Z]@', $pwd) && preg_match('@[a-z]@', $pwd) && preg_match('@[0-9]@', $pwd) && preg_match('@[^\w]@', $pwd)){
+        if (preg_match('@[A-Z]@', $pwd) && preg_match('@[a-z]@', $pwd) && preg_match('@[0-9]@', $pwd) && preg_match('@[^\w]@', $pwd)) {
             return true;
         }
 

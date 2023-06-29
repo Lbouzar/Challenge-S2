@@ -12,8 +12,6 @@ class User extends Sql
     protected String $email;
     protected String $password;
     protected Int $status = 0;
-    protected $created_at;
-    protected $updated_at;
     protected Int $role = 4;
     protected String $token;
 
@@ -111,22 +109,6 @@ class User extends Sql
     public function setStatus(int $status): void
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateInserted()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateUpdated()
-    {
-        return $this->updated_at;
     }
 
     /**

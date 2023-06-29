@@ -27,14 +27,16 @@ class Login extends Verificator
                     "class" => "input-regular--small",
                     "placeholder" => "Votre email",
                     "error" => "Le format de votre email est incorrect",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Adresse e-mail"
                 ],
                 "pwd" => [
                     "type" => "password",
                     "class" => "input-regular--small",
                     "placeholder" => "Votre mot de passe",
                     "error" => "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Mot de passe"
                 ]
             ]
         ];

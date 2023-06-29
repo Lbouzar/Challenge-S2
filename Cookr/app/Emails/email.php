@@ -12,8 +12,10 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 class Email
 {
     private $mail;
+    private static $instance;
 
-    public function __construct()
+
+    private function __construct()
     {
         $this->mail = new PHPMailer(true);
         $this->mail->isSMTP();
@@ -27,9 +29,17 @@ class Email
         $this->mail->isHTML(true);
     }
 
-    function register_mail($recipientAdress, $recipientName, $token): bool
+    public static function getInstance(): Email
     {
-        $this->mail->addAddress($recipientAdress, $recipientName);
+        if (!self::$instance) {
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
+
+    function register_mail($recipientAdress, $token): bool
+    {
+        $this->mail->addAddress($recipientAdress);
         $this->mail->Subject = ("Bienvenue chez Cookr");
 
         $this->mail->Body = ('
