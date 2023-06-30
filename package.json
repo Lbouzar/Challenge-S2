@@ -1,0 +1,17 @@
+{
+  "name": "JS framework",
+  "version": "1.0.0",
+  "description": "Js framework",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [
+    "framework",
+    "javascript"
+  ],
+  "devDependencies": {
+    "vite": "^2.6.14"
+  }
+}
