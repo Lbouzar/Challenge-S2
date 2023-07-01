@@ -19,6 +19,11 @@
 /recipe/$i:
   # ROUTE DYNAMIQUE A FAIRE
 
+# Profile
+/profile:
+  controller: Profile
+  action: profile
+
 # Connexion
 /login:
   controller: Security
@@ -39,4 +44,36 @@
 # -----------------FRONT SIDE---------------------------
 
 # -----------------BACK SIDE----------------------------
+/back-office/dashboard:
+  controller: Dashboard
+  action: dashboard
+
+/back-office/homepage:
+  controller: HomepageBO
+  action: homepageBO
+
+/back-office/recipes:
+  controller: RecipesBO
+  action: recipesBO
+
+/back-office/recipes/test:
+  controller: RecipeBO
+  action: recipeBO
+
+/back-office/articles:
+  controller: ArticlesBO
+  action: articlesBO
+
+/back-office/articles/test:
+  controller: ArticleBO
+  action: articleBO
+
+/back-office/comments:
+  controller: CommentsBO
+  action: commentsBO
+
+/back-office/contact:
+  controller: ContactBO
+  action: contactBO
+
 # -----------------BACK SIDE----------------------------

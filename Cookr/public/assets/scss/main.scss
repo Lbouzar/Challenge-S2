@@ -6,6 +6,7 @@
 @import "./base/margin";
 
 @import "./components/header";
+@import "./components/headerBO";
 @import "./components/cta-button";
 @import "./components/card";
 @import "./components/title";
@@ -18,3 +19,24 @@
 @import "./components/text-area";
 @import "./components/aside-graphic";
 @import "./components/collapse";
+@import "./components/sidebarBO";
+
+@import "./layout/layoutBO";
+
+@import "./page/index";
+@import "./page/article";
+@import "./page/articles";
+@import "./page/recipes";
+@import "./page/login";
+@import "./page/register";
+@import "./page/contact";
+@import "./page/profile";
+@import "./page/404";
+@import "./page/dashboard";
+@import "./page/recipesBO";
+@import "./page/recipeBO";
+@import "./page/articlesBO";
+@import "./page/articleBO";
+@import "./page/commentsBO";
+@import "./page/homepageBO";
+@import "./page/contactBO";

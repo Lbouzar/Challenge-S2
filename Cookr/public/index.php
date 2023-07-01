@@ -27,7 +27,6 @@ $uriExploded = explode("?",$_SERVER["REQUEST_URI"]);
 $uri = rtrim(strtolower(trim($uriExploded[0])),"/");
 //Dans le cas ou nous sommes à la racine $uri sera vide du coup je remets /
 $uri = (empty($uri))?"/":$uri;
-
 //Créer un fichier yaml contenant le route du type :
 // /login:
 //      controller: Security
