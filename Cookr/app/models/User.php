@@ -6,29 +6,27 @@ use App\Config\Sql;
 
 class User extends Sql
 {
-    protected Int $id = 0;
+    protected String $id = " ";
     protected String $firstname;
     protected String $lastname;
     protected String $email;
     protected String $password;
     protected Int $status = 0;
-    protected $created_at;
-    protected $updated_at;
-    protected Int $role = 4;
+    protected String $role = '74467e6e-f31a-4387-9895-82133144c568';
     protected String $token;
 
     /**
-     * @return int
+     * @return String
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
 
     /**
-     * @param Int $id
+     * @param String $id
      */
-    public function setId(int $id): void
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -98,7 +96,7 @@ class User extends Sql
     }
 
     /**
-     * @return int
+     * @return String
      */
     public function getStatus(): int
     {
@@ -106,7 +104,7 @@ class User extends Sql
     }
 
     /**
-     * @param int $status
+     * @param String $status
      */
     public function setStatus(int $status): void
     {
@@ -114,25 +112,9 @@ class User extends Sql
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDateInserted()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateUpdated()
-    {
-        return $this->updated_at;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRole(): int
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -140,7 +122,7 @@ class User extends Sql
     /**
      * @param int $role
      */
-    public function setRole(int $role): void
+    public function setRole(string $role): void
     {
         $this->role = $role;
     }

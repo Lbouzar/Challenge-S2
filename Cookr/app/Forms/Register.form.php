@@ -29,7 +29,8 @@ class Register extends Verificator
                     "min" => 2,
                     "max" => 60,
                     "error" => "Votre prénom doit faire entre 2 et 60 caractères",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Prénom"
                 ],
                 "lastname" => [
                     "type" => "text",
@@ -38,29 +39,36 @@ class Register extends Verificator
                     "min" => 2,
                     "max" => 120,
                     "error" => "Votre nom doit faire entre 2 et 120 caractères",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Nom"
                 ],
                 "email" => [
                     "type" => "email",
                     "class" => "input-regular--small",
                     "placeholder" => "Votre adresse email",
                     "error" => "Le format de votre email est incorrect",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Adresse e-mail"
                 ],
                 "pwd" => [
                     "type" => "password",
                     "class" => "input-regular--small",
                     "placeholder" => "Votre mot de passe",
-                    "error" => "Votre mot de passe est incorrect",
-                    "required" => true
+                    "min" => 8,
+                    "max" => 120,
+                    "error" => "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial",
+                    "required" => true,
+                    "label" => "Mot de passe"
                 ],
                 "pwdConfirm" => [
                     "type" => "password",
                     "class" => "input-regular--small",
                     "placeholder" => "Confirmation",
-                    "confirm" => "pwd",
+                    "min" => 8,
+                    "max" => 120,
                     "error" => "Mot de passe de confirmation incorrect",
-                    "required" => true
+                    "required" => true,
+                    "label" => "Confirmation du mot de passe"
                 ],
             ]
         ];

@@ -4,19 +4,23 @@ use App\Config\Sql;
 
 class Article extends Sql
 {
-    protected Int $id;
+    protected String $id;
     protected String $title;
-    protected String $description;
-    protected $created_at;
-    protected $updated_at;
-    // protected $mots_clés
+    protected String $user; // Auteur de l'article, clé étrangère 
+    protected String $content;
+    protected String $keywords;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): int 
+    public function getId(): String 
     {
         return $this->id;
+    }
+
+    public function setId(string $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -35,35 +39,40 @@ class Article extends Sql
         $this->title = ucfirst(strtolower(trim($title)));
     }
 
+    public function getUser(): int
+    {
+        return $this->user;
+    }
+
+    public function setUser(int $user): void
+    {
+        $this->user = $user;
+    }
+
     /**
      * @return String
      */
-    public function getDescription(): string
+    public function getContent(): string
     {
-        return $this->description;
+        return $this->content;
     }
 
     /**
-     * @param String $description
+     * @param String $content
      */
-    public function setDescription(string $description): void 
+    public function setContent(string $content): void 
     {
-        $this->description = trim($description);
+        $this->content = trim($content);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
+    public function getKeywords(): string 
     {
-        return $this->created_at;
+        return $this->keywords;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUpdatedAt()
+    public function setKeywords(string $keywords): void 
     {
-        return $this->updated_at;
+        $this->keywords = $keywords;
     }
+
 }

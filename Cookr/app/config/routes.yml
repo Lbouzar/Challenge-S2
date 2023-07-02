@@ -5,29 +5,21 @@
 
 # Articles
 /articles:
-  controller: Article
+  controller: Articles
   action: allArticles
 
 /article/$i:
   # ROUTE DYNAMIQUE A FAIRE
 
-#Recettes
+# Recettes
 /recipes:
-  controller: Recipe
+  controller: Recipes
   action: allRecipes
 
 /recipe/$i:
   # ROUTE DYNAMIQUE A FAIRE
 
-# Connexion
-/login:
-  controller: Security
-  action: login
-  
-/logout:
-  controller: Security
-  action: logout 
-
+# Utilisateur
 /register:
   controller: Security
   action: register
@@ -35,6 +27,23 @@
 /confirm:
   controller: Security
   action: Confirm
+
+/login:
+  controller: Security
+  action: login
+
+/profil:
+  controller: Security
+  action: profil
+
+/logout:
+  controller: Security
+  action: logout 
+
+/contact:
+  controller: Security 
+  action: contact
+
 
 # -----------------FRONT SIDE---------------------------
 
