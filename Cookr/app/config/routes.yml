@@ -8,7 +8,9 @@
   controller: Articles
   action: allArticles
 
-/article/$i:
+/article:
+  controller: Articles
+  action: article
   # ROUTE DYNAMIQUE A FAIRE
 
 # Recettes
@@ -16,7 +18,9 @@
   controller: Recipes
   action: allRecipes
 
-/recipe/$i:
+/recipe:
+  controller: Recipes
+  action: recipe
   # ROUTE DYNAMIQUE A FAIRE
 
 # Utilisateur
@@ -48,4 +52,38 @@
 # -----------------FRONT SIDE---------------------------
 
 # -----------------BACK SIDE----------------------------
+/back-office:
+  controller: Dashboard
+  action: dashboard
+
+/back-office/homepage:
+  controller: Dashboard
+  action: homepage
+
+/back-office/recipes:
+  controller: Recipes
+  action: allRecipesBO
+
+/back-office/recipe:
+  controller: Recipes
+  action: recipeBO
+# yes, une route dynamique
+
+/back-office/articles:
+  controller: Articles
+  action: allArticlesBO
+
+/back-office/article:
+  controller: Articles
+  action: articleBO
+# yes, une route dynamique
+
+/back-office/comments:
+  controller: Dashboard
+  action: comments
+
+/back-office/contact:
+  controller: Dashboard
+  action: contact
+
 # -----------------BACK SIDE----------------------------

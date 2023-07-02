@@ -19,6 +19,21 @@ class Recipes
         // récupérer la data dans la bdd
         $view->assign('mainRecipe', $this->recipe->selectWhere(["is_main" => 1]));
         $view->assign('recipes', $this->recipe->selectWhere(["is_main" => 0]));
-        
+    }
+
+    public function recipe()
+    {
+        //route dynamique
+    }
+
+    public function allRecipesBO()
+    {
+        $view = View::getInstance("Recipes/recipesBO", "back");
+    }
+
+    public function recipeBO()
+    {
+        //route dynamique 
+        $view = View::getInstance("Recipes/recipeBO", "back");
     }
 }

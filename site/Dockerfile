@@ -42,4 +42,5 @@ RUN npm install -g sass
 
 # Starting SASS and Apache
 CMD apachectl start \
-    && sass --watch /var/app/html/public/assets/scss/main.scss:/var/app/html/public/assets/css/main.css 
+    && sass --poll --watch /var/app/html/public/assets/scss/main.scss:/var/app/html/public/assets/css/main.css 
+

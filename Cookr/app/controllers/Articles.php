@@ -19,4 +19,20 @@ class Articles
         // récupérer la data dans la bdd
         $view->assign('articles', $this->article->selectWhere(null));
     }
+
+    public function article()
+    {
+        //route dynamique 
+    }
+
+    public function allArticlesBO()
+    {
+        $view = View::getInstance("Articles/articlesBO", "back");
+    }
+
+    public function  articleBO()
+    {
+        $view = View::getInstance("Articles/articleBO", "back");
+        //route dynamique
+    }
 }
