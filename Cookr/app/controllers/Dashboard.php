@@ -4,8 +4,18 @@ use App\Config\View;
 
 class Dashboard {
     public function dashboard() {
-        $view = new View("Dashboard/dashboard", "back");
-        //récupérer dans la bdd les articles et recettes 
-        // voir template Figma 
+        $view = View::getInstance("Dashboard/dashboard", "back");
+    }
+
+    public function homepage() {
+        $view = View::getInstance("Dashboard/homepageBO", "back");
+    }
+
+    public function comments() {
+        $view = View::getInstance("Dashboard/commentsBO", "back");
+    }
+
+    public function contact() {
+        $view = View::getInstance("Dashboard/contactBO", "back");
     }
 }

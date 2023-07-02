@@ -5,34 +5,25 @@
 
 # Articles
 /articles:
-  controller: Article
+  controller: Articles
   action: allArticles
 
-/article/$i:
+/article:
+  controller: Articles
+  action: article
   # ROUTE DYNAMIQUE A FAIRE
 
-#Recettes
+# Recettes
 /recipes:
-  controller: Recipe
+  controller: Recipes
   action: allRecipes
 
-/recipe/$i:
+/recipe:
+  controller: Recipes
+  action: recipe
   # ROUTE DYNAMIQUE A FAIRE
 
-# Profile
-/profile:
-  controller: Profile
-  action: profile
-
-# Connexion
-/login:
-  controller: Security
-  action: login
-  
-/logout:
-  controller: Security
-  action: logout 
-
+# Utilisateur
 /register:
   controller: Security
   action: register
@@ -41,39 +32,58 @@
   controller: Security
   action: Confirm
 
+/login:
+  controller: Security
+  action: login
+
+/profil:
+  controller: Security
+  action: profil
+
+/logout:
+  controller: Security
+  action: logout 
+
+/contact:
+  controller: Security 
+  action: contact
+
+
 # -----------------FRONT SIDE---------------------------
 
 # -----------------BACK SIDE----------------------------
-/back-office/dashboard:
+/back-office:
   controller: Dashboard
   action: dashboard
 
 /back-office/homepage:
-  controller: HomepageBO
-  action: homepageBO
+  controller: Dashboard
+  action: homepage
 
 /back-office/recipes:
-  controller: RecipesBO
-  action: recipesBO
+  controller: Recipes
+  action: allRecipesBO
 
-/back-office/recipes/test:
-  controller: RecipeBO
+/back-office/recipe:
+  controller: Recipes
   action: recipeBO
+# yes, une route dynamique
 
 /back-office/articles:
-  controller: ArticlesBO
-  action: articlesBO
+  controller: Articles
+  action: allArticlesBO
 
-/back-office/articles/test:
-  controller: ArticleBO
+/back-office/article:
+  controller: Articles
   action: articleBO
+# yes, une route dynamique
 
 /back-office/comments:
-  controller: CommentsBO
-  action: commentsBO
+  controller: Dashboard
+  action: comments
 
 /back-office/contact:
-  controller: ContactBO
-  action: contactBO
+  controller: Dashboard
+  action: contact
 
 # -----------------BACK SIDE----------------------------

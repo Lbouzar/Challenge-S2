@@ -3,80 +3,186 @@
 namespace App\Controllers;
 
 use App\Config\View;
+use App\Config\Session;
 use App\Forms\Register;
 use App\Models\User;
 use App\Emails\Email;
+use App\Forms\Contact;
+use App\Forms\Login;
 
 class Security
 {
     private $user;
     private $email;
+    private $session;
 
     public function __construct()
     {
         $this->user = user::getInstance();
-        $this->email = new Email();
-
-    }
-    
-    public function login(): void
-    {
-        echo "login";
+        $this->email = Email::getInstance();
+        $this->session = session::getInstance();
     }
 
     public function register(): void
     {
-        $form = new Register();
-        $view = new View("Security/register", "front");
-        $view->assign('form', $form->getConfig());
-        
-        if ($form->isSubmit() && $form->isValid()) {
-            if (count($this->user->selectWhere(["email" => $form->getData("email")])) == 0) {
-                $this->user->setFirstname($form->getData("firstname"));
-                $this->user->setLastname($form->getData("lastname"));
-                $this->user->setEmail($form->getData("email"));
-                $this->user->setPassword($form->getData("pwd"));
-                $this->user->setToken(self::generateToken());
-                $token = $this->user->getToken();
-                $this->user->save();
+        if (isset($this->session->id) && isset($this->session->token) && isset($this->session->role) && self::isLogged($this->session->token)) {
+            header("Location: profil");
+        } else {
+            $form = Register::getInstance();
+            $view = View::getInstance("Security/register", "front");
+            $view->assign('form', $form->getConfig());
 
-                // envoie du mail de confirmation
-                if ($this->email->register_mail($form->getData("email"), $form->getData("firstname") . ' ' . $form->getData("lastname"), $token)) {
-                    $form->errors[] = "Valide ton compte avec le mail envoyé (regarde tes spams aussi)";
+            if ($form->isSubmit() && $form->isValid()) {
+                if (count($this->user->selectWhere(["email" => $form->getData("email")])) == 0) {
+                    $this->user->setFirstname($form->getData("firstname"));
+                    $this->user->setLastname($form->getData("lastname"));
+                    $this->user->setEmail($form->getData("email"));
+                    $this->user->setPassword($form->getData("pwd"));
+                    $this->user->setToken(self::generateToken());
+                    $token = $this->user->getToken();
+                    $this->user->save();
+
+                    // envoie du mail de confirmation
+                    if ($this->email->register_mail($form->getData("email"), $token)) {
+                        $form->errors[] = "Valide ton compte avec le mail envoyé (regarde tes spams aussi)";
+                    } else {
+                        $form->errors[] = "Nous n'avons pas pu vous envoyer un mail de confirmation";
+                    }
                 } else {
-                    $form->errors[] = "Nous n'avons pas pu vous envoyer un mail de confirmation";
+                    $form->errors[] = "Un compte existe déjà avec cette adresse mail";
                 }
             }
-            $form->errors[] = "Un compte existe déjà avec cette adresse mail";
+            $view->assign("formErrors", $form->errors);
         }
-        $view->assign("formErrors", $form->errors);
     }
 
     public function confirm(): void
-    { 
+    {
         $userArray = $this->user->selectWhere(["email" => $_GET["email"], "token" => $_GET["token"]]);
         if (count($userArray) == 1) {
             $this->user->setId($userArray[0]["id"]);
             $this->user->setStatus(1);
             $this->user->save();
+            // redirection vers la page de connexion
+            header("Location: login");
+        } else {
+            //renvoyer un mail 
+            $retryUser = $this->user->selectWhere(["email" => $_GET["email"]]);
+            $this->user->setId($retryUser[0]["id"]);
+            $this->user->setToken(self::generateToken());
+            $token = $this->user->getToken();
+            $this->user->save();
+            $this->email->register_mail($_GET["email"], $token);
+            die("Erreur lors de la validation, un mail vous a été envoyé");
         }
-        // redirection vers la page de connexion
+    }
+
+    public function login(): void
+    {
+        if (isset($this->session->id) && isset($this->session->token) && isset($this->session->role) && self::isLogged($this->session->token)) {
+            header("Location: profil");
+        } else {
+            $form = Login::getInstance();
+            $view = View::getInstance("Security/login", "front");
+            $view->assign('form', $form->getConfig());
+
+            if ($form->isSubmit() && $form->isValid()) {
+                if (count($this->user->selectWhere(["email" => $form->getData("email")])) != 1) {
+                    $form->errors[] = "Aucun compte existant avec cette adresse mail";
+                } else if (count($this->user->selectWhere(["email" => $form->getData("email"), "status" => 1])) != 1) {
+                    $form->errors[] = "Votre compte n'est pas validé";
+                }
+                //Vérification du mot de passe
+                if (password_verify($form->getData("pwd"), $this->user->getUserPassword(["email" => $form->getData("email")])[0]["password"])) {
+                    //mise à jour du Token
+                    $this->user->setId($this->user->getTableId(["email" => $form->getData("email")])[0]["id"]);
+                    $this->user->setStatus(1);
+                    $this->user->setToken(self::generateToken());
+                    $this->user->save();
+                    //Récupération des infos de l'utilisateur
+                    $userArray = $this->user->selectWhere(["email" => $form->getData("email")]);
+                    //mise en place des informations en session
+                    $this->session->id = $userArray[0]["id"];
+                    $this->session->token = $userArray[0]["token"];
+                    $this->session->role = $userArray[0]["role"];
+                    if (isset($this->session->id) && isset($this->session->token) && isset($this->session->role) && self::isLogged($this->session->token)) {
+                        header("Location: profil");
+                    } else {
+                        $form->errors[] = "Connexion impossible";
+                    }
+                } else {
+                    $form->errors[] = "Mot de passe incorrect";
+                }
+            }
+            $view->assign("formErrors", $form->errors);
+        }
+    }
+
+    public function profil(): void
+    {
+        if (!isset($this->session->id) || !isset($this->session->token) || !isset($this->session->role) || !self::isLogged($this->session->token)) {
+            header("Location: login");
+        } else {
+            $view = View::getInstance("Security/profil", "front");
+        }
+    }
+
+    public function contact(): void
+    {
+        $view = View::getInstance("Security/contact", "front");
+        $form = Contact::getInstance();
+        $view->assign('form', $form->getConfig());
+
+        if ($form->isSubmit() && $form->isValid()) {
+            // envoyer un mail à l'admin et aux modérateurs
+            $recipients = $this->user->selectWhere(["role" => getenv('Admin')]);
+            array_push($recipients, $this->user->selectWhere(["role" => getenv('Moderateur')]));
+            // envoie du mail à la team
+            if ($this->email->contact_team_mail($form->getData("email"), $form->getData("firstname") . ' ' . $form->getData("lastname"), $form->getData("message"), $recipients)) {
+                $form->errors[] = "Super notre équipe à reçu ton message !";
+            } else {
+                $form->errors[] = "Nous n'avons pas pu vous envoyer ton message";
+            }
+        }
+
+        $view->assign("formErrors", $form->errors);
+    }
+    public function logout(): void
+    {
+        $this->session->destroy();
+        //redirection page de connexion
         header("Location: login");
     }
 
-    public function logout(): void
+    public static function generateToken()
     {
-        echo "logout";
+        $secretKey = "CoorkGotDaGoodFood";
+        // Deux heures d'expiration 
+        $secretTime = time() + (2 * 60 * 60);
+
+        $token = $secretKey . '|' . $secretTime;
+        $tokenHash = hash('sha256', $token);
+
+        $secretToken = base64_encode($token . '|' . $tokenHash);
+
+        return $secretToken;
     }
 
-    public static function generateToken(): string
+    public static function isLogged($sessionToken): bool
     {
-        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_!?./$';
-        $charactersLength = strlen($characters);
-        $token = '';
-        for ($i = 0; $i < 40; $i++) {
-            $token .= $characters[rand(0, $charactersLength - 1)];
+        $secretKey = "CoorkGotDaGoodFood";
+
+        $decodedToken = base64_decode($sessionToken);
+        $tokenParts = explode('|', $decodedToken);
+
+        if (count($tokenParts) === 3) {
+            $tokenData = $tokenParts[0] . '|' . $tokenParts[1];
+            $hashedToken = hash('sha256', $tokenData);
+
+            if ($tokenParts[2] === $hashedToken && $tokenParts[0] === $secretKey && time() < intval($tokenParts[1])) {
+                return true;
+            }
         }
-        return $token;
+        return false;
     }
 }

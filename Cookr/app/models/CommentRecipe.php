@@ -6,40 +6,40 @@ use App\Config\Sql;
 
 class CommentRecipe extends Sql
 {
-    protected Int $user_id;
-    protected Int $recipe_id;
+    protected String $user;
+    protected String $recipe;
     protected String $comment;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUserId(): int
+    public function getUserId(): string
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * @param int $user_id
+     * @param string $user
      */
-    public function setUserid(int $user_id): void
+    public function setUserid(string $user): void
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getRecipeId(): int
+    public function getRecipeId(): string
     {
-        return $this->recipe_id;
+        return $this->recipe;
     }
 
     /**
-     * @param int $recipe_id
+     * @param string $recipe
      */
-    public function setRecipeId(int $recipe_id): void
+    public function setRecipeId(string $recipe): void
     {
-        $this->recipe_id = $recipe_id;
+        $this->recipe = $recipe;
     }
 
     /**

@@ -49,12 +49,12 @@ class Sql
         $columns = array_diff_key($columns, $columnsToDeleted);
         unset($columns["id"]);
 
-        if (is_numeric($this->getId()) && $this->getId() > 0) {
+        if (is_string($this->getId()) && $this->getId() !== " " && preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',$this->getId())) {
             $columnsUpdate = [];
             foreach ($columns as $key => $value) {
                 $columnsUpdate[] = $key . "=:" . $key;
             }
-            $queryPrepared = $this->PDO->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id =" . $this->getId());
+            $queryPrepared = $this->PDO->prepare("UPDATE " . $this->table . " SET " . implode(",", $columnsUpdate) . " WHERE id = '" . $this->getId() . "'");
         } else {
             $queryPrepared = $this->PDO->prepare("INSERT INTO " . $this->table . " (" . implode(",", array_keys($columns)) . ") 
                             VALUES (:" . implode(",:", array_keys($columns)) . ")");
@@ -63,22 +63,47 @@ class Sql
         $queryPrepared->execute($columns);
     }
 
-    public function selectWhere(array $array): array
+    public function delete(): void
+    {
+        $queryPrepared = $this->PDO->prepare("DELETE FROM " . $this->table . " WHERE id =" . $id);
+    }
+
+    public function selectWhere(?array $array): array
+    {
+        if (isset($array)) {
+            $where = [];
+            foreach ($array as $column => $value) {
+                $where[] = $column . " = :" . $column;
+            }
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " WHERE " . implode(" AND ", $where));
+            $queryPrepared->execute($array);
+        } else {
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table);
+            $queryPrepared->execute();
+        }
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getUserPassword(array $array): array
     {
         $where = [];
         foreach ($array as $column => $value) {
             $where[] = $column . " = :" . $column;
         }
-        $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " WHERE " . implode(" AND ", $where));
-        $queryPrepared->setFetchMode(\PDO::FETCH_ASSOC);
+        $queryPrepared = $this->PDO->prepare("SELECT password FROM " . $this->table . " WHERE " . implode(" AND ", $where));
         $queryPrepared->execute($array);
-        return $queryPrepared->fetchAll();
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
-    public function delete($id): void
+    public function getTableId(array $array): array
     {
-        $queryPrepared = $this->PDO->prepare("DELETE FROM " . $this->table . " WHERE id =" . $id);
+        $where = [];
+        foreach ($array as $column => $value) {
+            $where[] = $column . " = :" . $column;
+        }
+        $queryPrepared = $this->PDO->prepare("SELECT id FROM " . $this->table . " WHERE " . implode(" AND ", $where));
+        $queryPrepared->execute($array);
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     // public function select($request): void 

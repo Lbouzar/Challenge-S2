@@ -17,18 +17,26 @@ class Login extends Verificator
                 "method" => $this->method,
                 "action" => "",
                 "enctype" => "",
+                "id" => "",
+                "class" => "",
                 "submit" => "Connexion"
             ],
             "inputs" => [
                 "email" => [
                     "type" => "email",
+                    "class" => "input-regular--small",
                     "placeholder" => "Votre email",
-                    "error" => "Le format de votre email est incorrect"
+                    "error" => "Le format de votre email est incorrect",
+                    "required" => true,
+                    "label" => "Adresse e-mail"
                 ],
                 "pwd" => [
                     "type" => "password",
+                    "class" => "input-regular--small",
                     "placeholder" => "Votre mot de passe",
-                    "error" => "Votre mot de passe est incorrect"
+                    "error" => "Votre mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un caractère spécial",
+                    "required" => true,
+                    "label" => "Mot de passe"
                 ]
             ]
         ];
