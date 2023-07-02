@@ -6,19 +6,32 @@ use App\Config\Sql;
 
 class Recipe extends Sql
 {
-    protected Int $id;
+    protected String $id;
     protected String $title;
-    protected String $description;
+    protected String $description; //Les étapes de la recette
     protected String $difficulty;
-    protected Int $duration;
-    protected Int $recipeCategory;
+    protected Int $isMain = 0;
+    protected String $category;
+    protected String $presentation;
+    protected Int $preparationTime = 0;
+    protected Int $cookingTime = 0;
+    protected Int $price = 0;
+    protected String $ingredients;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @param String $id
+     */
+    public function setId(string $id): void
+    {
+        $this->id = $id;
     }
 
     /**
@@ -69,35 +82,73 @@ class Recipe extends Sql
         $this->description = $difficulty;
     }
 
-    /**
-     * @return int
-     */
-    public function getDuration(): int
+    public function getIsMain(): int
     {
-        return $this->duration;
+        return $this->isMain;
     }
 
-    /**
-     * @param int $duration
-     */
-    public function setDuration(int $duration): void
+    public function setIsMain(int $isMain): void
     {
-        $this->duration = $duration;
+        $this->isMain = $isMain;
     }
 
-    /**
-     * @return int
-     */
-    public function getRecipeCategory(): int
+    public function getCategory(): string
     {
-        return $this->recipeCategory;
+        return $this->category;
     }
 
-    /**
-     * @param int $recipeCategory
-     */
-    public function setRecipeCategory(int $recipeCategory): void
+    public function setCategory(string $category): void
     {
-        $this->recipeCategory = $recipeCategory;
+        $this->category = $category;
+    }
+
+    public function getPresentation(): string
+    {
+        return $this->presentation;
+    }
+
+    public function setPresentation(string $presentation): void
+    {
+        $this->presentation = $presentation;
+    }
+
+    public function getPreparationTime(): int
+    {
+        return $this->preparationTime;
+    }
+
+    public function setPreparationTime(int $preparationTime): void
+    {
+        $this->preparationTime = $preparationTime;
+    }
+
+    public function getCookingTime(): int 
+    {
+        return $this->cookingTime;
+    }
+
+    public function setCookingTime(int $cookingTime): void 
+    {
+        $this->cookingTime = $cookingTime;
+    }
+
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function getIngredients(): string
+    {
+        return $this->ingredients;
+    }
+
+    public function setIngredients(string $ingredients): void 
+    {
+        $this->ingredients = '{'.$ingredients.'}';
     }
 }

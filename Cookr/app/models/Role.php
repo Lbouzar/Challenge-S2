@@ -6,15 +6,20 @@ use App\Config\Sql;
 
 class Role extends Sql
 {
-    protected Int $id;
+    protected String $id;
     protected String $name;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
+    }
+
+    public function setId(string $id): void 
+    {
+        $this->id = $id;
     }
 
     /**

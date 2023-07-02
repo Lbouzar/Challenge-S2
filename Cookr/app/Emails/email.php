@@ -24,6 +24,7 @@ class Email
         $this->mail->Username = getenv("APP_EMAIL_ADRESS");
         $this->mail->Password = getenv("APP_EMAIL_PASSWORD");
         $this->mail->setFrom(getenv("APP_EMAIL_ADRESS"), 'Cookr Compagny');
+        $this->mail->addEmbeddedImage(dirname(__DIR__, 2) . '/public/assets/img/logo-regular.jpg', "logo_cookr");
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->Port = 465;
         $this->mail->isHTML(true);
@@ -39,39 +40,40 @@ class Email
 
     function register_mail($recipientAdress, $token): bool
     {
+        $link = ' href = "http://' . getenv('HTTP_HOST') . '/confirm?' . http_build_query(['email' => $recipientAdress, 'token' => $token]) . '"';
+        $contact = 'href = "http://' . getenv('HTTP_HOST') . '/contact"';
+        $date = date('Y');
         $this->mail->addAddress($recipientAdress);
-        $this->mail->Subject = ("Bienvenue chez Cookr");
+        $this->mail->Subject = "Bienvenue chez Cookr";
+        $this->mail->Body = strtr(file_get_contents(__DIR__ . '/register.html'), array('%link%' => $link, '%contact%' => $contact, '%date%' => $date));
 
-        $this->mail->Body = ('
-        <body>
-        <div>
-            <h1>Bienvenue chez Cookr</h1>
-        </div>
-        <div>
-            <div>
-                <p>Nous n\'avons toujours pas slogan mais vous trouverez les
-                    meilleurs recettes et articles culinaires chez
-                    Cookr.</p><br>
-                <p>Convaincu(e) ? Super !</p><br>
-                <p>Validez votre compte en cliquant sur le bouton juste ici :</p><br>
-                
-                <button type="submit" style="font-weight:700; background-color: #FC6E3C; padding: 10px 20px 10px 20px; border: none; border-radius: 8px; font-size: 20px; cursor: pointer; margin-top: 12px;">
-                    <a href="http://'.getenv('HTTP_HOST').'/confirm?'.http_build_query(["email" => $recipientAdress, "token" => $token]).'" style="color: white; text-decoration: none;">
-                        Je valide mon compte
-                    </a>
-                </button>
-            </div>
-        </div>
-        <div style="display: flex; justify-content: center;">
-            <p style="color: grey;">Ceci est un message automatique, merci de ne pas répondre.</p>
-        </div>
-    </body>
-        ');
-        
         if (!$this->mail->send()) {
             return false;
         } else {
             return true;
         }
+    }
+
+    function newsletter_welcome_mail()
+    {
+    }
+
+    function contact_team_mail($senderMail, $senderName, $message, $recipients): bool
+    {
+        foreach ($recipients as $recipient) {
+            $this->mail->ClearAllRecipients();
+            $this->mail->addAddress($recipient["email"]);
+            $this->mail->Subject = "Message utilisateur";
+            $this->mail->Body = strtr(file_get_contents(__DIR__ . '/contact.html'), array('%userMail%' => $senderMail, '%userName%' => $senderName, '%message%' => $message));
+            if (!$this->mail->send()) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    function report_mail()
+    {
     }
 }

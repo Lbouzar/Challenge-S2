@@ -52,9 +52,7 @@ class Contact extends Verificator
                 ],
                 "message" => [
                     "type" => "textarea",
-                    "class" => "input-regular--small",
                     "class" => "text-area",
-                    "placeholder" => "Votre message",
                     "minlength" => 2,
                     "maxlength" => 300,
                     "cols" => 30,

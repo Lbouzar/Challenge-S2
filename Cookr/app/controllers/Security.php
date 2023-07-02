@@ -43,7 +43,7 @@ class Security
                     $this->user->save();
 
                     // envoie du mail de confirmation
-                    if ($this->email->register_mail($form->getData("email"),$token)) {
+                    if ($this->email->register_mail($form->getData("email"), $token)) {
                         $form->errors[] = "Valide ton compte avec le mail envoyé (regarde tes spams aussi)";
                     } else {
                         $form->errors[] = "Nous n'avons pas pu vous envoyer un mail de confirmation";
@@ -67,10 +67,12 @@ class Security
             header("Location: login");
         } else {
             //renvoyer un mail 
-            $this->user->setId($userArray[0]["id"]);
+            $retryUser = $this->user->selectWhere(["email" => $_GET["email"]]);
+            $this->user->setId($retryUser[0]["id"]);
             $this->user->setToken(self::generateToken());
             $token = $this->user->getToken();
-            $this->email->register_mail($_GET["email"],$token);
+            $this->user->save();
+            $this->email->register_mail($_GET["email"], $token);
             die("Erreur lors de la validation, un mail vous a été envoyé");
         }
     }
@@ -125,7 +127,7 @@ class Security
         }
     }
 
-    public function contact(): void 
+    public function contact(): void
     {
         $view = View::getInstance("Security/contact", "front");
         $form = Contact::getInstance();
@@ -133,6 +135,14 @@ class Security
 
         if ($form->isSubmit() && $form->isValid()) {
             // envoyer un mail à l'admin et aux modérateurs
+            $recipients = $this->user->selectWhere(["role" => getenv('Admin')]);
+            array_push($recipients, $this->user->selectWhere(["role" => getenv('Moderateur')]));
+            // envoie du mail à la team
+            if ($this->email->contact_team_mail($form->getData("email"), $form->getData("firstname") . ' ' . $form->getData("lastname"), $form->getData("message"), $recipients)) {
+                $form->errors[] = "Super notre équipe à reçu ton message !";
+            } else {
+                $form->errors[] = "Nous n'avons pas pu vous envoyer ton message";
+            }
         }
 
         $view->assign("formErrors", $form->errors);
