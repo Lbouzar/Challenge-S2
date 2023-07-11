@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="public/assets/icons/logo-small.svg">
-    <link rel="stylesheet" href="public/assets/css/main.css">
+    <link rel="icon" type="image/svg+xml" href="<?php getenv('HTTP_HOST') ?>/public/assets/icons/logo-small.svg">
+    <link rel="stylesheet" href="<?php getenv('HTTP_HOST') ?>/public/assets/css/main.css">
     <!-- <script src="<?php // js_url('main') 
                         ?>"></script> -->
     <title>Cookr</title>
@@ -35,14 +35,13 @@
             </ul>
         </nav>
         <a href="/" id="logo-link">
-            <img class="icon--logo" src="public/assets/icons/logo-regular.svg" alt="logo cookr">
+            <img class="icon--logo" src="<?php getenv('HTTP_HOST') ?>/public/assets/icons/logo-regular.svg" alt="logo cookr">
         </a>
         <a href="/register" id="logo-user">
             <i class="icon-user icon-medium" aria-label="user button"></i>
         </a>
     </header>
     <?php include $this->view; ?>
-
     <footer>
         <!-- top footer -->
         <section>
@@ -98,7 +97,7 @@
                 <a href="#">Termes et conditions</a>
                 <a href="#">Confidentialité</a>
             </div>
-            <p class="copyright">&copy; Cookr - <?= date("Y");?></p>
+            <p class="copyright">&copy; Cookr - <?= date("Y"); ?></p>
         </section>
     </footer>
 </body>

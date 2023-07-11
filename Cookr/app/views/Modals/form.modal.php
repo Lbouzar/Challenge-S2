@@ -8,22 +8,24 @@
             maxlength="<?= $input["max"]?? ""?>" 
             cols="<?= $input["cols"]?>" 
             rows="<?= $input["rows"]?>"
-            <?= $input["required"] ? "required" : "" ?>>
-            </textarea>
+            <?= $input["required"] ? "required" : "" ?>></textarea>
             <span class="length" id="message-length">
                 <span>0</span>
                 <span>/</span>
                 <span>300</span>
             </span>
         <?php else : ?>
+            <fieldset class="flex-column">
             <label for="<?= $name ?>"><?= $input["label"] ?></label>
             <input name="<?= $name ?>"  
             type="<?= $input["type"] ?>"
             class="<?= $input["class"] ?>" 
-            placeholder="<?= $input["placeholder"] ?>"
+            placeholder="<?= $input["placeholder"]?? "" ?>"
             minlength="<?= $input["min"]?? ""?>"
             maxlength="<?= $input["max"]?? ""?>" 
+            value="<?= $input["value"]?? ""?>"
             <?= $input["required"] ? "required" : "" ?>>
+            </fieldset>
         <?php endif; ?>
     <?php endforeach; ?>
     <button type="submit" class="cta-button"><?= $config["config"]["submit"] ?></button>

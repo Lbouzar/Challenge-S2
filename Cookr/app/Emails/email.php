@@ -13,10 +13,13 @@ class Email
 {
     private $mail;
     private static $instance;
-
+    public $contact;
+    public $date;
 
     private function __construct()
     {
+        $this->contact = 'href = "http://' . getenv('HTTP_HOST') . '/contact"';
+        $this->date = date('Y');
         $this->mail = new PHPMailer(true);
         $this->mail->isSMTP();
         $this->mail->Host = 'smtp.gmail.com';
@@ -41,17 +44,24 @@ class Email
     function register_mail($recipientAdress, $token): bool
     {
         $link = ' href = "http://' . getenv('HTTP_HOST') . '/confirm?' . http_build_query(['email' => $recipientAdress, 'token' => $token]) . '"';
-        $contact = 'href = "http://' . getenv('HTTP_HOST') . '/contact"';
-        $date = date('Y');
         $this->mail->addAddress($recipientAdress);
         $this->mail->Subject = "Bienvenue chez Cookr";
-        $this->mail->Body = strtr(file_get_contents(__DIR__ . '/register.html'), array('%link%' => $link, '%contact%' => $contact, '%date%' => $date));
+        $this->mail->Body = strtr(file_get_contents(__DIR__ . '/register.html'), array('%link%' => $link, '%contact%' => $this->contact, '%date%' => $this->date));
 
         if (!$this->mail->send()) {
             return false;
         } else {
             return true;
         }
+    }
+
+    function update_mail($recipientAdress)
+    {
+        $this->mail->addAddress($recipientAdress);
+        $this->mail->Subject = "Votre compte a été mis à jour";
+        $this->mail->Body = strtr(file_get_contents(__DIR__.'/update.html'), array('%contact%' => $this->contact, '%date%' => $this->date));
+        $this->mail->send();
+
     }
 
     function newsletter_welcome_mail()

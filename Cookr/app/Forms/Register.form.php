@@ -17,7 +17,7 @@ class Register extends Verificator
                 "method" => $this->method,
                 "action" => "",
                 "enctype" => "",
-                "id" => "",
+                "id" => "form-display",
                 "class" => "",
                 "submit" => "Je m'inscris"
             ],

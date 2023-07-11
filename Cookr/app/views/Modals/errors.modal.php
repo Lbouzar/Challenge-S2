@@ -1,6 +1,5 @@
-<div class="">
-    Attention vous avez fait des erreurs !
-    <?php foreach ($config as $error) :?>
-        <span><?= $error ?></span>
-    <?php endforeach; ?>
-</div>
+<?php foreach ($config as $error) : ?>
+    <?php if ($error != " ") : ?>
+    <span><?= $error ?></span>
+    <?php endif; ?>
+<?php endforeach; ?>

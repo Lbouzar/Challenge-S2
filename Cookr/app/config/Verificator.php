@@ -45,7 +45,7 @@ class Verificator
     public function isValid(): bool
     {
         if (count($this->config["inputs"]) != count($this->data) || $_SERVER['REQUEST_METHOD'] != $this->method) {
-            $this->errors[] = "Veuillez remplir le formulaire";
+            $this->errors[] = " ";
         }
         foreach ($this->config["inputs"] as $name => $configInput) {
             if (!isset($this->data[$name])) {

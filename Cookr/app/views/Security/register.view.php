@@ -10,11 +10,9 @@
     </aside>
     <section>
         <h1>Inscription</h1>
-        <div id="form-display">
             <?php if (isset($formErrors)) 
                 $this->modal("errors", $formErrors); ?>
             <?php $this->modal("form", $form); ?>
-        </div>
         <div class="register">
             <p>Déjà un compte ?</p>
             <a href="/login">Connectez-vous !</a>
