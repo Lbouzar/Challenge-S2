@@ -11,8 +11,8 @@ class User extends Sql
     protected String $lastname;
     protected String $email;
     protected String $password;
-    protected Int $status = 0;
-    protected String $role = '74467e6e-f31a-4387-9895-82133144c568';
+    protected Int $status;
+    protected String $role;
     protected String $token;
 
     /**

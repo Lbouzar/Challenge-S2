@@ -55,11 +55,11 @@ class Email
         }
     }
 
-    function update_mail($recipientAdress)
+    function update_mail($recipientAdress, $newEail)
     {
         $this->mail->addAddress($recipientAdress);
         $this->mail->Subject = "Votre compte a été mis à jour";
-        $this->mail->Body = strtr(file_get_contents(__DIR__.'/update.html'), array('%contact%' => $this->contact, '%date%' => $this->date));
+        $this->mail->Body = strtr(file_get_contents(__DIR__.'/update.html'), array('%newEmail%' =>$newEail,'%contact%' => $this->contact, '%date%' => $this->date));
         $this->mail->send();
 
     }

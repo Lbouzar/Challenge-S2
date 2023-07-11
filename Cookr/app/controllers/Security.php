@@ -98,7 +98,6 @@ class Security
                 else if (password_verify($form->getData("pwd"), $this->user->getUserPassword(["email" => $form->getData("email")])[0]["password"])) {
                     //mise à jour du Token
                     $this->user->setId($this->user->getTableId(["email" => $form->getData("email")])[0]["id"]);
-                    $this->user->setStatus(1);
                     $this->user->setToken(self::generateToken());
                     $this->user->save();
                     //Récupération des infos de l'utilisateur
@@ -131,7 +130,6 @@ class Security
                 $updatePwd = Password::getInstance();
 
                 $this->user->setId($this->session->id);
-                $this->user->setStatus(1);
 
                 $secondsWait = 2;
 
@@ -145,7 +143,7 @@ class Security
                     $this->user->setFirstname($updateUser->getData("firstname"));
                     $this->user->setLastname($updateUser->getData("lastname"));
                     if ($data[0]['email'] != $updateUser->getData("email")) {
-                        $this->email->update_mail($data[0]['email']);
+                        $this->email->update_mail($data[0]['email'], $updateUser->getData("email"));
                         $this->user->setEmail($updateUser->getData("email"));
                     }
                     $this->user->save();
@@ -157,10 +155,9 @@ class Security
                 if ($updatePwd->isSubmit() && $updatePwd->isValid()) {
                     if (password_verify($updatePwd->getData("oldPwd"), $data[0]["password"])) {
                         //mise à jour du mot de passe
-                        $this->email->update_mail($data[0]['email']);
                         $this->user->setPassword($updatePwd->getData("pwd"));
                         $this->user->save();
-                        $updatePwd->errors[] = "Mise à jour de votre mot de passe";
+                        $updatePwd->errors[] = "Votre mot de passe a été mis à jour";
                     } else {
                         $updatePwd->errors[] = "Votre ancien mot de passe est incorrect";
                     }

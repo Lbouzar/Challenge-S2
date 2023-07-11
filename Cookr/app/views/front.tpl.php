@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="<?php getenv('HTTP_HOST') ?>/public/assets/icons/logo-small.svg">
     <link rel="stylesheet" href="<?php getenv('HTTP_HOST') ?>/public/assets/css/main.css">
-    <!-- <script src="<?php // js_url('main') 
-                        ?>"></script> -->
     <title>Cookr</title>
 </head>
 
@@ -21,6 +19,9 @@
                 <li><a href="/recipes" class="">Recettes</a></li>
                 <li><a href="/articles" class="">Articles</a></li>
                 <li><a href="/contact" class="">Contact</a></li>
+                <?php if($_SESSION["role"] != getenv('Utilisateur') && ($_SESSION["role"] == getenv("Editeur") || $_SESSION["role"] == getenv("Moderateur") || $_SESSION["role"] == getenv("Admin"))):?>
+                <li><a href="/back-office" class="">Back Office</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
         <button id="hamburger-menu">
@@ -32,6 +33,9 @@
                 <li><a href="/recipes">Recettes</a></li>
                 <li><a href="/articles">Articles</a></li>
                 <li><a href="/contact">Contact</a></li>
+                <?php if($_SESSION["role"] != getenv('Utilisateur') && ($_SESSION["role"] == getenv("Editeur") || $_SESSION["role"] == getenv("Moderateur") || $_SESSION["role"] == getenv("Admin"))):?>
+                <li><a href="/back-office" class="">Back Office</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
         <a href="/" id="logo-link">

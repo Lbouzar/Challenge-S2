@@ -50,7 +50,6 @@ if (!file_exists("../app/config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
 $session = Session::getInstance();
-
 $routes = yaml_parse_file("../app/config/routes.yml");
 
 if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
@@ -83,18 +82,18 @@ if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || em
 
     if (isset($routes[$uri]["roles"])) {
         $roles = $routes[$uri]["roles"];
+        $isAuthorized = false;
         foreach ($roles as $role) {
-            if($session->role == getenv($role)) {
+            if ($session->role == getenv($role)) {
                 $isAuthorized = true;
                 break;
             }
-            $isAuthorized = false;
         }
-        if($isAuthorized) {
-            $objet->$action;
+        if ($isAuthorized) {
+            $objet->$action();
         } else {
             http_response_code(404);
-            View::getInstance("404/404", "front"); 
+            View::getInstance("404/404", "front");
         }
     } else {
         $objet->$action();

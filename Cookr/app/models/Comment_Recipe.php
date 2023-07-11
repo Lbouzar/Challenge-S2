@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Config\Sql;
 
-class CommentRecipe extends Sql
+class Comment_Recipe extends Sql
 {
     protected String $user;
     protected String $recipe;

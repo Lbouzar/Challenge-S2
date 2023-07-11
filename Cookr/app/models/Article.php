@@ -4,7 +4,7 @@ use App\Config\Sql;
 
 class Article extends Sql
 {
-    protected String $id;
+    protected String $id = " ";
     protected String $title;
     protected String $user; // Auteur de l'article, clé étrangère 
     protected String $content;

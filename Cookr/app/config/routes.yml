@@ -60,20 +60,20 @@
     - Moderateur
     - Editeur
 
-/back-office/homepage:
+/homepage:
   controller: Dashboard
   action: homepage
   roles:
     - Admin
 
-/back-office/recipes:
+/recipes-bo:
   controller: Recipes
   action: allRecipesBO
-  roles:
+  roles: 
     - Admin
     - Editeur
 
-/back-office/recipe:
+/recipe-bo:
   controller: Recipes
   action: recipeBO
   roles:
@@ -81,14 +81,14 @@
     - Editeur
 # yes, une route dynamique
 
-/back-office/articles:
+/articles-bo:
   controller: Articles
   action: allArticlesBO
   roles:
     - Admin
     - Editeur
 
-/back-office/article:
+/article-bo:
   controller: Articles
   action: articleBO
   roles:
@@ -96,14 +96,14 @@
     - Editeur
 # yes, une route dynamique
 
-/back-office/comments:
+/comments-bo:
   controller: Dashboard
   action: comments
   roles:
     - Admin
     - Moderateur
 
-/back-office/contact:
+/contact-bo:
   controller: Dashboard
   action: contact
   roles:

@@ -6,16 +6,16 @@ use App\Config\Sql;
 
 class Recipe extends Sql
 {
-    protected String $id;
+    protected String $id = " ";
     protected String $title;
     protected String $description; //Les étapes de la recette
     protected String $difficulty;
-    protected Int $isMain = 0;
+    protected Int $is_main;
     protected String $category;
     protected String $presentation;
-    protected Int $preparationTime = 0;
-    protected Int $cookingTime = 0;
-    protected Int $price = 0;
+    protected Int $preparation_time;
+    protected Int $cooking_time;
+    protected Int $price;
     protected String $ingredients;
 
     /**
@@ -84,12 +84,12 @@ class Recipe extends Sql
 
     public function getIsMain(): int
     {
-        return $this->isMain;
+        return $this->is_main;
     }
 
     public function setIsMain(int $isMain): void
     {
-        $this->isMain = $isMain;
+        $this->is_main = $isMain;
     }
 
     public function getCategory(): string
@@ -114,22 +114,22 @@ class Recipe extends Sql
 
     public function getPreparationTime(): int
     {
-        return $this->preparationTime;
+        return $this->preparation_time;
     }
 
     public function setPreparationTime(int $preparationTime): void
     {
-        $this->preparationTime = $preparationTime;
+        $this->preparation_time = $preparationTime;
     }
 
     public function getCookingTime(): int 
     {
-        return $this->cookingTime;
+        return $this->cooking_time;
     }
 
     public function setCookingTime(int $cookingTime): void 
     {
-        $this->cookingTime = $cookingTime;
+        $this->cooking_time = $cookingTime;
     }
 
     public function getPrice(): int

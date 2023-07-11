@@ -49,7 +49,7 @@ class Sql
         $columns = array_diff_key($columns, $columnsToDeleted);
         unset($columns["id"]);
 
-        if (is_string($this->getId()) && $this->getId() !== " " && preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',$this->getId())) {
+        if (is_string($this->getId()) && $this->getId() !== " " && preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $this->getId())) {
             $columnsUpdate = [];
             foreach ($columns as $key => $value) {
                 $columnsUpdate[] = $key . "=:" . $key;
@@ -106,28 +106,15 @@ class Sql
         return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    // public function select($request): void 
-    // {
-    //     $queryPrepared = $this->pdo->prepare("SELECT " .$request. "FROM " .$this->table);
-    // }
+    public function getLatestData(?Int $limit): array
+    {
+        if (isset($limit)) {
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " ORDER BY created_at DESC LIMIT ". $limit);
+        } else {
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table ." ORDER BY created_at DESC");
+        }
+        $queryPrepared->execute();
 
-    // public function where($field, $operator ,$value): void
-    // {
-    //     $queryPrepared = $this->pdo->prepare("WHERE ".$field. " ".$operator. " ".$value  );
-    // }
-
-    // public function join($joinType, $newTable, $request): void 
-    // {
-    //     $queryPrepared = $this->pdo->prepare($joinType . "JOIN " .$newTable. " ON " .$request);
-    // }
-
-    /**
-     * ok, le plan est "simple" :
-     * Dans un select, j'ai besoin de savoir la rêquete
-     * Dans un select, je peux avoir une ou plusieurs conditions (where, group by, order by, limit)
-     * Dans un select, je peux avoir une ou plusieurs jointures (inner, cross, left, right)
-     * Résultat attendu :
-     * $user = new User();
-     * $user->select(*)->join(inner, role, role.id = user.role_id)->where(role.id, = ,4)
-     */
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
