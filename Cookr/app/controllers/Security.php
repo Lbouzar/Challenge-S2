@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Emails\Email;
 use App\Forms\Contact;
 use App\Forms\Login;
+use App\Forms\Password;
+use App\Forms\Profil;
 
 class Security
 {
@@ -93,7 +95,7 @@ class Security
                     $form->errors[] = "Votre compte n'est pas validé";
                 }
                 //Vérification du mot de passe
-                if (password_verify($form->getData("pwd"), $this->user->getUserPassword(["email" => $form->getData("email")])[0]["password"])) {
+                else if (password_verify($form->getData("pwd"), $this->user->getUserPassword(["email" => $form->getData("email")])[0]["password"])) {
                     //mise à jour du Token
                     $this->user->setId($this->user->getTableId(["email" => $form->getData("email")])[0]["id"]);
                     $this->user->setStatus(1);
@@ -123,7 +125,52 @@ class Security
         if (!isset($this->session->id) || !isset($this->session->token) || !isset($this->session->role) || !self::isLogged($this->session->token)) {
             header("Location: login");
         } else {
-            $view = View::getInstance("Security/profil", "front");
+            $data = $this->user->selectWhere(["id" => $this->session->id]);
+            if (count($data) == 1) {
+                $updateUser = Profil::getInstance();
+                $updatePwd = Password::getInstance();
+
+                $this->user->setId($this->session->id);
+                $this->user->setStatus(1);
+
+                $secondsWait = 2;
+
+                $view = View::getInstance("Security/profil", "front");
+                $view->assign("userInfos", $data[0]["firstname"]. " ".$data[0]["lastname"]);
+                $view->assign('formUpdateUser', $updateUser->getConfig());
+                $view->assign('formUpdatePassword', $updatePwd->getConfig());
+
+                if ($updateUser->isSubmit() && $updateUser->isValid()) {
+                    //mise à jour du profil
+                    $this->user->setFirstname($updateUser->getData("firstname"));
+                    $this->user->setLastname($updateUser->getData("lastname"));
+                    if ($data[0]['email'] != $updateUser->getData("email")) {
+                        $this->email->update_mail($data[0]['email']);
+                        $this->user->setEmail($updateUser->getData("email"));
+                    }
+                    $this->user->save();
+                    $updateUser->errors[] = "Mise à jour de votre profil";
+                    header("Refresh:$secondsWait");
+                }
+                $view->assign("updateUserErrors", $updateUser->errors);
+
+                if ($updatePwd->isSubmit() && $updatePwd->isValid()) {
+                    if (password_verify($updatePwd->getData("oldPwd"), $data[0]["password"])) {
+                        //mise à jour du mot de passe
+                        $this->email->update_mail($data[0]['email']);
+                        $this->user->setPassword($updatePwd->getData("pwd"));
+                        $this->user->save();
+                        $updatePwd->errors[] = "Mise à jour de votre mot de passe";
+                    } else {
+                        $updatePwd->errors[] = "Votre ancien mot de passe est incorrect";
+                    }
+                }
+                $view->assign("updatePasswordErrors", $updatePwd->errors);
+            } else {
+                $this->session->destroy();
+                //redirection page de connexion
+                header("Location: login");
+            }
         }
     }
 

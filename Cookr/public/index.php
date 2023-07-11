@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Config\View;
+use App\Config\Session;
 
 spl_autoload_register(function ($class) {
     $class = "../" . str_replace("\\", "/", $class);
@@ -48,12 +49,13 @@ $uri = (empty($uri)) ? "/" : $uri;
 if (!file_exists("../app/config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
+$session = Session::getInstance();
 
 $routes = yaml_parse_file("../app/config/routes.yml");
 
 if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
     http_response_code(404);
-    new View("404/404", "front");
+    View::getInstance("404/404", "front");
 } else {
     $controller = $routes[$uri]["controller"];
     $action = $routes[$uri]["action"];
@@ -62,7 +64,6 @@ if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || em
     if (!file_exists("../app/controllers/" . $controller . ".php")) {
         die("Le fichier Controllers/" . $controller . ".php n'existe pas");
     }
-
     include "../app/controllers/" . $controller . ".php";
 
     //Le fichier existe mais est-ce qu'il possède la bonne classe
@@ -80,5 +81,22 @@ if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || em
         die("L'action " . $action . " n'existe pas");
     }
 
-    $objet->$action();
+    if (isset($routes[$uri]["roles"])) {
+        $roles = $routes[$uri]["roles"];
+        foreach ($roles as $role) {
+            if($session->role == getenv($role)) {
+                $isAuthorized = true;
+                break;
+            }
+            $isAuthorized = false;
+        }
+        if($isAuthorized) {
+            $objet->$action;
+        } else {
+            http_response_code(404);
+            View::getInstance("404/404", "front"); 
+        }
+    } else {
+        $objet->$action();
+    }
 }

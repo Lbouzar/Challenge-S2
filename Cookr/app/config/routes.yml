@@ -55,35 +55,58 @@
 /back-office:
   controller: Dashboard
   action: dashboard
+  roles: 
+    - Admin
+    - Moderateur
+    - Editeur
 
 /back-office/homepage:
   controller: Dashboard
   action: homepage
+  roles:
+    - Admin
 
 /back-office/recipes:
   controller: Recipes
   action: allRecipesBO
+  roles:
+    - Admin
+    - Editeur
 
 /back-office/recipe:
   controller: Recipes
   action: recipeBO
+  roles:
+    - Admin
+    - Editeur
 # yes, une route dynamique
 
 /back-office/articles:
   controller: Articles
   action: allArticlesBO
+  roles:
+    - Admin
+    - Editeur
 
 /back-office/article:
   controller: Articles
   action: articleBO
+  roles:
+    - Admin
+    - Editeur
 # yes, une route dynamique
 
 /back-office/comments:
   controller: Dashboard
   action: comments
+  roles:
+    - Admin
+    - Moderateur
 
 /back-office/contact:
   controller: Dashboard
   action: contact
+  roles:
+    - Admin
 
 # -----------------BACK SIDE----------------------------
