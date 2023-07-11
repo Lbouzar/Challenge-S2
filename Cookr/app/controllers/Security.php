@@ -108,7 +108,7 @@ class Security
                     $this->session->token = $userArray[0]["token"];
                     $this->session->role = $userArray[0]["role"];
                     if (isset($this->session->id) && isset($this->session->token) && isset($this->session->role) && self::isLogged($this->session->token)) {
-                        header("Location: profil");
+                        header("Location: /");
                     } else {
                         $form->errors[] = "Connexion impossible";
                     }
