@@ -1,8 +1,6 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteRule article/([a-zA-Z0-9\-]+)/?$ article?slug=$1 [QSA,L]
-RewriteRule recipe/([a-zA-Z0-9\-]+)/?$ recipe?slug=$1 [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

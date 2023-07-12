@@ -1,11 +1,3 @@
-<!-- <script>
-  function uploadImg(input, img) {
-    const [file] = input.files
-    if (file) {
-      img.src = URL.createObjectURL(file)
-    }
-  }
-</script>
 <script>
   tinymce.init({
     selector: '#myTextarea',
@@ -21,11 +13,11 @@
     plugins: 'image',
     toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image',
   });
-</script> -->
+</script>
 
-<div class="layout-bo articles-bo">
-  <h2>Modifier l'article</h2>
-  <?php if (isset($formErrors))
-    $this->modal("errors", $formErrors); ?>
-  <?php $this->modal("form", $form); ?>
+<div class="layout-bo recipes-bo">
+    <h2>Créer un article</h2>
+    <?php if (isset($formErrors))
+        $this->modal("errors", $formErrors); ?>
+    <?php $this->modal("form", $form); ?>
 </div>

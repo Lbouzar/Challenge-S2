@@ -73,6 +73,13 @@
     - Admin
     - Editeur
 
+/create-recipe:
+  controller: Recipes
+  action: createRecipe
+  roles:
+    - Admin
+    - Editeur
+
 /recipe-bo:
   controller: Recipes
   action: recipeBO
@@ -84,6 +91,13 @@
 /articles-bo:
   controller: Articles
   action: allArticlesBO
+  roles:
+    - Admin
+    - Editeur
+
+/create-article:
+  controller: Articles 
+  action: createArticle
   roles:
     - Admin
     - Editeur

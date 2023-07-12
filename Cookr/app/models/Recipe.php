@@ -11,12 +11,12 @@ class Recipe extends Sql
     protected String $description; //Les étapes de la recette
     protected String $difficulty;
     protected Int $is_main;
-    protected String $category;
     protected String $presentation;
     protected Int $preparation_time;
     protected Int $cooking_time;
     protected Int $price;
     protected String $ingredients;
+    protected String $slug;
 
     /**
      * @return string
@@ -79,7 +79,7 @@ class Recipe extends Sql
      */
     public function setDifficulty(string $difficulty): void
     {
-        $this->description = $difficulty;
+        $this->description = trim($difficulty);
     }
 
     public function getIsMain(): int
@@ -90,16 +90,6 @@ class Recipe extends Sql
     public function setIsMain(int $isMain): void
     {
         $this->is_main = $isMain;
-    }
-
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(string $category): void
-    {
-        $this->category = $category;
     }
 
     public function getPresentation(): string
@@ -122,12 +112,12 @@ class Recipe extends Sql
         $this->preparation_time = $preparationTime;
     }
 
-    public function getCookingTime(): int 
+    public function getCookingTime(): int
     {
         return $this->cooking_time;
     }
 
-    public function setCookingTime(int $cookingTime): void 
+    public function setCookingTime(int $cookingTime): void
     {
         $this->cooking_time = $cookingTime;
     }
@@ -147,8 +137,24 @@ class Recipe extends Sql
         return $this->ingredients;
     }
 
-    public function setIngredients(string $ingredients): void 
+    public function setIngredients(string $ingredients): void
     {
-        $this->ingredients = '{'.$ingredients.'}';
+        $this->ingredients = '{' . $ingredients . '}';
+    }
+
+    /**
+     * @return String 
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param String $slug
+     */
+    public function setSlug(string $slug): void
+    {
+        $this->slug = ucfirst(strtolower(trim($slug)));
     }
 }

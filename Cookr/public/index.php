@@ -26,9 +26,14 @@ spl_autoload_register(function ($class) {
 //Nettoyer la donnée
 //S'il y a des paramètres dans l'url il faut les enlever :
 $uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
+
 $uri = rtrim(strtolower(trim($uriExploded[0])), "/");
+$uriParameters = isset($uriExploded[1]) ? explode("&",$uriExploded[1]) : null;
+
 //Dans le cas ou nous sommes à la racine $uri sera vide du coup je remets /
 $uri = (empty($uri)) ? "/" : $uri;
+$slug = isset($uriParameters) ? explode("slug=", $uriParameters[0])[1] : null;
+$id = isset($uriParameters) ? explode("id=", $uriParameters[1])[1] : null;
 
 //Créer un fichier yaml contenant le route du type :
 // /login:
