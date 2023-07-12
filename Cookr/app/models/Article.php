@@ -12,10 +12,9 @@ class Article extends Sql
     protected String $content;
     protected String $keywords;
     protected String $slug;
+    protected Int $is_active;
+    protected String $image;
 
-    /**
-     * @return string
-     */
     public function getId(): String
     {
         return $this->id;
@@ -26,17 +25,11 @@ class Article extends Sql
         $this->id = $id;
     }
 
-    /**
-     * @return String 
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param String $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = ucfirst(strtolower(trim($title)));
@@ -49,20 +42,14 @@ class Article extends Sql
 
     public function setUser(String $user): void
     {
-        $this->user = $user;
+        $this->user = "'".$user."'";
     }
 
-    /**
-     * @return String
-     */
     public function getContent(): string
     {
         return $this->content;
     }
 
-    /**
-     * @param String $content
-     */
     public function setContent(string $content): void
     {
         $this->content = trim($content);
@@ -75,22 +62,36 @@ class Article extends Sql
 
     public function setKeywords(string $keywords): void
     {
-        $this->keywords = $keywords;
+        $this->keywords = trim($keywords);
     }
 
-    /**
-     * @return String 
-     */
     public function getSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * @param String $slug
-     */
     public function setSlug(string $slug): void
     {
         $this->slug = ucfirst(strtolower(trim($slug)));
+    }
+
+    public function getIsActive(): int
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(int $is_active): void
+    {
+        $this->is_active = $is_active;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 }

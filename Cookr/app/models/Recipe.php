@@ -11,72 +11,50 @@ class Recipe extends Sql
     protected String $description; //Les étapes de la recette
     protected String $difficulty;
     protected Int $is_main;
+    protected Int $is_active;
     protected String $presentation;
     protected Int $preparation_time;
     protected Int $cooking_time;
     protected Int $price;
     protected String $ingredients;
     protected String $slug;
+    protected String $image;
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param String $id
-     */
     public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return String 
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param String $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = ucfirst(strtolower(trim($title)));
     }
 
-    /**
-     * @return String
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param String $description
-     */
     public function setDescription(string $description): void
     {
         $this->description = trim($description);
     }
 
-    /**
-     * @return String
-     */
     public function getDifficulty(): string
     {
         return $this->difficulty;
     }
 
-    /**
-     * @param String $difficulty
-     */
     public function setDifficulty(string $difficulty): void
     {
         $this->description = trim($difficulty);
@@ -90,6 +68,16 @@ class Recipe extends Sql
     public function setIsMain(int $isMain): void
     {
         $this->is_main = $isMain;
+    }
+
+    public function getIsActive(): int
+    {
+        return $this->is_active;
+    }
+
+    public function setIsActive(int $is_active): void
+    {
+        $this->is_active = $is_active;
     }
 
     public function getPresentation(): string
@@ -139,22 +127,26 @@ class Recipe extends Sql
 
     public function setIngredients(string $ingredients): void
     {
-        $this->ingredients = '{' . $ingredients . '}';
+        $this->ingredients =  $ingredients;
     }
 
-    /**
-     * @return String 
-     */
     public function getSlug(): string
     {
         return $this->slug;
     }
 
-    /**
-     * @param String $slug
-     */
     public function setSlug(string $slug): void
     {
         $this->slug = ucfirst(strtolower(trim($slug)));
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 }
