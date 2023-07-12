@@ -10,6 +10,24 @@
       text-align: center;
     }
   }
+  span {
+    display: block;
+    color: red;
+    margin-top: 12px;
+    margin-bottom: -24px;
+  }
+  #message-length {
+    display: inline;
+    color: black;
+    margin-top: initial;
+    margin-bottom: initial;
+    span {
+      display: inline;
+      color: black;
+      margin-top: initial;
+      margin-bottom: initial;
+    }
+  }
   p {
     margin-top: 24px;
     @media screen and (min-width: 768px) {

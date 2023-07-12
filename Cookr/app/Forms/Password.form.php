@@ -18,7 +18,7 @@ class Password extends Verificator
                 "enctype" => "",
                 "id" => "",
                 "class" => "",
-                "submit" => "Changer mon mot de passe"
+                "submit" => "Sauvegarder"
             ],
             "inputs" => [
                 "oldPwd" => [

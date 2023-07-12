@@ -1,8 +1,15 @@
 #login {
   margin-top: 40px;
   padding: 0 40px;
+  section {
+    max-width: 400px;
+  }
   h1 {
     font-size: 30px;
+  }
+  span {
+    display: block;
+    color: red;
   }
   form {
     margin-top: 24px;
@@ -69,6 +76,7 @@
     justify-content: space-between;
     section:nth-of-type(1) {
       margin-right: 113px;
+      margin-left: 113px;
     }
     .register {
       font-size: 25px;

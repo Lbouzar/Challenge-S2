@@ -4,6 +4,13 @@
   h1 {
     font-size: 30px;
   }
+  span {
+    display: block;
+    color: red;
+  }
+  section {
+    max-width: 400px;
+  }
   form {
     margin-top: 24px;
     display: flex;
@@ -66,11 +73,11 @@
 }
 @media screen and (min-width: 1280px) {
   #register {
-    justify-content: space-between;
+    justify-content: start;
+    section {
+      margin: 0 auto;
+    }
     form {
-      fieldset {
-        margin-top: 0;
-      }
       #form-display {
         display: grid;
         grid-template-columns: 1fr 1fr;

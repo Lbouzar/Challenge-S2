@@ -19,6 +19,7 @@ h1 {
     justify-content: center;
     align-items: center;
     width: 33%;
+    min-width: 240px;
     .img-container {
       width: 100px;
       height: 100px;
@@ -90,8 +91,14 @@ h1 {
     }
   }
   .second-section {
-    width: 66%;
     padding: 32px 24px 32px 64px;
+    span {
+      display: block;
+      color: red;
+    }
+    fieldset {
+      margin-bottom: 12px;
+    }
     .save {
       margin-left: auto;
     }
@@ -104,6 +111,17 @@ h1 {
       input {
         width: 100% !important;
       }
+    }
+  }
+  .third-section {
+    padding: 32px 24px 32px 64px;
+    span {
+      display: block;
+      color: red;
+    }
+    fieldset {
+      margin-top: 12px;
+      margin-bottom: 12px;
     }
   }
 }
