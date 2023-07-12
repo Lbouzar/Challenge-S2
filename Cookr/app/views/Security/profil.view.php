@@ -12,13 +12,13 @@
       </button>
     </div>
     <div class="second-section">
-      <h1 class="sub-title">Mes coordonnées</h1>
+      <h1 class="sub-title ml-0">Mes coordonnées</h1>
       <?php if (isset($updateUserErrors))
         $this->modal("errors", $updateUserErrors); ?>
       <?php $this->modal("form", $formUpdateUser); ?>
     </div>
-    <div>
-      <h1 class="sub-title">Changer mon mot de passe</h1>
+    <div class="third-section">
+      <h1 class="sub-title ml-0">Changer mon mot de passe</h1>
       <?php if (isset($updatePasswordErrors))
         $this->modal("errors", $updatePasswordErrors); ?>
       <?php $this->modal("form", $formUpdatePassword); ?>

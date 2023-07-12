@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -923,8 +923,8 @@ footer nav h3 {
 }
 @font-face {
   font-family: "fontello";
-  src: url("/../fonts/fontello.eot ");
-  src: url("../../fonts/fontello.eot") format("embedded-opentype"), url("../../fonts/fontello.woff2") format("woff2"), url("../../fonts/fontello.woff") format("woff"), url("../../fonts/fontello.ttf") format("truetype"), url("../../fonts/fontello.svg") format("svg");
+  src: url("/public/assets/fonts/fontello.eot");
+  src: url("/public/assets/fonts/fontello.eot") format("embedded-opentype"), url("/public/assets/fonts/fontello.woff2") format("woff2"), url("/public/assets/fonts/fontello.woff") format("woff"), url("/public/assets/fonts/fontello.ttf") format("truetype"), url("/public/assets/fonts/fontello.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -1597,8 +1597,15 @@ footer nav h3 {
   margin-top: 40px;
   padding: 0 40px;
 }
+#login section {
+  max-width: 400px;
+}
 #login h1 {
   font-size: 30px;
+}
+#login span {
+  display: block;
+  color: red;
 }
 #login form {
   margin-top: 24px;
@@ -1662,6 +1669,7 @@ footer nav h3 {
   }
   #login section:nth-of-type(1) {
     margin-right: 113px;
+    margin-left: 113px;
   }
   #login .register {
     font-size: 25px;
@@ -1673,6 +1681,13 @@ footer nav h3 {
 }
 #register h1 {
   font-size: 30px;
+}
+#register span {
+  display: block;
+  color: red;
+}
+#register section {
+  max-width: 400px;
 }
 #register form {
   margin-top: 24px;
@@ -1733,10 +1748,10 @@ footer nav h3 {
 }
 @media screen and (min-width: 1280px) {
   #register {
-    justify-content: space-between;
+    justify-content: start;
   }
-  #register form fieldset {
-    margin-top: 0;
+  #register section {
+    margin: 0 auto;
   }
   #register form #form-display {
     display: grid;
@@ -1764,6 +1779,24 @@ footer nav h3 {
   #contact h1 {
     text-align: center;
   }
+}
+#contact span {
+  display: block;
+  color: red;
+  margin-top: 12px;
+  margin-bottom: -24px;
+}
+#contact #message-length {
+  display: inline;
+  color: black;
+  margin-top: initial;
+  margin-bottom: initial;
+}
+#contact #message-length span {
+  display: inline;
+  color: black;
+  margin-top: initial;
+  margin-bottom: initial;
 }
 #contact p {
   margin-top: 24px;
@@ -1837,6 +1870,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 33%;
+  min-width: 240px;
 }
 .profile-container .first-section .img-container {
   width: 100px;
@@ -1908,8 +1942,14 @@ h1 {
   margin-right: 12px;
 }
 .profile-container .second-section {
-  width: 66%;
   padding: 32px 24px 32px 64px;
+}
+.profile-container .second-section span {
+  display: block;
+  color: red;
+}
+.profile-container .second-section fieldset {
+  margin-bottom: 12px;
 }
 .profile-container .second-section .save {
   margin-left: auto;
@@ -1923,6 +1963,17 @@ h1 {
 }
 .profile-container .second-section .grid-infos-user input {
   width: 100% !important;
+}
+.profile-container .third-section {
+  padding: 32px 24px 32px 64px;
+}
+.profile-container .third-section span {
+  display: block;
+  color: red;
+}
+.profile-container .third-section fieldset {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .delete-account {
