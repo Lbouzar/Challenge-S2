@@ -43,6 +43,21 @@ class UpdateArticle extends Verificator
                     "label" => "Slug",
                     "value" => $data[0]["slug"]
                 ],
+                "is_active" => [
+                    "type" => "select",
+                    "options" => [
+                        [
+                            "value" => "1",
+                            "name" => "Oui"
+                        ],
+                        [
+                            "value" => "0",
+                            "name" => "Non"
+                        ]
+                    ],
+                    "error" => " ",
+                    "label" => "Article actif ?"
+                ],
                 "keywords" => [
                     "type" => "text",
                     "class" => "input-regular",

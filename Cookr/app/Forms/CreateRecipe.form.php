@@ -15,7 +15,7 @@ class CreateRecipe extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Créer"
@@ -41,26 +41,6 @@ class CreateRecipe extends Verificator
                     "required" => true,
                     "label" => "Slug"
                 ],
-                "difficulty" => [
-                    "type" => "select",
-                    "options" => [
-                        [
-                            "value" => "Facile",
-                            "name" => "Facile"
-                        ],
-                        [
-                            "value" => "Normal",
-                            "name" => "Normal"
-                        ],
-                        [
-                            "value" => "Difficile",
-                            "name" => "Difficile"
-                        ]
-                    ],
-                    "error" => "Difficulté incorrecte",
-                    "required" => true,
-                    "label" => "Difficulté"
-                ],
                 "is_main" => [
                     "type" => "select",
                     "options" => [
@@ -73,8 +53,23 @@ class CreateRecipe extends Verificator
                             "name" => "Oui"
                         ]
                     ],
-                    "error" => "Status incorrecte",
+                    "error" => " ",
                     "label" => "Recette du jour ?"
+                ],
+                "is_active" => [
+                    "type" => "select",
+                    "options" => [
+                        [
+                            "value" => "1",
+                            "name" => "Oui"
+                        ],
+                        [
+                            "value" => "0",
+                            "name" => "Non"
+                        ]
+                    ],
+                    "error" => " ",
+                    "label" => "Recette active ?"
                 ],
                 "preparation_time" => [
                     "type" => "number",
@@ -130,7 +125,7 @@ class CreateRecipe extends Verificator
                     "rows" => 7,
                     "required" => true,
                     "label" => "Description de la recette"
-                ],
+                ]
             ]
         ];
     }

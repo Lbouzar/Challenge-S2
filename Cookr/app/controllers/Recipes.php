@@ -10,7 +10,6 @@ use App\Models\Recipe;
 class Recipes
 {
     private $recipe;
-    private $urlData;
 
     public function __construct()
     {
@@ -40,12 +39,11 @@ class Recipes
         $form = CreateRecipe::getInstance();
         $view = View::getInstance("Recipes/createRecipes", "back");
         $view->assign('form', $form->getConfig());
-
         if ($form->isSubmit() && $form->isValid()) {
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
-            $this->recipe->setDifficulty($form->getData("difficulty"));
             $this->recipe->setIsMain($form->getData("is_main"));
+            $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
             $this->recipe->setPrice($form->getData("price"));
@@ -71,8 +69,8 @@ class Recipes
             $this->recipe->setId($_GET["id"]);
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
-            $this->recipe->setDifficulty($form->getData("difficulty"));
             $this->recipe->setIsMain($form->getData("is_main"));
+            $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
             $this->recipe->setPrice($form->getData("price"));

@@ -8,12 +8,12 @@ class Article extends Sql
 {
     protected String $id = " ";
     protected String $title;
-    protected String $user; // Auteur de l'article, clé étrangère 
+    protected String $creator; // Auteur de l'article, clé étrangère 
     protected String $content;
     protected String $keywords;
     protected String $slug;
     protected Int $is_active;
-    protected String $image;
+    protected String $image = "article_picture.png";
 
     public function getId(): String
     {
@@ -35,14 +35,14 @@ class Article extends Sql
         $this->title = ucfirst(strtolower(trim($title)));
     }
 
-    public function getUser(): String
+    public function getCreator(): String
     {
-        return $this->user;
+        return $this->creator;
     }
 
-    public function setUser(String $user): void
+    public function setCreator(String $creator): void
     {
-        $this->user = "'".$user."'";
+        $this->creator = $creator;
     }
 
     public function getContent(): string

@@ -41,6 +41,21 @@ class CreateArticle extends Verificator
                     "required" => true,
                     "label" => "Slug"
                 ],
+                "is_active" => [
+                    "type" => "select",
+                    "options" => [
+                        [
+                            "value" => "1",
+                            "name" => "Oui"
+                        ],
+                        [
+                            "value" => "0",
+                            "name" => "Non"
+                        ]
+                    ],
+                    "error" => " ",
+                    "label" => "Article actif ?"
+                ],
                 "keywords" => [
                     "type" => "text",
                     "class" => "input-regular",

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Config\View;
 use App\Models\Article;
+use App\Models\User;
 use App\Forms\CreateArticle;
 use App\Config\Session;
 use App\Forms\UpdateArticle;
@@ -11,10 +12,12 @@ use App\Forms\UpdateArticle;
 class Articles
 {
     private $article;
+    private $user;
 
     public function __construct()
     {
         $this->article = Article::getInstance();
+        $this->user = User::getInstance();
     }
     public function allArticles()
     {
@@ -40,10 +43,11 @@ class Articles
         $form = createArticle::getInstance();
         $view = View::getInstance("Articles/createArticles", "back");
         $view->assign('form', $form->getConfig());
+
         if ($form->isSubmit() && $form->isValid()) {
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            $this->article->setUser($session->id);
+            $this->article->setCreator($session->id);
             // $this->article->setContent();
             $this->article->setKeywords($form->getData("keywords"));
             $this->article->save();

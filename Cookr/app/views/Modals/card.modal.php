@@ -1,12 +1,14 @@
-<a href="" id="link-card">
-    <article class="card">
-        <div class="card-image">
-            <img src="" alt="">
-        </div>
-        <div class="card-title">
-            <h2></h2>
-        </div>
-        <div class="card-body"></div>
-        <div class="bard-body"></div>
-    </article>
-</a>
+<article class="card">
+    <div class="card-image">
+        <img src="<?php getenv('HTTP_HOST') ?>/public/assets/images/<?= $config["image"] ?>" alt="">
+    </div>
+    <div class="card-title">
+        <h2><?= $config["title"] ?></h2>
+    </div>
+    <div class="card-body">
+        <?= $config["presentation"] ?? "" ?>
+    </div>
+    <div class="card-footer">
+        <span>Posté le : <?= $config["created_at"] ?></span>
+    </div>
+</article>

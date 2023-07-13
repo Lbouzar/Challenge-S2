@@ -43,26 +43,6 @@ class UpdateRecipe extends Verificator
                     "label" => "Slug",
                     "value" => $data[0]["slug"]
                 ],
-                "difficulty" => [
-                    "type" => "select",
-                    "options" => [
-                        [
-                            "value" => "Facile",
-                            "name" => "Facile"
-                        ],
-                        [
-                            "value" => "Normal",
-                            "name" => "Normal"
-                        ],
-                        [
-                            "value" => "Difficile",
-                            "name" => "Difficile"
-                        ]
-                    ],
-                    "error" => "Difficulté incorrecte",
-                    "required" => true,
-                    "label" => "Difficulté"
-                ],
                 "is_main" => [
                     "type" => "select",
                     "options" => [
@@ -77,6 +57,21 @@ class UpdateRecipe extends Verificator
                     ],
                     "error" => "Status incorrecte",
                     "label" => "Recette du jour ?"
+                ],
+                "is_active" => [
+                    "type" => "select",
+                    "options" => [
+                        [
+                            "value" => "1",
+                            "name" => "Oui"
+                        ],
+                        [
+                            "value" => "0",
+                            "name" => "Non"
+                        ]
+                    ],
+                    "error" => " ",
+                    "label" => "Recette active ?"
                 ],
                 "preparation_time" => [
                     "type" => "number",

@@ -9,7 +9,6 @@ class Recipe extends Sql
     protected String $id = " ";
     protected String $title;
     protected String $description; //Les étapes de la recette
-    protected String $difficulty;
     protected Int $is_main;
     protected Int $is_active;
     protected String $presentation;
@@ -18,7 +17,7 @@ class Recipe extends Sql
     protected Int $price;
     protected String $ingredients;
     protected String $slug;
-    protected String $image;
+    protected String $image = "gateau_citron.png";
 
     public function getId(): string
     {
@@ -48,16 +47,6 @@ class Recipe extends Sql
     public function setDescription(string $description): void
     {
         $this->description = trim($description);
-    }
-
-    public function getDifficulty(): string
-    {
-        return $this->difficulty;
-    }
-
-    public function setDifficulty(string $difficulty): void
-    {
-        $this->description = trim($difficulty);
     }
 
     public function getIsMain(): int

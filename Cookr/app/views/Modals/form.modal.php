@@ -39,6 +39,8 @@
             minlength="<?= $input["min"]?? ""?>"
             maxlength="<?= $input["max"]?? ""?>" 
             value="<?= $input["value"]?? ""?>"
+            accept="<?= $input["accept"]?? ""?>"
+            onchange="<?= $input["onchange"]?? ""?>"
             <?= $input["required"] ? "required" : "" ?>>
             </fieldset>
         <?php endif; ?>
