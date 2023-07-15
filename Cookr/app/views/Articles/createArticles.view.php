@@ -21,3 +21,10 @@
         $this->modal("errors", $formErrors); ?>
     <?php $this->modal("form", $form); ?>
 </div>
+
+<script>
+  document.querySelector('#createArticleForm button').addEventListener('click', function(){
+    const inputContent = tinymce.activeEditor.getContent({ format: 'raw' });
+    document.querySelector('#createArticleForm button').value = inputContent;
+  });
+</script>

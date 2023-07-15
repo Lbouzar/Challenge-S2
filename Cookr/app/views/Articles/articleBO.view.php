@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
   function uploadImg(input, img) {
     const [file] = input.files
     if (file) {
@@ -21,7 +21,8 @@
     plugins: 'image',
     toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image',
   });
-</script> -->
+</script>
+
 
 <div class="layout-bo articles-bo">
   <h2>Modifier l'article</h2>

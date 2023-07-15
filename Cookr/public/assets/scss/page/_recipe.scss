@@ -1,0 +1,77 @@
+.recipe-view {
+  width: 100%;
+  padding: 64px 20px;
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 36px;
+  }
+  .img-container {
+    width: 100%;
+    margin-top: 32px;
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+  }
+  .presentation {
+    margin-top: 24px;
+  }
+  .ingredients {
+    margin-top: 24px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background-color: $lightgrey;
+    border-radius: 8px;
+  }
+  .indications {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    .indication {
+      background-color: $lightgrey;
+      padding: 8px;
+      border-radius: 4px;
+      margin-right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 25%;
+      .indication-title {
+        font-weight: bold;
+      }
+    }
+    .indication:last-child {
+      margin-right: 0;
+    }
+  }
+  .description {
+    margin-top: 24px;
+    background-color: $lightgrey;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .layer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+    background-color: $orange;
+    border-radius: 8px;
+    span {
+      color: $white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+  }
+}

@@ -32,6 +32,10 @@ class Recipes
 
     public function recipe()
     {
+        $view = View::getInstance("Recipes/recipe", "front");
+        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("recipespage", $this->recipespage->selectWhere(null));
+        $view->assign('recipes', $this->recipe->selectWhere(["is_active" => 1]));
         //route dynamique
     }
 
