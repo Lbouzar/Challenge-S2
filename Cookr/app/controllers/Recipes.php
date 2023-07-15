@@ -6,21 +6,28 @@ use App\Config\View;
 use App\Forms\CreateRecipe;
 use App\Forms\UpdateRecipe;
 use App\Models\Recipe;
+use App\Models\Menu;
+use App\Models\Recipespage;
 
 class Recipes
 {
     private $recipe;
+    private $menu;
+    private $recipespage;
 
     public function __construct()
     {
         $this->recipe = Recipe::getInstance();
+        $this->menu = Menu::getInstance();
+        $this->recipespage = Recipespage::getInstance();
     }
     public function allRecipes()
     {
         $view = View::getInstance("Recipes/recipes", "front");
         // récupérer la data dans la bdd
-        $view->assign('mainRecipe', $this->recipe->selectWhere(["is_main" => 1]));
-        $view->assign('recipes', $this->recipe->selectWhere(["is_main" => 0]));
+        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("recipespage", $this->recipespage->selectWhere(null));
+        $view->assign('recipes', $this->recipe->selectWhere(["is_active" => 1]));
     }
 
     public function recipe()
@@ -31,7 +38,7 @@ class Recipes
     public function allRecipesBO()
     {
         $view = View::getInstance("Recipes/recipesBO", "back");
-        $view->assign('recipes', $this->recipe->selectWhere(null));
+        $view->assign('recipes', $this->recipe->selectWhere(["is_active" => 1]));
     }
 
     public function createRecipe()
@@ -42,7 +49,6 @@ class Recipes
         if ($form->isSubmit() && $form->isValid()) {
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
-            $this->recipe->setIsMain($form->getData("is_main"));
             $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
@@ -69,7 +75,6 @@ class Recipes
             $this->recipe->setId($_GET["id"]);
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
-            $this->recipe->setIsMain($form->getData("is_main"));
             $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
@@ -82,5 +87,17 @@ class Recipes
             header("Refresh:$secondsWait");
         }
         $view->assign("formErrors", $form->errors);
+    }
+
+    public function delete(): void
+    {
+        if (count($this->recipe->selectWhere(["id" => $_GET["id"]])) > 0) {
+            $this->recipe->setId($_GET["id"]);
+            $this->recipe->delete();
+    
+            header("Location: recipes-bo");
+        } else {
+            header("Location: recipes-bo");
+        }
     }
 }

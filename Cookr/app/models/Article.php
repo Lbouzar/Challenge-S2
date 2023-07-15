@@ -7,8 +7,7 @@ use App\Config\Sql;
 class Article extends Sql
 {
     protected String $id = " ";
-    protected String $title;
-    protected String $creator; // Auteur de l'article, clé étrangère 
+    protected String $title; 
     protected String $content;
     protected String $keywords;
     protected String $slug;
@@ -33,16 +32,6 @@ class Article extends Sql
     public function setTitle(string $title): void
     {
         $this->title = ucfirst(strtolower(trim($title)));
-    }
-
-    public function getCreator(): String
-    {
-        return $this->creator;
-    }
-
-    public function setCreator(String $creator): void
-    {
-        $this->creator = $creator;
     }
 
     public function getContent(): string

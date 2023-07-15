@@ -44,6 +44,10 @@
   controller: Security
   action: logout 
 
+/delete-profil:
+  controller: Security
+  action: delete
+
 /contact:
   controller: Security 
   action: contact
@@ -60,11 +64,102 @@
     - Moderateur
     - Editeur
 
-/homepage:
+/menu:
   controller: Dashboard
+  action: menu
+  roles:
+    - Admin
+
+/create-menu:
+  controller: Dashboard 
+  action: createMenu
+  roles:
+    - Admin
+
+/homepage:
+  controller: Home
   action: homepage
   roles:
     - Admin
+
+/create-homepage:
+  controller: Home 
+  action: createHomepage
+  roles: 
+    - Admin
+
+/recipespage:
+  controller: Dashboard
+  action: recipespage
+  roles:
+    - Admin
+
+/create-recipespage:
+  controller: Dashboard
+  action: createRecipespage
+  roles: 
+    - Admin
+
+/articlespage:
+  controller: Dashboard
+  action: articlespage
+  roles:
+    - Admin
+
+/create-articlespage:
+  controller: Dashboard
+  action: createArticlespage
+  roles: 
+    - Admin
+
+/contactpage:
+  controller: Dashboard
+  action: contact
+  roles:
+    - Admin
+
+/create-contactpage:
+  controller: Dashboard
+  action: createContactpage
+  roles:
+    - Admin
+
+/registerpage:
+  controller: Dashboard
+  action: register
+  roles: 
+    - Admin
+
+/create-registerpage:
+  controller: Dashboard
+  action: createRegister
+  roles:
+    - Admin 
+
+/loginpage: 
+  controller: Dashboard
+  action: login
+  roles:
+    - Admin
+
+/create-loginpage:
+  controller: Dashboard
+  action: createLogin
+  roles:
+    - Admin
+
+/profilpage:
+  controller: Dashboard
+  action: profil 
+  roles:
+    - Admin
+
+/create-profilpage:
+  controller: Dashboard
+  action: createProfil
+  roles: 
+    - Admin
+
 
 /recipes-bo:
   controller: Recipes
@@ -88,6 +183,13 @@
     - Editeur
 # yes, une route dynamique
 
+/delete-recipe:
+  controller: Recipes
+  action: delete
+  roles:
+    - Admin
+    - Editeur
+
 /articles-bo:
   controller: Articles
   action: allArticlesBO
@@ -110,6 +212,31 @@
     - Editeur
 # yes, une route dynamique
 
+/delete-article:
+  controller: Articles
+  action: delete
+  roles:
+    - Admin
+    - Editeur
+
+/users-bo:
+  controller: Users
+  action: show
+  roles:
+    - Admin
+
+/user-bo:
+  controller: Users
+  action: update
+  roles:
+    - Admin
+
+/delete-user:
+  controller: Users
+  action: delete
+  roles:
+    - Admin
+
 /comments-bo:
   controller: Dashboard
   action: comments
@@ -117,10 +244,10 @@
     - Admin
     - Moderateur
 
-/contact-bo:
+/delete-comments:
   controller: Dashboard
-  action: contact
+  action: deleteComment
   roles:
     - Admin
-
+    - Moderateur
 # -----------------BACK SIDE----------------------------

@@ -6,29 +6,40 @@ use App\Config\Sql;
 
 class Comment_Recipe extends Sql
 {
-    protected String $user;
+    protected String $id = " ";
+    protected String $creator;
     protected String $recipe;
     protected String $comment;
 
-    public function getUserId(): string
+    public function getId(): string
     {
-        return $this->user;
+        return $this->id;
     }
 
-    public function setUserid(string $user): void
+    public function setId(String $id): void 
     {
-        $this->user = "'".$user."'";
+        $this->id = $id;
+    }
+
+    public function getCreator(): string
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(string $creator): void
+    {
+        $this->creator = $creator;
     }
 
 
-    public function getRecipeId(): string
+    public function getRecipe(): string
     {
         return $this->recipe;
     }
 
-    public function setRecipeId(string $recipe): void
+    public function setRecipe(string $recipe): void
     {
-        $this->recipe = "'".$recipe."'";
+        $this->recipe = $recipe;
     }
 
     public function getComment(): string

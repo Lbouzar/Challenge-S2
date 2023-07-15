@@ -1,31 +1,29 @@
 <main>
-    <?php $this->modal("searchBar", null); ?>
+
+    <?php echo $menu[0]["content"] ?>
+
+
+    <section id="slogan-logo" class="mt-10">
+        <img src="public/assets/icons/logo-regular.svg" alt="logo cookr">
+        <h1><?php echo $homepage[0]["slogan"] ?></h1>
+    </section>
 
     <!-- Articles sections -->
     <section class="flex-column justify-between list-card-article mt-7">
-        <h1 class="main-title">Nos derniers articles</h1>
+
+        <h1 class="main-title"><?php echo $homepage[0]["firsttitle"] ?></h1>
         <div class="grid index-card articles-grid align-self-center">
             <?php foreach ($articles as $article) : ?>
                 <a href="">
                     <?php $this->modal("card", $article); ?>
                 </a>
             <?php endforeach ?>
-            <button class="more-article cta-button--full cta-button" onclick="window.location.href ='/articles';">
-                Voir plus d'articles
-            </button>
         </div>
     </section>
 
     <!-- Recettes sections -->
     <section class="flex-column justify-between list-card-recette mt-7 mb-13">
-        <h1 class="main-title">Nos dernières recettes</h1>
-        <h3 class="sub-title">Découvrez notre recette du jour</h3>
-        <div class="container-recipe-of-the-day">
-            <?php if (isset($mainRecipe)) :
-                $this->modal("main", $mainRecipe);
-            endif; ?>
-        </div>
-        <h3 class="sub-title">Toutes nos recettes</h3>
+        <h1 class="main-title"><?php echo $homepage[0]["secondtitle"] ?></h1>
         <div class="grid index-card recipes-grid mt-0 justify-items-center">
             <?php foreach ($recipes as $recipe) : ?>
                 <a href="">
@@ -33,8 +31,5 @@
                 </a>
             <?php endforeach ?>
         </div>
-        <button class="more-article cta-button--full cta-button" onclick="window.location.href ='/recipes';">
-            Voir plus de recettes
-        </button>
     </section>
 </main>
