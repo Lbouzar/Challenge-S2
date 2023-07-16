@@ -3,7 +3,7 @@
             <i id="close-icon" class="icon-close" aria-label="close"></i>
             <ul>
                 <?php foreach ($config as $data): ?>
-                    <li><a href="/<?= $data["link_route"] ?>" class=""><?= $data["title"] ?></a></li>
+                    <li><a href="<?= $data["link_route"] ?>" class=""><?= $data["title"] ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </nav>
@@ -13,7 +13,7 @@
         <nav id="desktop-nav">
             <ul class="justify-between">
             <?php foreach ($config as $data): ?>
-                    <li><a href="/<?= $data["link_route"] ?>" class=""><?= $data["title"] ?></a></li>
+                    <li><a href="<?= $data["link_route"] ?>" class=""><?= $data["title"] ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </nav>
