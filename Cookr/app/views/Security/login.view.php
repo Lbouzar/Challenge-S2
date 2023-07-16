@@ -4,7 +4,7 @@
 <?php if (isset($loginpage) && !empty($loginpage)) : ?>
 <main id="login" class="justify-between">
     <section>
-        <h1><?php echo $loginpage[0]["title"] ?></h1>
+        <h1 class="ml-0"><?php echo $loginpage[0]["title"] ?></h1>
         <?php if (isset($formErrors))
             $this->modal("errors", $formErrors); ?>
         <?php $this->modal("form", $form); ?>
