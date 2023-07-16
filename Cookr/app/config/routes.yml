@@ -76,6 +76,18 @@
   roles:
     - Admin
 
+/update-menu:
+  controller: Dashboard
+  action: updateMenu
+  roles:
+    - Admin
+
+/delete-menu:
+  controller: Dashboard
+  action: deleteMenu
+  roles:
+    - Admin
+
 /homepage:
   controller: Home
   action: homepage

@@ -1,4 +1,7 @@
-<?php echo $menu[0]["content"] ?>
+<?php if (isset($menu) && !empty($menu))
+    $this->modal("navbar", $menu); ?>
+
+<?php if (isset($profilpage) && !empty($profilpage)) : ?>
 <main>
   <h1><?php echo $profilpage[0]["firsttitle"] ?></h1>
   <div class="profile-container">
@@ -27,3 +30,4 @@
   </div>
   <button class="cta-button delete-account" onclick="window.location.href ='/delete-profil?id=<?=$id?>';">Supprimer</button>
 </main>
+<?php endif; ?>

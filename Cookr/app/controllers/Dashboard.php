@@ -65,14 +65,36 @@ class Dashboard
 
     public function menu()
     {
-        $form = UpdateMenu::getInstance();
         $view = View::getInstance("Dashboard/menu", "back");
         $view->assign('menu', $this->menu->selectWhere(null));
-        $view->assign('form', $form->getConfig($this->menu->selectWhere(null)));
+    }
+
+    public function createMenu()
+    {
+        $form = CreateMenu::getInstance();
+        $view = View::getInstance("Dashboard/createMenu", "back");
+        $view->assign("form", $form->getConfig());
+        if ($form->isSubmit() && $form->isValid()) {
+            $this->menu->setTitle($form->getData("title"));
+            $this->menu->setRoute($form->getData("link_route"));
+            $this->menu->setIsActive($form->getData("is_active"));
+            $this->menu->save();
+            $form->errors[] = "Le menu a été créé";
+        }
+        $view->assign("formErrors", $form->errors);
+    }
+
+    public function updateMenu()
+    {
+        $form = UpdateMenu::getInstance();
+        $view = View::getInstance("Dashboard/updateMenu", "back");
+        $view->assign('form', $form->getConfig($this->menu->selectWhere(["id" => $_GET["id"]])));
         $secondsWait = 2;
         if ($form->isSubmit() && $form->isValid()) {
-            $this->menu->setId(1);
-            $this->menu->setContent($form->getData("content"));
+            $this->menu->setId($_GET["id"]);
+            $this->menu->setTitle($form->getData("title"));
+            $this->menu->setRoute($form->getData("link_route"));
+            $this->menu->setIsActive($form->getData("is_active"));
             $this->menu->save();
             $form->errors[] = "Mise à jour du menu";
             header("Refresh:$secondsWait");
@@ -80,20 +102,15 @@ class Dashboard
         $view->assign("formErrors", $form->errors);
     }
 
-    public function createMenu()
+    public function deleteMenu()
     {
-        if (count($this->menu->selectWhere(null)) > 0) {
+        if (count($this->menu->selectWhere(["id" => $_GET["id"]])) > 0) {
+            $this->menu->setId($_GET["id"]);
+            $this->menu->delete();
+
             header("Location: menu");
         } else {
-            $form = CreateMenu::getInstance();
-            $view = View::getInstance("Dashboard/createMenu", "back");
-            $view->assign("form", $form->getConfig());
-            if ($form->isSubmit() && $form->isValid()) {
-                $this->menu->setContent($form->getData("content"));
-                $this->menu->save();
-                header("Location: menu");
-            }
-            $view->assign("formErrors", $form->errors);
+            header("Location: menu");
         }
     }
 
@@ -235,7 +252,7 @@ class Dashboard
                 header("Location: registerpage");
             }
             $view->assign("formErrors", $form->errors);
-        } 
+        }
     }
 
     public function login()
@@ -272,7 +289,7 @@ class Dashboard
                 header("Location: loginpage");
             }
             $view->assign("formErrors", $form->errors);
-        } 
+        }
     }
 
     public function profil()
@@ -293,7 +310,7 @@ class Dashboard
         $view->assign("formErrors", $form->errors);
     }
 
-    public function createProfil() 
+    public function createProfil()
     {
         if (count($this->profilpage->selectWhere(null)) > 0) {
             header("Location: profilpage");
@@ -309,7 +326,7 @@ class Dashboard
                 header("Location: profilpage");
             }
             $view->assign("formErrors", $form->errors);
-        } 
+        }
     }
 
     public function comments()
@@ -323,7 +340,7 @@ class Dashboard
         if (count($this->comments->selectWhere(["id" => $_GET["id"]])) > 0) {
             $this->comments->setId($_GET["id"]);
             $this->comments->delete();
-    
+
             header("Location: comments-bo");
         } else {
             header("Location: comments-bo");

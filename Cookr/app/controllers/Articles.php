@@ -26,7 +26,7 @@ class Articles
     {
         $view = View::getInstance("Articles/articles", "front");
         // récupérer la data dans la bdd
-        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         $view->assign("articlespage", $this->articlespage->selectWhere(null));
         $view->assign('articles', $this->article->selectWhere(["is_active" => 1]));
     }

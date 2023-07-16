@@ -1,8 +1,9 @@
 <main>
 
-    <?php echo $menu[0]["content"] ?>
+    <?php if (isset($menu))
+        $this->modal("navbar", $menu);?>
 
-
+    <?php if (isset($homepage) && !empty($homepage)) : ?>
     <section id="slogan-logo" class="mt-10">
         <img src="public/assets/icons/logo-regular.svg" alt="logo cookr">
         <h1><?php echo $homepage[0]["slogan"] ?></h1>
@@ -33,3 +34,4 @@
         </div>
     </section>
 </main>
+<?php endif; ?>

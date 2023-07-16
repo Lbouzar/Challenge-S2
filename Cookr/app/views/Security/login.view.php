@@ -1,4 +1,7 @@
-<?php echo $menu[0]["content"] ?>
+<?php if (isset($menu) && !empty($menu))
+    $this->modal("navbar", $menu); ?>
+
+<?php if (isset($loginpage) && !empty($loginpage)) : ?>
 <main id="login" class="justify-between">
     <section>
         <h1><?php echo $loginpage[0]["title"] ?></h1>
@@ -10,3 +13,4 @@
         </div>
     </section>
 </main>
+<?php endif; ?>

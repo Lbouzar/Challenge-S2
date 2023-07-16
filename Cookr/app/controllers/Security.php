@@ -49,7 +49,7 @@ class Security
             $view = View::getInstance("Security/register", "front");
             $view->assign("registerpage", $this->registerpage->selectWhere(null));
             $view->assign('form', $form->getConfig());
-            $view->assign("menu", $this->menu->selectWhere(null));
+            $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
 
             if ($form->isSubmit() && $form->isValid()) {
                 if (count($this->user->selectWhere(["email" => $form->getData("email")])) == 0) {
@@ -105,7 +105,7 @@ class Security
             $view = View::getInstance("Security/login", "front");
             $view->assign("loginpage", $this->loginpage->selectWhere(null));
             $view->assign('form', $form->getConfig());
-            $view->assign("menu", $this->menu->selectWhere(null));
+            $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
 
             if ($form->isSubmit() && $form->isValid()) {
                 if (count($this->user->selectWhere(["email" => $form->getData("email")])) != 1) {
@@ -153,7 +153,7 @@ class Security
                 $secondsWait = 2;
 
                 $view = View::getInstance("Security/profil", "front");
-                $view->assign("menu", $this->menu->selectWhere(null));
+                $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
                 $view->assign("profilpage", $this->profilpage->selectWhere(null));
                 $view->assign('id', $this->session->id);
                 $view->assign("userInfos", $data[0]["firstname"]. " ".$data[0]["lastname"]);
@@ -199,7 +199,7 @@ class Security
         $form = Contact::getInstance();
         $view->assign('contactpage', $this->contactpage->selectWhere(null));
         $view->assign('form', $form->getConfig());
-        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         if ($form->isSubmit() && $form->isValid()) {
             // envoyer un mail à l'admin et aux modérateurs
             $recipients = $this->user->selectWhere(["role" => getenv('Admin')]);

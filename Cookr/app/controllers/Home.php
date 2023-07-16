@@ -29,7 +29,7 @@ class Home
     {
         $view = View::getInstance("Home/home", "front");
         //récupérer dans la bdd les articles et recettes
-        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         $view->assign("homepage", $this->homepage->selectWhere(null));
         $view->assign('recipes', $this->recipe->getLatestDataWhere(["is_active" => 1]));
         $view->assign('articles', $this->article->getLatestDataWhere(["is_active" => 1]));
