@@ -13,7 +13,7 @@
     <section class="flex-column justify-between list-card-article mt-7">
 
         <h1 class="main-title"><?php echo $homepage[0]["firsttitle"] ?></h1>
-        <div class="grid index-card articles-grid align-self-center">
+        <div class="grid index-card articles-grid">
             <?php foreach ($articles as $article) : ?>
                 <a href="">
                     <?php $this->modal("card", $article); ?>
@@ -25,7 +25,7 @@
     <!-- Recettes sections -->
     <section class="flex-column justify-between list-card-recette mt-7 mb-13">
         <h1 class="main-title"><?php echo $homepage[0]["secondtitle"] ?></h1>
-        <div class="grid index-card recipes-grid mt-0 justify-items-center">
+        <div class="grid index-card recipes-grid mt-7 justify-items-center">
             <?php foreach ($recipes as $recipe) : ?>
                 <a href="">
                     <?php $this->modal("card", $recipe); ?>

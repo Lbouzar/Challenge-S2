@@ -44,15 +44,16 @@
 .card-body {
     padding-left: 12px;
     p {
-        font-weight: 400;
-        font-size: 14px;
+        color: $black !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 .card-footer {
+    margin: 20px 0 12px 0;
     padding-left: 12px;
-    p {
-        margin: 20px 0 12px 0;
+    span {
         color: rgba(0, 0, 0, 0.6);
-        font-size: 14px;
     }
 }

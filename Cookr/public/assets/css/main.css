@@ -75,6 +75,19 @@ input:focus {
   outline-color: #443630;
 }
 
+.error {
+  color: red;
+}
+
+.delete-button {
+  background-color: #dc3545 !important;
+}
+.delete-button:hover {
+  border-color: #dc3545 !important;
+  background-color: #FFFFFF !important;
+  color: #dc3545 !important;
+}
+
 @media screen and (min-width: 768px) {
   main {
     padding: 0 40px;
@@ -654,12 +667,32 @@ header #mobile-nav ul li:last-child {
   background-color: #FFF;
   height: 80px;
   width: 100%;
-  padding: 0 20px 0 48px;
+  padding: 0 48px 0 48px;
   box-shadow: 0px 12px 70px 0px rgba(252, 110, 60, 0.08);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 10;
+}
+.headerBO .header-buttons a:first-child {
+  margin-right: 32px;
+}
+.headerBO .header-buttons button {
+  text-align: center;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: 2px solid #FC6E3C;
+  transition: 0.3s;
+  color: #FC6E3C;
+  background-color: #FFFFFF;
+  font-size: 16px;
+}
+.headerBO .header-buttons button:hover {
+  background-color: #FC6E3C;
+  border: 2px solid #FC6E3C;
+  color: #FFFFFF;
 }
 
 .cta-button {
@@ -752,17 +785,18 @@ header #mobile-nav ul li:last-child {
   padding-left: 12px;
 }
 .card-body p {
-  font-weight: 400;
-  font-size: 14px;
+  color: #000000 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-footer {
+  margin: 20px 0 12px 0;
   padding-left: 12px;
 }
-.card-footer p {
-  margin: 20px 0 12px 0;
+.card-footer span {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
 }
 
 .main-title {
@@ -1297,13 +1331,22 @@ footer nav h3 {
 .sidebarBO {
   background-color: #FAFAFA;
   position: fixed;
-  width: 200px;
+  width: 220px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
+  padding-top: 44px;
   top: 80px;
   z-index: 100;
+}
+.sidebarBO a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  margin-left: 8px;
+}
+.sidebarBO a .icon-burger_menu {
+  color: #FC6E3C;
 }
 
 .sidebarBO > div {
@@ -1329,14 +1372,21 @@ footer nav h3 {
 }
 
 .sidebarBO span {
-  margin-left: 20px;
+  margin-left: 16px;
 }
 
 .layout-bo {
   padding: 32px 40px;
-  width: 100%;
+  width: calc(100% - 220px);
   margin-top: 80px;
-  margin-left: 200px;
+  margin-left: 220px;
+}
+.layout-bo .title-bo {
+  font-size: 48px;
+  font-weight: 700;
+}
+.layout-bo .cta-button {
+  margin-top: 20px;
 }
 
 #slogan-logo {
@@ -1415,7 +1465,6 @@ footer nav h3 {
 @media screen and (min-width: 768px) {
   .articles-grid {
     grid-template-columns: 1fr 1fr;
-    column-gap: 50px;
     align-self: center;
   }
   .more-articles {
@@ -1453,7 +1502,11 @@ footer nav h3 {
     align-items: center;
   }
   .articles-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-self: auto;
+    padding: 0 64px;
   }
   .more-articles {
     justify-self: end;
@@ -1489,6 +1542,7 @@ footer nav h3 {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 0 64px;
   }
 }
 #article-main {
@@ -1848,7 +1902,7 @@ footer nav h3 {
   }
 }
 
-h1 {
+.profile-title {
   margin: 32px auto 0 auto;
   width: 90%;
 }
@@ -2076,7 +2130,9 @@ h1 {
   height: 100%;
   z-index: 2;
 }
-.recipes-bo .img-previews #imgPreview1, .recipes-bo .img-previews #imgPreview2, .recipes-bo .img-previews #imgPreview3 {
+.recipes-bo .img-previews #imgPreview1,
+.recipes-bo .img-previews #imgPreview2,
+.recipes-bo .img-previews #imgPreview3 {
   position: absolute;
   top: 28px;
   width: calc(100% - 2px);
@@ -2125,6 +2181,11 @@ h1 {
 .recipes-bo .list-edit-recipes a .edit-recipe .recipe-dscp span {
   font-weight: 600;
   margin-bottom: 8px;
+}
+.recipes-bo .list-edit-recipes a .edit-recipe .recipe-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .recipe-infos {
   width: 15%;
@@ -2275,6 +2336,11 @@ h1 {
 .articles-bo .list-edit-articles a .edit-article .article-dscp span {
   font-weight: 600;
   margin-bottom: 8px;
+}
+.articles-bo .list-edit-articles a .edit-article .article-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .articles-bo .list-edit-articles a .edit-article .article-infos {
   width: 15%;

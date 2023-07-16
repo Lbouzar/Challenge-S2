@@ -3,7 +3,7 @@
 
 <?php if (isset($profilpage) && !empty($profilpage)) : ?>
   <main>
-    <h1><?php echo $profilpage[0]["firsttitle"] ?></h1>
+    <h1 class="profile-title"><?php echo $profilpage[0]["firsttitle"] ?></h1>
     <div class="profile-container">
       <div class="first-section">
         <span class="name"><?= $userInfos ?></span>
@@ -28,6 +28,6 @@
         <?php $this->modal("form", $formUpdatePassword); ?>
       </div>
     </div>
-    <button class="cta-button delete-account" onclick="window.location.href ='/delete-profil?id=<?= $id ?>';">Supprimer</button>
+    <button class="cta-button delete-account delete-button" onclick="window.location.href ='/delete-profil?id=<?= $id ?>';">Supprimer</button>
   </main>
 <?php endif; ?>

@@ -71,6 +71,19 @@
   input:focus {
     outline-color: $brown;
   }
+
+  .error {
+    color: red;
+  }
+
+  .delete-button {
+    background-color: #dc3545 !important;
+    &:hover {
+      border-color: #dc3545 !important;
+      background-color: $white !important;
+      color: #dc3545 !important;
+    }
+  }
   
   @media screen and (min-width: 768px){
     main {
