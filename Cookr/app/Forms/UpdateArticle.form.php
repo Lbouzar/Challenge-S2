@@ -48,11 +48,13 @@ class UpdateArticle extends Verificator
                     "options" => [
                         [
                             "value" => "1",
-                            "name" => "Oui"
+                            "name" => "Oui",
+                            "selected" => false
                         ],
                         [
                             "value" => "0",
-                            "name" => "Non"
+                            "name" => "Non",
+                            "selected" => false
                         ]
                     ],
                     "error" => " ",

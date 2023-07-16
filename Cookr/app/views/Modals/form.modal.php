@@ -22,7 +22,7 @@
             <label for="<?= $name ?>"><?= $input["label"] ?></label> 
             <select name="<?= $name;?>" id="<?= $input["id"]?? ""?>">
                 <?php foreach ($input["options"] as $option):?>
-                    <option value="<?= $option["value"];?>" >
+                    <option value="<?= $option["value"];?>" <?= $input["selected"] ? "selected" : "" ?>>
                     <?= $option["name"];?>
                 </option>
                 <?php endforeach;?>

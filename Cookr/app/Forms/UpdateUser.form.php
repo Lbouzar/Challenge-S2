@@ -48,19 +48,23 @@ class UpdateUser extends Verificator
                     "options" => [
                         [
                             "value" => "Utilisateur",
-                            "name" => "Utilisateur"
+                            "name" => "Utilisateur",
+                            "selected" => false
                         ],
                         [
                             "value" => "Editeur",
-                            "name" => "Editeur"
+                            "name" => "Editeur",
+                            "selected" => false
                         ],
                         [
                             "value" => "Moderateur",
-                            "name" => "Moderateur"
+                            "name" => "Moderateur",
+                            "selected" => false
                         ],
                         [
                             "value" => "Admin",
-                            "name" => "Admin"
+                            "name" => "Administrateur",
+                            "selected" => false
                         ]
                     ],
                     "error" => " ",
@@ -71,11 +75,13 @@ class UpdateUser extends Verificator
                     "options" => [
                         [
                             "value" => "0",
-                            "name" => "Non"
+                            "name" => "Non",
+                            "selected" => false
                         ],
                         [
                             "value" => "1",
-                            "name" => "Oui"
+                            "name" => "Oui",
+                            "selected" => false
                         ]
                     ],
                     "error" => " ",
