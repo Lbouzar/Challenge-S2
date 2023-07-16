@@ -237,9 +237,15 @@
   roles:
     - Admin
 
-/user-bo:
+/update-user:
   controller: Users
   action: update
+  roles:
+    - Admin
+
+/create-user:
+  controller: Users
+  action: create
   roles:
     - Admin
 
