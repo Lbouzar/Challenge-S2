@@ -1,6 +1,6 @@
 # -----------------FRONT SIDE---------------------------
 /:
-  controller: Home 
+  controller: Home
   action: index
 
 # Articles
@@ -23,10 +23,10 @@
 /login:
   controller: Security
   action: login
-  
+
 /logout:
   controller: Security
-  action: logout 
+  action: logout
 
 /register:
   controller: Security
@@ -35,7 +35,6 @@
 /confirm:
   controller: Security
   action: Confirm
-
 # -----------------FRONT SIDE---------------------------
 
 # -----------------BACK SIDE----------------------------

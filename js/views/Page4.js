@@ -37,7 +37,7 @@ export default function Page4() {
             attributes: {
               type: "Password",
               placeholder: "Password",
-              id: "Password",
+              id: "password",
             },
           },
         ],
@@ -94,8 +94,36 @@ export default function Page4() {
 }
 function handleSubmit(event) {
   event.preventDefault();
+
   const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
-  console.log("Form submitted:", { name, email, message });
+  const password = document.getElementById("password").value;
+
+  const formData = {
+    name: name,
+    email: email,
+    message: message,
+    password: password,
+  };
+
+  console.log(formData);
+  fetch("http://localhost:80/installer", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      console.log(response);
+      if (response.ok) {
+        console.log("Form submitted successfully");
+      } else {
+        console.error("Form submission failed");
+      }
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
 }

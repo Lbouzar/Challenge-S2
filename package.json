@@ -1,9 +1,9 @@
 {
-  "name": "JS framework",
+  "name": "CHALLENGE-S2",
   "version": "1.0.0",
-  "description": "Js framework",
+  "description": "CHALLENGE-S2",
   "scripts": {
-    "dev": "vite",
+    "dev": "cd js && vite",
     "build": "vite build",
     "serve": "vite preview"
   },

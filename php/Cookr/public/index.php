@@ -1,7 +1,17 @@
 <?php
+
 namespace App;
 
-use App\Config\View;
+require_once('../app/config/View.php');
+
+
+$uriExploded = explode("?",$_SERVER["REQUEST_URI"]);
+$uri = rtrim(strtolower(trim($uriExploded[0])),"/");
+
+if($uri === '/installer'){
+    $_POST = json_decode(file_get_contents("php://input"), true);
+    include('../app/installer.php');
+}else{
 
 spl_autoload_register(function ($class) {
     $class = "../" . str_replace("\\", "/", $class);
@@ -53,7 +63,7 @@ $routes = yaml_parse_file("../app/config/routes.yml");
 //Page 404
 if(empty($routes[$uri])) {
     http_response_code(404);
-    new View("404/404","front");
+    new View("404/404","front"); // TODO : fix view not found
 }
 
 if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
@@ -86,3 +96,5 @@ if(!method_exists($objet, $action)){
 }
 
 $objet->$action();
+
+}
