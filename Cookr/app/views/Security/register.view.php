@@ -9,7 +9,7 @@
         <img src="public/assets/icons/orange-dot1.svg" alt="orange-dot1" class="align-self-center">
     </aside>
     <section>
-        <h1>Inscription</h1>
+        <h1 class="ml-0">Inscription</h1>
             <?php if (isset($formErrors)) 
                 $this->modal("errors", $formErrors); ?>
             <?php $this->modal("form", $form); ?>
