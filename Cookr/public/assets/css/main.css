@@ -2062,6 +2062,10 @@ footer nav h3 {
 }
 .dashboard .recipes-list {
   width: 100%;
+  padding: 0 !important;
+}
+.dashboard .recipes-grid {
+  padding: 0 !important;
 }
 .dashboard button {
   margin-left: auto;
