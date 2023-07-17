@@ -15,7 +15,7 @@ class CreateArticle extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Créer"
@@ -67,6 +67,15 @@ class CreateArticle extends Verificator
                     "error" => "Veuillez mettre des mots-clés",
                     "required" => true,
                     "label" => "Mots-clés"
+                ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir un logo",
+                    "required" => false,
+                    "label" => "Votre logo",
+                    "accept" => "image/*"
                 ],
                 // "content" => [
                 //     "id" => "myTextarea",

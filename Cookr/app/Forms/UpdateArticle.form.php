@@ -15,7 +15,7 @@ class UpdateArticle extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Modifier"
@@ -49,12 +49,12 @@ class UpdateArticle extends Verificator
                         [
                             "value" => "1",
                             "name" => "Oui",
-                            "selected" => false
+                            "selected" => ($data[0]["is_active"] == 1) ? true : false
                         ],
                         [
                             "value" => "0",
                             "name" => "Non",
-                            "selected" => false
+                            "selected" => ($data[0]["is_active"] == 0) ? true : false
                         ]
                     ],
                     "error" => " ",
@@ -70,6 +70,15 @@ class UpdateArticle extends Verificator
                     "required" => true,
                     "label" => "Mots-clés",
                     "value" => $data[0]["keywords"]
+                ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir un logo",
+                    "required" => false,
+                    "label" => "Votre logo",
+                    "accept" => "image/*"
                 ],
                 // "content" => [
                 //     "id" => "myTextarea",

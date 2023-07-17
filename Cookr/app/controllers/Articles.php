@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Models\Article;
 use App\Forms\CreateArticle;
@@ -15,12 +16,14 @@ class Articles
     private $article;
     private $menu;
     private $articlespage;
+    private $image;
 
     public function __construct()
     {
         $this->article = Article::getInstance();
         $this->menu = Menu::getInstance();
         $this->articlespage = Articlespage::getInstance();
+        $this->image = Image::getInstance();
     }
     public function allArticles()
     {
@@ -52,9 +55,12 @@ class Articles
         if ($form->isSubmit() && $form->isValid()) {
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            $this->article->setCreator($session->id);
             // $this->article->setContent();
             $this->article->setKeywords($form->getData("keywords"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->article->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->article->save();
             $form->errors[] = "L'article a été créée";
         }
@@ -76,6 +82,10 @@ class Articles
             $this->article->setSlug($form->getData("slug"));
             // $this->article->setContent();
             $this->article->setKeywords($form->getData("keywords"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->article->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->article->save();
             $form->errors[] = "Mise à jour de l'article";
             header("Refresh:$secondsWait");
@@ -88,10 +98,10 @@ class Articles
         if (count($this->article->selectWhere(["id" => $_GET["id"]])) > 0) {
             $this->article->setId($_GET["id"]);
             $this->article->delete();
-    
+
             header("Location: articles-bo");
         } else {
             header("Location: articles-bo");
-        }  
+        }
     }
 }

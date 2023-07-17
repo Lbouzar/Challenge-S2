@@ -49,12 +49,12 @@ class UpdateMenu extends Verificator
                         [
                             "value" => "1",
                             "name" => "Oui",
-                            "selected" => false
+                            "selected" => ($data[0]["is_active"] == 1) ? true : false
                         ],
                         [
                             "value" => "0",
                             "name" => "Non",
-                            "selected" => false
+                            "selected" => ($data[0]["is_active"] == 0) ? true : false
                         ]
                     ],
                     "error" => " ",
