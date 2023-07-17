@@ -28,6 +28,7 @@ use App\Models\Contactpage;
 use App\Models\Loginpage;
 use App\Models\Profilpage;
 use App\Models\Registerpage;
+use App\Models\Settings as Style;
 
 class Dashboard
 {
@@ -55,7 +56,7 @@ class Dashboard
         $this->registerpage = Registerpage::getInstance();
         $this->loginpage = Loginpage::getInstance();
         $this->profilpage = Profilpage::getInstance();
-        $this->settings = Settings::getInstance();
+        $this->settings = Style::getInstance();
     }
 
     public function dashboard()
