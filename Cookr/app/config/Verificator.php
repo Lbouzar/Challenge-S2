@@ -33,7 +33,7 @@ class Verificator
     public function isSubmit(): bool
     {
         $this->data = ($this->method == "POST") ? $_POST : $_GET;
-        if (isset($_FILES)) {
+        if (!empty($_FILES)) {
             array_push($this->data, $_FILES);
         }
         return isset($this->data);

@@ -142,9 +142,9 @@ class UpdateRecipe extends Verificator
                     "type" => "file",
                     "class" => "input-regular",
                     "placeholder" => "Votre logo",
-                    "error" => "Veuillez saisir un logo",
+                    "error" => "Veuillez saisir une image",
                     "required" => false,
-                    "label" => "Votre logo",
+                    "label" => "Image de couverture",
                     "accept" => "image/*"
                 ]
             ]

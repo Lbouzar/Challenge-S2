@@ -96,6 +96,9 @@
         </svg>
         <span>Commentaires</span>
       </a>
+      <a href="/show-images">
+        <span>Images</span>
+      </a>
     </nav>
     <?php include $this->view; ?>
   </div>

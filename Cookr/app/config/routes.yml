@@ -268,4 +268,16 @@
   roles:
     - Admin
     - Moderateur
+
+/show-images:
+  controller: Dashboard
+  action: showImages
+  roles:
+    - Admin
+
+/delete-image:
+  controller: Dashboard
+  action: deleteImage
+  roles:
+    - Admin
 # -----------------BACK SIDE----------------------------

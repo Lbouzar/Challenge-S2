@@ -28,4 +28,12 @@ class Image
         }
         return false;
     }
+
+    public function deleteImage(string $imageName): void
+    {
+        $this->target_dir .= $imageName;
+        if (file_exists($this->target_dir)) {
+            unlink($this->target_dir);
+        }
+    }
 }

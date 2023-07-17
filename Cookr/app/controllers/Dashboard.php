@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateMenu;
 use App\Forms\CreateRecipespage;
@@ -40,6 +41,7 @@ class Dashboard
     private $registerpage;
     private $loginpage;
     private $profilpage;
+    private $image;
 
     public function __construct()
     {
@@ -53,6 +55,7 @@ class Dashboard
         $this->registerpage = Registerpage::getInstance();
         $this->loginpage = Loginpage::getInstance();
         $this->profilpage = Profilpage::getInstance();
+        $this->image = Image::getInstance();
     }
 
     public function dashboard()
@@ -345,5 +348,17 @@ class Dashboard
         } else {
             header("Location: comments-bo");
         }
+    }
+
+    public function showImages()
+    {
+        $view = View::getInstance("Dashboard/imagesBO", "back");
+        $view->assign("images", glob(dirname(__DIR__, 2) . '/public/assets/images/*', GLOB_BRACE));
+    }
+
+    public function deleteImage()
+    {
+        $this->image->deleteImage($_GET["name"]);
+        header("Location: show-images");
     }
 }

@@ -71,11 +71,11 @@ class CreateArticle extends Verificator
                 "logo" => [
                     "type" => "file",
                     "class" => "input-regular",
-                    "placeholder" => "Votre logo",
-                    "error" => "Veuillez saisir un logo",
+                    "placeholder" => "Image de couverture",
+                    "error" => "Veuillez saisir une image",
                     "required" => false,
-                    "label" => "Votre logo",
-                    "accept" => "image/*"
+                    "label" => "Image de couverture",
+                    "accept" => "image/*",
                 ],
                 // "content" => [
                 //     "id" => "myTextarea",
