@@ -1,4 +1,3 @@
-<?php echo $menu[0]["content"] ?>
 <main class="recipe-view">
   <h1><?php echo $recipes[0]["title"] ?></h1>
   <div class="img-container">
