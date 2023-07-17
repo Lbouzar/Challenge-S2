@@ -268,4 +268,10 @@
   roles:
     - Admin
     - Moderateur
+
+/settings:
+  controller: Dashboard
+  action: settings
+  roles:
+    - Admin
 # -----------------BACK SIDE----------------------------
