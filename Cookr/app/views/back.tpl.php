@@ -97,6 +97,9 @@
         <span>Commentaires</span>
       </a>
       <a href="/show-images">
+        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 21c-.55 0-1.021-.196-1.413-.588A1.922 1.922 0 0 1 3 19V5c0-.55.196-1.021.588-1.413A1.922 1.922 0 0 1 5 3h14c.55 0 1.021.196 1.413.588.392.392.588.863.587 1.412v14c0 .55-.196 1.021-.588 1.413A1.922 1.922 0 0 1 19 21H5Zm1-4h12l-3.75-5-3 4L9 13l-3 4Z" fill="#FC6E3C" />
+        </svg>
         <span>Images</span>
       </a>
     </nav>

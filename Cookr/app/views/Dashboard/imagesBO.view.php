@@ -1,17 +1,20 @@
-<div class="layout-bo">
-    <?php
-    foreach ($images as $image) : ?>
-        <div class="card">
-            <div class="card-image">
-                <?php $nomImage = basename($image); ?>
-                <img src="<?php getenv('HTTP_HOST') ?>/public/assets/images/<?= $nomImage ?>">
+<div class="layout-bo images-view">
+    <h2 class="title-bo">Gérer les images</h2>
+    <div class="images-grid">
+        <?php
+        foreach ($images as $image) : ?>
+            <div class="card-img">
+                <div class="card-img-content">
+                    <?php $nomImage = basename($image); ?>
+                    <img src="<?php getenv('HTTP_HOST') ?>/public/assets/images/<?= $nomImage ?>">
+                </div>
+                <div class="card-img-name">
+                    <?= $nomImage; ?>
+                </div>
+                <div class="card-img-button">
+                    <button class="cta-button delete-button" onclick="window.location.href ='/delete-image?name=<?=$nomImage?>';">Supprimer</button>
+                </div>
             </div>
-            <div class="card-body">
-                <?= $nomImage; ?>
-            </div>
-            <div class="card-footer justify-center">
-                <button class="cta-button" onclick="window.location.href ='/delete-image?name=<?=$nomImage?>';">Supprimer</button>
-            </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
 </div>

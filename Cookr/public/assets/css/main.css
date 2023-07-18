@@ -1332,11 +1332,59 @@ footer nav h3 {
   margin-left: 20px;
 }
 
+.user-card {
+  border: 2px solid #FC6E3C;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.user-card .infos {
+  display: flex;
+  flex-direction: column;
+}
+.user-card .infos .email, .user-card .infos .role {
+  margin-top: 8px;
+}
+.user-card .infos .name, .user-card .infos .role span {
+  font-weight: 700;
+  font-size: 18px;
+}
+.user-card .infos:last-child {
+  align-items: flex-end;
+}
+
 .layout-bo {
   padding: 32px 40px;
   width: 100%;
   margin-top: 80px;
   margin-left: 200px;
+}
+.layout-bo .title-bo {
+  font-size: 48px;
+  font-weight: 700;
+}
+.layout-bo .cta-button {
+  margin-top: 20px;
+}
+.layout-bo input[type=file] {
+  height: 300px;
+  padding-top: 10px;
+  z-index: 2;
+}
+.layout-bo #imgPreview[src="#"] {
+  display: none;
+}
+.layout-bo #imgPreview {
+  position: absolute;
+  top: 26px;
+  width: calc(100% - 2px);
+  height: calc(100% - 28px);
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 4px;
 }
 
 #slogan-logo {
@@ -2161,26 +2209,11 @@ h1 {
 .recipes-bo .input-regular {
   width: 100% !important;
 }
-.recipes-bo .img-previews fieldset {
-  width: 30%;
-  height: 300px;
-  position: relative;
+.recipes-bo input[type=file] {
+  width: 50% !important;
 }
-.recipes-bo .img-previews input[type=file] {
-  position: relative;
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.recipes-bo .img-previews #imgPreview1, .recipes-bo .img-previews #imgPreview2, .recipes-bo .img-previews #imgPreview3 {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
+.recipes-bo #imgPreview {
+  width: 50% !important;
 }
 .recipes-bo .manage-buttons {
   margin-top: 32px;
@@ -2214,26 +2247,6 @@ h1 {
 }
 .articles-bo .input-regular {
   width: 100% !important;
-}
-.articles-bo .thumbnail {
-  width: 100%;
-  height: calc(100% - 20px);
-  position: relative;
-}
-.articles-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.articles-bo #imgThumbnail {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
 }
 .articles-bo button {
   margin-top: 32px;
@@ -2308,25 +2321,11 @@ h1 {
 .articles-bo .input-regular {
   width: 100% !important;
 }
-.articles-bo .thumbnail {
-  width: 100%;
-  height: calc(100% - 20px);
-  position: relative;
-}
 .articles-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
+  width: 50% !important;
 }
-.articles-bo #imgThumbnail {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
+.articles-bo #imgPreview {
+  width: 50% !important;
 }
 .articles-bo .manage-buttons {
   margin-top: 32px;
@@ -2410,25 +2409,6 @@ h1 {
 .homepage-bo .input-regular {
   width: 100% !important;
 }
-.homepage-bo .img-logo {
-  position: relative;
-  height: 300px;
-}
-.homepage-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 50%;
-  height: 100%;
-  z-index: 2;
-}
-.homepage-bo #imgLogo {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
-}
 
 .contact-bo h2 {
   font-weight: 700;
@@ -2447,6 +2427,41 @@ h1 {
 .contact-bo button {
   margin-top: 32px;
   margin-left: auto;
+}
+
+.images-view .images-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.images-view .images-grid .card-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #FC6E3C;
+  border-radius: 8px;
+}
+.images-view .images-grid .card-img .card-img-content {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.images-view .images-grid .card-img .card-img-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.images-view .images-grid .card-img .card-img-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.images-view .images-grid .card-img .card-img-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=main.css.map */

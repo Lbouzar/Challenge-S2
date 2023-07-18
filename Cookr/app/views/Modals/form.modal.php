@@ -1,3 +1,12 @@
+<script>
+  function uploadImg(input, img) {
+    const [file] = input.files
+    if (file) {
+      img.src = URL.createObjectURL(file)
+    }
+  }
+</script>
+
 <form method="<?= $config["config"]["method"] ?>" action="<?= $config["config"]["action"] ?>" enctype="<?= $config["config"]["enctype"] ?>" id="<?= $config["config"]["id"] ?>" class="<?= $config["config"]["class"] ?>">
     <?php foreach ($config["inputs"] as $name => $input) : ?>
         <?php if ($input["type"] === "textarea") : ?>
@@ -29,7 +38,7 @@
             </select>
             </fieldset>
         <?php else : ?>
-            <fieldset class="flex-column">
+            <fieldset class="flex-column" style="position: relative;">
             <label for="<?= $name ?>"><?= $input["label"] ?></label>
             <input name="<?= $name ?>"
             id="<?= $input["id"]?? ""?>"  
@@ -40,8 +49,11 @@
             maxlength="<?= $input["max"]?? ""?>" 
             value="<?= $input["value"]?? ""?>"
             accept="<?= $input["accept"]?? ""?>"
-            onchange="<?= $input["onchange"]?? ""?>"
+            onchange="<?= $input["type"] === "file" ? "uploadImg(this, imgPreview)" : (isset($input["onchange"]) ? $input["onchange"] : "") ?>"
             <?= $input["required"] ? "required" : "" ?>>
+            <?php if ($input["type"] === "file") : ?>
+                <img id="imgPreview" src="#" alt="Image preview">
+            <?php endif; ?>
             </fieldset>
         <?php endif; ?>
     <?php endforeach; ?>
