@@ -717,8 +717,9 @@ header #mobile-nav ul li:last-child {
 }
 .card-image img {
   width: 100%;
-  min-height: 189px;
+  height: 189px;
   transition: 0.3s;
+  object-fit: cover;
 }
 .card-image:hover img {
   transform: scale(1.1);
