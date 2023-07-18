@@ -262,6 +262,13 @@
     - Admin
     - Moderateur
 
+/valid-comments:
+  controller: Dashboard
+  action: validComment
+  roles:
+    - Admin
+    - Moderateur
+
 /delete-comments:
   controller: Dashboard
   action: deleteComment

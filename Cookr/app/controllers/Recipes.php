@@ -6,6 +6,7 @@ use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateRecipe;
 use App\Forms\UpdateRecipe;
+use App\Models\Comment_Recipe;
 use App\Models\Recipe;
 use App\Models\Menu;
 use App\Models\Recipespage;
@@ -16,6 +17,7 @@ class Recipes
     private $menu;
     private $recipespage;
     private $image;
+    private $comments;
 
     public function __construct()
     {
@@ -23,6 +25,7 @@ class Recipes
         $this->menu = Menu::getInstance();
         $this->recipespage = Recipespage::getInstance();
         $this->image = Image::getInstance();
+        $this->comments = Comment_Recipe::getInstance();
     }
     public function allRecipes()
     {
@@ -36,6 +39,7 @@ class Recipes
     public function recipe()
     {
         //route dynamique
+        $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]);
     }
 
     public function allRecipesBO()

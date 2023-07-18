@@ -129,4 +129,20 @@ class Sql
         $queryPrepared->execute($array);
         return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function getCommentsOfRecipe(?array $array): array
+    {
+        if(isset($array)) {
+            $where = [];
+            foreach ($array as $column => $value) {
+                $where[] = $column . " = :" . $column;
+            }
+            $queryPrepared = $this->PDO->prepare("SELECT " .$this->table.".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator WHERE " . implode(" AND ", $where));
+            $queryPrepared->execute($array);
+        } else {
+            $queryPrepared = $this->PDO->prepare("SELECT " .$this->table.".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator");
+            $queryPrepared->execute();
+        }
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

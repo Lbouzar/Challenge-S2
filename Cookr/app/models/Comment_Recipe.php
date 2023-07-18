@@ -10,6 +10,7 @@ class Comment_Recipe extends Sql
     protected String $creator;
     protected String $recipe;
     protected String $comment;
+    protected Int $is_valid;
 
     public function getId(): string
     {
@@ -50,5 +51,15 @@ class Comment_Recipe extends Sql
     public function setDescription(string $comment): void
     {
         $this->comment = trim($comment);
+    }
+
+    public function getValid(): int
+    {
+        return $this->is_valid;
+    }
+
+    public function setValid(int $is_valid): void
+    {
+        $this->is_valid = $is_valid;
     }
 }

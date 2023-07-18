@@ -3,5 +3,8 @@
   <div class="comments-list">
     <?php foreach ($comments as $comment) :
       $this->modal("comment", $comment); ?>
-    <button class="cta-button delete-account" onclick="window.location.href ='/delete-comments?id=<?=$comment['id']?>';">Supprimer</button>
+      <?php if ($comment["is_valid"] == 0) : ?>
+        <button class="cta-button" onclick="window.location.href ='/valid-comments?id=<?= $comment['id'] ?>';">Valider</button>
+      <?php endif; ?>
+      <button class="cta-button" onclick="window.location.href ='/delete-comments?id=<?= $comment['id'] ?>';">Supprimer</button>
     <?php endforeach; ?>

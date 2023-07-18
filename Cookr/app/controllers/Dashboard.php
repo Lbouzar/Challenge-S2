@@ -335,7 +335,19 @@ class Dashboard
     public function comments()
     {
         $view = View::getInstance("Dashboard/commentsBO", "back");
-        $view->assign("comments", $this->comments->selectWhere(null));
+        $view->assign("comments", $this->comments->getCommentsOfRecipe(null));
+    }
+
+    public function validComment()
+    {
+        if (count($this->comments->selectWhere(["id" => $_GET["id"]])) > 0) {
+            $this->comments->setId($_GET["id"]);
+            $this->comments->setValid(1);
+            $this->comments->save();
+            header("Location: comments-bo");
+        } else {
+            header("Location: comments-bo");
+        }
     }
 
     public function deleteComment()
