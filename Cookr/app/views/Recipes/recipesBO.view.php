@@ -1,5 +1,3 @@
-
-
 <div class="layout-bo recipes-bo">
   <button class="cta-button" onclick="window.location.href ='/create-recipe';">Créer une recette</button>
   <h2>Toutes les recettes</h2>
