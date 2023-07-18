@@ -1,6 +1,6 @@
 <main>
 
-    <?php if (isset($menu))
+    <?php if (isset($menu) && !empty($menu))
         $this->modal("navbar", $menu); ?>
 
     <?php if (isset($homepage) && !empty($homepage)) : ?>
