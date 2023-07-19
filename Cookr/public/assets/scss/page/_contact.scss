@@ -1,0 +1,76 @@
+#contact {
+  margin-top: 40px;
+  max-width: 768px;
+  @media screen and (min-width: 768px) {
+    margin: 80px auto;
+  }
+  h1 {
+    font-size: 24px;
+    @media screen and (min-width: 768px) {
+      text-align: center;
+    }
+  }
+  span {
+    display: block;
+    color: red;
+    margin-top: 12px;
+    margin-bottom: -24px;
+  }
+  #message-length {
+    display: inline;
+    color: black;
+    margin-top: initial;
+    margin-bottom: initial;
+    span {
+      display: inline;
+      color: black;
+      margin-top: initial;
+      margin-bottom: initial;
+    }
+  }
+  p {
+    margin-top: 24px;
+    @media screen and (min-width: 768px) {
+      text-align: center;
+    }
+  }
+  form {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    .user-info {
+      display: flex;
+      div {
+        width: 50%;
+      }
+      label {
+        margin-top: 0px;
+      }
+      input {
+        width: 100%;
+      }
+      div:first-child {
+        margin-right: 4px;
+      }
+    }
+    label {
+      margin-top: 24px;
+      font-weight: 500;
+    }
+    input[type="email"] {
+      width: 100%;
+    }
+    .length {
+      text-align: right;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    button {
+      margin-top: 32px;
+      @media screen and (min-width: 768px) {
+        max-width: none;
+      }
+    }
+  }
+}

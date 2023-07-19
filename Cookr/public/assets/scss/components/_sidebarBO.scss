@@ -1,0 +1,37 @@
+.sidebarBO {
+  background-color: #FAFAFA;
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  top: 80px;
+  z-index: 100;
+}
+
+.sidebarBO > div {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  opacity: 50%;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.sidebarBO > div:hover {
+  opacity: 100%;
+}
+
+.sidebarBO > div.selected {
+  opacity: 100%;
+  background-color: #FFDED2;
+  border-right: 2px solid $orange;
+  box-sizing: content-box;
+}
+
+.sidebarBO span {
+  margin-left: 20px;
+}

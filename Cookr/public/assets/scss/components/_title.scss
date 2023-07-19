@@ -1,0 +1,22 @@
+.main-title{
+    font-weight: 700;
+    font-size: 24px;
+    position: relative;
+    margin-left: 34px;
+    &::before {
+        display: inline-flex;
+        width: 28px;
+        height: 6px;
+        margin-right: 4px;
+        background-color: $orange;
+        position: absolute;
+        top: 50%;
+        transform: translate(-34px,-50%);
+        content: "";
+    }
+}
+
+.sub-title {
+    font-weight: 600;
+    font-size: 18px;
+}

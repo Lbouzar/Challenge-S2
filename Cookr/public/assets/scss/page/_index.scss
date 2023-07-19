@@ -1,0 +1,163 @@
+#slogan-logo {
+    display: none;
+}
+
+.grid {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 32px;
+  .more-articles {
+    justify-self: end;
+  }
+}
+
+.sub-title {
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+#results {
+  display: none;
+  margin: -20px 15px 20px 15px;
+  padding-right: 30px;
+  width: 100%;
+  li {
+    padding: 6px 10px;
+    background-color: $lightgrey;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color: $orange;
+      color: $white;
+      a {
+        color: $white;
+      }
+    }
+  }
+  li:last-child {
+    margin-bottom: 0;
+  }
+}
+
+#link-card {
+  color: initial;
+}
+
+.index-card {
+  .card:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+.container-recipe-of-the-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .recipe-of-the-day {
+    aside {
+      margin-top: 20px;
+      margin-bottom: 25px;
+      p {
+        margin-top: 25px;
+        @media screen and (min-width: 1280px) {
+          margin-bottom: 25px;
+        }
+      }
+    }
+    button {
+      max-width: initial;
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .articles-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    align-self: center;
+  }
+  .more-articles {
+    justify-self: end;
+    grid-column: 2 span / 2 span;
+  }
+  .index-card {
+    .card:nth-child(n + 4) {
+      display: block;
+    }
+  }
+  .list-card-article > .cta-button {
+    align-self: flex-end;
+  }
+  #card-recipe-of-the-day {
+    width: 630px;
+  }
+  .recipe-of-the-day {
+    aside {
+      p {
+        margin-top: 0px;
+        order: -1;
+      }
+    }
+  }
+  .list-card-recette > .cta-button:nth-of-type(1) {
+    max-width: none;
+  }
+  .list-card-recette > .cta-button {
+    align-self: flex-end;
+  }
+  .recipes-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #slogan-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .articles-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .more-articles {
+    justify-self: end;
+    grid-column: 3 span / 3 span;
+  }
+  .container-recipe-of-the-day {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    .recipe-of-the-day {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 50px;
+      aside {
+        width: 610px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        p {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+  .recipe-of-the-day {
+    justify-content: space-between;
+    
+  }
+  .list-card-recette > .cta-button:nth-of-type(1) {
+    align-self: flex-end;
+    width: 610px;
+  }
+  .recipes-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

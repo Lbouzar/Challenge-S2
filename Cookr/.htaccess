@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ public/index.php [L,QSA]
+RewriteRule recipe-bo/([a-zA-Z0-9\-]+)/([0-9]+)    recipe-bo?slug=$1&id=$2
+
+DirectoryIndex public/index.php

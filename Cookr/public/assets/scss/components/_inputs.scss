@@ -1,0 +1,53 @@
+@mixin border-color($color) {
+  border-color: $color;
+}
+
+.input-regular {
+  padding-left: 10px;
+  width: 285px;
+  height: 48px;
+  border-width: 2px;
+  font-family: "Poppins";
+  @include border-color($light-brown);
+  &:focus {
+    border: 2px solid $orange;
+    outline: none;
+  }
+  &--small {
+    padding-left: 10px;
+    width: 185px;
+    height: 40px;
+    border-width: 2px;
+    font-family: "Poppins";
+    @include border-color($light-brown);
+    &:focus {
+      border: 2px solid $orange;
+      outline: none;
+    }
+  }
+}
+
+.input-search {
+  width: 350px;
+  @include border-color($orange);
+  border-radius: 4px 0px 0px 4px;
+  padding-left: 10px;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: rgba($color: #000000, $alpha: 0.6);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .input-search {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .input-search {
+    width: 100%;
+  }
+}
