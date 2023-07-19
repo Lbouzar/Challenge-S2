@@ -6,7 +6,7 @@ use App\Config\View;
 use App\Config\Session;
 
 spl_autoload_register(function ($class) {
-    $class = "../" . str_replace("\\", "/", $class);
+    $class = dirname(__DIR__) . "/" . str_replace("\\", "/", $class);
 
     //Config files
     $config = $class . ".php";
@@ -51,11 +51,11 @@ $uri = (empty($uri)) ? "/" : $uri;
 // $controller = new Security();
 // $controller->login();
 
-if (!file_exists("../app/config/routes.yml")) {
+if (!file_exists("../App/Config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
 $session = Session::getInstance();
-$routes = yaml_parse_file("../app/config/routes.yml");
+$routes = yaml_parse_file("../App/Config/routes.yml");
 
 if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
     http_response_code(404);
@@ -65,10 +65,10 @@ if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || em
     $action = $routes[$uri]["action"];
 
     //Vérification de l'existance de la classe
-    if (!file_exists("../app/controllers/" . $controller . ".php")) {
+    if (!file_exists("../App/Controllers/" . $controller . ".php")) {
         die("Le fichier Controllers/" . $controller . ".php n'existe pas");
     }
-    include "../app/controllers/" . $controller . ".php";
+    include "../App/Controllers/" . $controller . ".php";
 
     //Le fichier existe mais est-ce qu'il possède la bonne classe
     //bien penser à ajouter le namespace \App\Controllers\Security
