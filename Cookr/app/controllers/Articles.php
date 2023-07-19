@@ -55,7 +55,7 @@ class Articles
         if ($form->isSubmit() && $form->isValid()) {
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            // $this->article->setContent();
+            $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
             if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
                 $imagesInfo = $form->getData("0");
@@ -80,7 +80,7 @@ class Articles
             $this->article->setId($_GET["id"]);
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            // $this->article->setContent();
+            $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
             if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
                 $imagesInfo = $form->getData("0");

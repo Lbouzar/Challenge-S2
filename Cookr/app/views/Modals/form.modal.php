@@ -37,6 +37,8 @@
                 <?php endforeach;?>
             </select>
             </fieldset>
+        <?php elseif ($input["type"] === "hidden") :?>
+            <input type="hidden" id="inputContent" name="inputContent" value="">
         <?php else : ?>
             <fieldset class="flex-column mt-4" style="position: relative;">
             <label class="mb-1" for="<?= $name ?>"><?= $input["label"] ?></label>
