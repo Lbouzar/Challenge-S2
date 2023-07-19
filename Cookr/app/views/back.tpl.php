@@ -7,11 +7,6 @@
   <link rel="icon" type="image/svg+xml" href="<?php getenv('HTTP_HOST') ?>/public/assets/icons/logo-small.svg">
   <link rel="stylesheet" href="<?php getenv('HTTP_HOST') ?>/public/assets/css/main.css">
   <script src="/app/vendor/tinymce/tinymce/tinymce.min.js"></script>
-  <style>
-    body, button {
-      font-family: <?php echo $fontFamily; ?>, sans-serif !important;
-    }
-  </style>
   <title>Cookr - Dashboard</title>
 </head>
 

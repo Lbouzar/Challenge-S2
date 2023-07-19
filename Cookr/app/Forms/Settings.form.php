@@ -23,7 +23,7 @@ class Settings extends Verificator
             "inputs" => [
                 "font" => [
                     "type" => "select",
-                    "id" => "fontSettings",
+                    "id" => "font",
                     "options" => [
                         [
                             "value" => "poppins",

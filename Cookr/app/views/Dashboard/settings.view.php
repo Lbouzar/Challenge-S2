@@ -1,4 +1,4 @@
-<!-- <script>
+<script>
   window.addEventListener('load', function() {
     let font = document.getElementById('font').value;
     document.getElementById('font').addEventListener('change', function() {
@@ -9,12 +9,16 @@
       const styleElement = document.createElement('style');
       const css = `body, button { font-family: ${font}, sans-serif !important; }`;
       styleElement.textContent = css;
-      const headElement = document.head || document.getElementsByTagName('head')[0];
+      const headElement = document.head;
+      const existingStyleElement = document.querySelector('head style');
+      if (existingStyleElement) {
+        headElement.removeChild(existingStyleElement);
+      }
       headElement.appendChild(styleElement);
     }
     updateDynamicFont(font);
   })
-</script> -->
+</script>
 
 <div class="layout-bo settings">
   <h2 class="title-bo">Modifier les paramètres</h2>

@@ -2545,4 +2545,8 @@ footer nav h3 {
   margin-left: auto;
 }
 
+.settings select {
+  width: 50%;
+}
+
 /*# sourceMappingURL=main.css.map */
