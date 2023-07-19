@@ -23,19 +23,20 @@ class Settings extends Verificator
             "inputs" => [
                 "font" => [
                     "type" => "select",
+                    "id" => "fontSettings",
                     "options" => [
                         [
-                            "value" => "0",
+                            "value" => "poppins",
                             "name" => "Poppins",
                             "selected" => false
                         ],
                         [
-                            "value" => "1",
+                            "value" => "lato",
                             "name" => "Lato",
                             "selected" => false
                         ],
                         [
-                            "value" => "2",
+                            "value" => "roboto",
                             "name" => "Roboto",
                             "selected" => false
                         ]
@@ -45,20 +46,21 @@ class Settings extends Verificator
                 ],
                 // "color" => [
                 //     "type" => "select",
+                //     "id" => "colorSettings",
                 //     "options" => [
                 //         [
-                //             "value" => "1",
-                //             "name" => "Oui",
+                //             "value" => "orange",
+                //             "name" => "Orange",
                 //             "selected" => false
                 //         ],
                 //         [
-                //             "value" => "0",
-                //             "name" => "Non",
+                //             "value" => "red",
+                //             "name" => "Red",
                 //             "selected" => false
                 //         ]
                 //     ],
-                //     "error" => " ",
-                //     "label" => "Recette active ?"
+                //     "error" => "Couleur incorrecte",
+                //     "label" => "Couleur"
                 // ],
             ]
         ];

@@ -7,8 +7,8 @@ use App\Config\Sql;
 class Settings extends Sql
 {
     protected Int $id = 0;
-    protected String $font;
-    protected String $color;
+    protected String $font = '';
+    protected String $color = '';
 
     public function getId(): int
     {
@@ -30,13 +30,13 @@ class Settings extends Sql
         $this->font = trim($font);
     }
 
-    public function getColor(): string
-    {
-        return $this->color;
-    }
+    // public function getColor(): string
+    // {
+    //     return $this->color;
+    // }
 
-    public function setColor(string $color): void 
-    {
-        $this->color = trim($color);
-    }
+    // public function setColor(string $color): void 
+    // {
+    //     $this->color = trim($color);
+    // }
 }

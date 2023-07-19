@@ -9,8 +9,9 @@
     overflow: hidden;
     img {
         width: 100%;
-        min-height: 189px;
+        height: 189px;
         transition: 0.3s;
+        object-fit: cover;
     }
     &:hover img {
         transform: scale(1.1);

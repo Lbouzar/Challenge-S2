@@ -5,13 +5,13 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 44px;
+  padding-top: 36px;
   top: 80px;
   z-index: 100;
   a {
     display: flex;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     margin-left: 8px;
     .icon-burger_menu {
       color: $orange;

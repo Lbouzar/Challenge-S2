@@ -45,5 +45,5 @@
             </fieldset>
         <?php endif; ?>
     <?php endforeach; ?>
-    <button type="submit" class="cta-button"><?= $config["config"]["submit"] ?></button>
+    <button type="submit" class="cta-button submitSettings"><?= $config["config"]["submit"] ?></button>
 </form>
