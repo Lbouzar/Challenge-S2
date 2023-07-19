@@ -76,11 +76,6 @@ class CreateArticle extends Verificator
                     "rows" => 10,
                     "required" => false,
                     "label" => "Contenu de l'article"
-                ],
-                "inputContent" => [
-                    "type" => "hidden",
-                    "id" => "inputContent",
-                    "name" => "inputContent"
                 ]
             ]
         ];

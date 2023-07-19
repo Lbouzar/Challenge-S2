@@ -52,8 +52,7 @@ class Articles
         if ($form->isSubmit() && $form->isValid()) {
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            //$this->article->setCreator($session->id);
-            $this->article->setContent($form->getData("inputContent"));
+            $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
             $this->article->save();
             $form->errors[] = "L'article a été créée";
@@ -74,8 +73,7 @@ class Articles
             $this->article->setId($_GET["id"]);
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
-            // $this->article->setContent();
-            $this->article->setContent($form->getData("inputContent"));
+            $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
             $this->article->save();
             $form->errors[] = "Mise à jour de l'article";
