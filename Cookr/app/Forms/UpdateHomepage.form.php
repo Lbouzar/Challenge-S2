@@ -15,7 +15,7 @@ class UpdateHomepage extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Modifier"
@@ -53,6 +53,15 @@ class UpdateHomepage extends Verificator
                     "label" => "Titre 2",
                     "value" => $data[0]["secondtitle"]??"",
                 ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir un logo",
+                    "required" => false,
+                    "label" => "Votre logo",
+                    "accept" => "image/*",
+                ]
             ]
         ];
     }

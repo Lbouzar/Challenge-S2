@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateRecipe;
 use App\Forms\UpdateRecipe;
+use App\Models\Comment_Recipe;
 use App\Models\Recipe;
 use App\Models\Menu;
 use App\Models\Recipespage;
@@ -14,12 +16,16 @@ class Recipes
     private $recipe;
     private $menu;
     private $recipespage;
+    private $image;
+    private $comments;
 
     public function __construct()
     {
         $this->recipe = Recipe::getInstance();
         $this->menu = Menu::getInstance();
         $this->recipespage = Recipespage::getInstance();
+        $this->image = Image::getInstance();
+        $this->comments = Comment_Recipe::getInstance();
     }
     public function allRecipes()
     {
@@ -33,6 +39,7 @@ class Recipes
     public function recipe()
     {
         //route dynamique
+        $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]);
     }
 
     public function allRecipesBO()
@@ -56,6 +63,10 @@ class Recipes
             $this->recipe->setPresentation($form->getData("presentation"));
             $this->recipe->setIngredients($form->getData("ingredients"));
             $this->recipe->setDescription($form->getData("description"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->recipe->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->recipe->save();
             $form->errors[] = "La recette a été créée";
         }
@@ -82,6 +93,10 @@ class Recipes
             $this->recipe->setPresentation($form->getData("presentation"));
             $this->recipe->setIngredients($form->getData("ingredients"));
             $this->recipe->setDescription($form->getData("description"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->recipe->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->recipe->save();
             $form->errors[] = "Mise à jour de la recette";
             header("Refresh:$secondsWait");

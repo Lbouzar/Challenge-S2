@@ -1,4 +1,4 @@
-<!-- <script>
+ <script>
   function uploadImg(input, img) {
     const [file] = input.files
     if (file) {
@@ -6,6 +6,8 @@
     }
   }
 </script>
+
+<!--
 <script>
   tinymce.init({
     selector: '#myTextarea',

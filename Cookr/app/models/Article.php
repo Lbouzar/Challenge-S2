@@ -12,7 +12,7 @@ class Article extends Sql
     protected String $keywords;
     protected String $slug;
     protected Int $is_active;
-    protected String $image = "article_picture.png";
+    protected String $image;
 
     public function getId(): String
     {

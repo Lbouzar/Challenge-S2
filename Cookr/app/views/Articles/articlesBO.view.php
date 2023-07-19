@@ -1,13 +1,3 @@
-<!-- <script>
-  function uploadImg(input, img) {
-    const [file] = input.files
-    if (file) {
-      img.src = URL.createObjectURL(file)
-    }
-  }
-</script> -->
-
-
 <div class="layout-bo articles-bo">
   <button class="cta-button" onclick="window.location.href ='/create-article';">Créer un article</button>
   <h2 class="title-bo">Tous les articles</h2>

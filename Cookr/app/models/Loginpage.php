@@ -48,6 +48,6 @@ class Loginpage extends Sql
 
     public function setRoute(string $link_route): void 
     {
-        $this->link_route = trim($link_route, '/');
+        $this->link_route = "/".trim($link_route, '/');
     }
 }

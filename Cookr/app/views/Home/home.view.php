@@ -1,16 +1,18 @@
 <main>
 
-    <?php if (isset($menu))
-        $this->modal("navbar", $menu);?>
+    <?php if (isset($menu) && !empty($menu))
+        $this->modal("navbar", $menu); ?>
 
     <?php if (isset($homepage) && !empty($homepage)) : ?>
-    <section id="slogan-logo" class="mt-10">
-        <img src="public/assets/icons/logo-regular.svg" alt="logo cookr">
-        <h1><?php echo $homepage[0]["slogan"] ?></h1>
-    </section>
+        <section id="slogan-logo" class="mt-10">
+            <?php if (!empty($homepage[0]["logo"])) : ?>
+                <img src="public/assets/images/<?= $homepage[0]["logo"] ?>" alt="logo">
+            <?php endif; ?>
+            <h1><?= $homepage[0]["slogan"] ?></h1>
+        </section>
 
-    <!-- Articles sections -->
-    <section class="flex-column justify-between list-card-article mt-7">
+        <!-- Articles sections -->
+        <section class="flex-column justify-between list-card-article mt-7">
 
         <h1 class="main-title"><?php echo $homepage[0]["firsttitle"] ?></h1>
         <div class="grid index-card articles-grid">

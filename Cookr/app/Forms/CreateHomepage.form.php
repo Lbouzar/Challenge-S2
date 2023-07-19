@@ -15,7 +15,7 @@ class CreateHomepage extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Créer"
@@ -50,6 +50,15 @@ class CreateHomepage extends Verificator
                     "required" => true,
                     "label" => "Titre 2"
                 ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir un logo",
+                    "required" => false,
+                    "label" => "Votre logo",
+                    "accept" => "image/*"
+                ]
             ]
         ];
     }

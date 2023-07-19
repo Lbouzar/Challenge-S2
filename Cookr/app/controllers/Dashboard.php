@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateMenu;
 use App\Forms\CreateRecipespage;
@@ -43,6 +44,7 @@ class Dashboard
     private $loginpage;
     private $profilpage;
     private $settings;
+    private $image;
 
     public function __construct()
     {
@@ -57,6 +59,7 @@ class Dashboard
         $this->loginpage = Loginpage::getInstance();
         $this->profilpage = Profilpage::getInstance();
         $this->settings = Style::getInstance();
+        $this->image = Image::getInstance();
     }
 
     public function dashboard()
@@ -336,7 +339,19 @@ class Dashboard
     public function comments()
     {
         $view = View::getInstance("Dashboard/commentsBO", "back");
-        $view->assign("comments", $this->comments->selectWhere(null));
+        $view->assign("comments", $this->comments->getCommentsOfRecipe(null));
+    }
+
+    public function validComment()
+    {
+        if (count($this->comments->selectWhere(["id" => $_GET["id"]])) > 0) {
+            $this->comments->setId($_GET["id"]);
+            $this->comments->setValid(1);
+            $this->comments->save();
+            header("Location: comments-bo");
+        } else {
+            header("Location: comments-bo");
+        }
     }
 
     public function deleteComment()
@@ -371,5 +386,17 @@ class Dashboard
             header("Refresh:$secondsWait");
         }
         $view->assign("formErrors", $form->errors);
+    }
+
+    public function showImages()
+    {
+        $view = View::getInstance("Dashboard/imagesBO", "back");
+        $view->assign("images", glob(dirname(__DIR__, 2) . '/public/assets/images/*', GLOB_BRACE));
+    }
+
+    public function deleteImage()
+    {
+        $this->image->deleteImage($_GET["name"]);
+        header("Location: show-images");
     }
 }

@@ -129,6 +129,15 @@ class CreateRecipe extends Verificator
                     "rows" => 7,
                     "required" => true,
                     "label" => "Description de la recette"
+                ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir une image",
+                    "required" => false,
+                    "label" => "Image de couverture",
+                    "accept" => "image/*"
                 ]
             ]
         ];

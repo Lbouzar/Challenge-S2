@@ -49,22 +49,22 @@ class UpdateUser extends Verificator
                         [
                             "value" => "Utilisateur",
                             "name" => "Utilisateur",
-                            "selected" => false
+                            "selected" => ($data[0]["role"] == getenv("Utilisateur")) ? true : false
                         ],
                         [
                             "value" => "Editeur",
                             "name" => "Editeur",
-                            "selected" => false
+                            "selected" => ($data[0]["role"] == getenv("Editeur")) ? true : false
                         ],
                         [
                             "value" => "Moderateur",
                             "name" => "Moderateur",
-                            "selected" => false
+                            "selected" => ($data[0]["role"] == getenv("Moderateur")) ? true : false
                         ],
                         [
                             "value" => "Admin",
                             "name" => "Administrateur",
-                            "selected" => false
+                            "selected" => ($data[0]["role"] == getenv("Admin")) ? true : false
                         ]
                     ],
                     "error" => " ",
@@ -76,12 +76,12 @@ class UpdateUser extends Verificator
                         [
                             "value" => "0",
                             "name" => "Non",
-                            "selected" => false
+                            "selected" => ($data[0]["status"] == 0) ? true : false
                         ],
                         [
                             "value" => "1",
                             "name" => "Oui",
-                            "selected" => false
+                            "selected" => ($data[0]["status"] == 1) ? true : false
                         ]
                     ],
                     "error" => " ",

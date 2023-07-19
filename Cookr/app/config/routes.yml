@@ -262,6 +262,13 @@
     - Admin
     - Moderateur
 
+/valid-comments:
+  controller: Dashboard
+  action: validComment
+  roles:
+    - Admin
+    - Moderateur
+
 /delete-comments:
   controller: Dashboard
   action: deleteComment
@@ -272,6 +279,18 @@
 /settings:
   controller: Dashboard
   action: settings
+  roles:
+    - Admin
+
+/show-images:
+  controller: Dashboard
+  action: showImages
+  roles:
+    - Admin
+
+/delete-image:
+  controller: Dashboard
+  action: deleteImage
   roles:
     - Admin
 # -----------------BACK SIDE----------------------------
