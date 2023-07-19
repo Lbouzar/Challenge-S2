@@ -6,23 +6,38 @@ use App\Config\View;
 use App\Config\Session;
 use App\Forms\Register;
 use App\Models\User;
+use App\Models\Contactpage;
 use App\Emails\Email;
 use App\Forms\Contact;
 use App\Forms\Login;
 use App\Forms\Password;
 use App\Forms\Profil;
+use App\Models\Loginpage;
+use App\Models\Menu;
+use App\Models\Profilpage;
+use App\Models\Registerpage;
 
 class Security
 {
     private $user;
     private $email;
     private $session;
+    private $menu;
+    private $contactpage;
+    private $registerpage;
+    private $loginpage;
+    private $profilpage;
 
     public function __construct()
     {
         $this->user = user::getInstance();
         $this->email = Email::getInstance();
         $this->session = session::getInstance();
+        $this->menu = Menu::getInstance();
+        $this->contactpage = Contactpage::getInstance();
+        $this->registerpage = Registerpage::getInstance();
+        $this->loginpage = Loginpage::getInstance();
+        $this->profilpage = Profilpage::getInstance();
     }
 
     public function register(): void
@@ -32,7 +47,9 @@ class Security
         } else {
             $form = Register::getInstance();
             $view = View::getInstance("Security/register", "front");
+            $view->assign("registerpage", $this->registerpage->selectWhere(null));
             $view->assign('form', $form->getConfig());
+            $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
 
             if ($form->isSubmit() && $form->isValid()) {
                 if (count($this->user->selectWhere(["email" => $form->getData("email")])) == 0) {
@@ -86,7 +103,9 @@ class Security
         } else {
             $form = Login::getInstance();
             $view = View::getInstance("Security/login", "front");
+            $view->assign("loginpage", $this->loginpage->selectWhere(null));
             $view->assign('form', $form->getConfig());
+            $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
 
             if ($form->isSubmit() && $form->isValid()) {
                 if (count($this->user->selectWhere(["email" => $form->getData("email")])) != 1) {
@@ -98,7 +117,6 @@ class Security
                 else if (password_verify($form->getData("pwd"), $this->user->getUserPassword(["email" => $form->getData("email")])[0]["password"])) {
                     //mise à jour du Token
                     $this->user->setId($this->user->getTableId(["email" => $form->getData("email")])[0]["id"]);
-                    $this->user->setStatus(1);
                     $this->user->setToken(self::generateToken());
                     $this->user->save();
                     //Récupération des infos de l'utilisateur
@@ -131,11 +149,13 @@ class Security
                 $updatePwd = Password::getInstance();
 
                 $this->user->setId($this->session->id);
-                $this->user->setStatus(1);
 
                 $secondsWait = 2;
 
                 $view = View::getInstance("Security/profil", "front");
+                $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
+                $view->assign("profilpage", $this->profilpage->selectWhere(null));
+                $view->assign('id', $this->session->id);
                 $view->assign("userInfos", $data[0]["firstname"]. " ".$data[0]["lastname"]);
                 $view->assign('formUpdateUser', $updateUser->getConfig());
                 $view->assign('formUpdatePassword', $updatePwd->getConfig());
@@ -145,7 +165,7 @@ class Security
                     $this->user->setFirstname($updateUser->getData("firstname"));
                     $this->user->setLastname($updateUser->getData("lastname"));
                     if ($data[0]['email'] != $updateUser->getData("email")) {
-                        $this->email->update_mail($data[0]['email']);
+                        $this->email->update_mail($data[0]['email'], $updateUser->getData("email"));
                         $this->user->setEmail($updateUser->getData("email"));
                     }
                     $this->user->save();
@@ -157,10 +177,9 @@ class Security
                 if ($updatePwd->isSubmit() && $updatePwd->isValid()) {
                     if (password_verify($updatePwd->getData("oldPwd"), $data[0]["password"])) {
                         //mise à jour du mot de passe
-                        $this->email->update_mail($data[0]['email']);
                         $this->user->setPassword($updatePwd->getData("pwd"));
                         $this->user->save();
-                        $updatePwd->errors[] = "Mise à jour de votre mot de passe";
+                        $updatePwd->errors[] = "Votre mot de passe a été mis à jour";
                     } else {
                         $updatePwd->errors[] = "Votre ancien mot de passe est incorrect";
                     }
@@ -178,8 +197,9 @@ class Security
     {
         $view = View::getInstance("Security/contact", "front");
         $form = Contact::getInstance();
+        $view->assign('contactpage', $this->contactpage->selectWhere(null));
         $view->assign('form', $form->getConfig());
-
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         if ($form->isSubmit() && $form->isValid()) {
             // envoyer un mail à l'admin et aux modérateurs
             $recipients = $this->user->selectWhere(["role" => getenv('Admin')]);
@@ -199,6 +219,18 @@ class Security
         $this->session->destroy();
         //redirection page de connexion
         header("Location: login");
+    }
+
+    public function delete(): void 
+    {
+        if (count($this->user->selectWhere(["id" => $_GET["id"]])) > 0) {
+            $this->user->setId($_GET["id"]);
+            $this->user->delete();
+    
+            //redirection sur la page d'acceuil 
+            header("Location: /");
+        }
+        header("Location: profil");
     }
 
     public static function generateToken()

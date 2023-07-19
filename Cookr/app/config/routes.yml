@@ -44,6 +44,10 @@
   controller: Security
   action: logout 
 
+/delete-profil:
+  controller: Security
+  action: delete
+
 /contact:
   controller: Security 
   action: contact
@@ -60,20 +64,130 @@
     - Moderateur
     - Editeur
 
-/back-office/homepage:
+/menu:
   controller: Dashboard
+  action: menu
+  roles:
+    - Admin
+
+/create-menu:
+  controller: Dashboard 
+  action: createMenu
+  roles:
+    - Admin
+
+/update-menu:
+  controller: Dashboard
+  action: updateMenu
+  roles:
+    - Admin
+
+/delete-menu:
+  controller: Dashboard
+  action: deleteMenu
+  roles:
+    - Admin
+
+/homepage:
+  controller: Home
   action: homepage
   roles:
     - Admin
 
-/back-office/recipes:
+/create-homepage:
+  controller: Home 
+  action: createHomepage
+  roles: 
+    - Admin
+
+/recipespage:
+  controller: Dashboard
+  action: recipespage
+  roles:
+    - Admin
+
+/create-recipespage:
+  controller: Dashboard
+  action: createRecipespage
+  roles: 
+    - Admin
+
+/articlespage:
+  controller: Dashboard
+  action: articlespage
+  roles:
+    - Admin
+
+/create-articlespage:
+  controller: Dashboard
+  action: createArticlespage
+  roles: 
+    - Admin
+
+/contactpage:
+  controller: Dashboard
+  action: contact
+  roles:
+    - Admin
+
+/create-contactpage:
+  controller: Dashboard
+  action: createContactpage
+  roles:
+    - Admin
+
+/registerpage:
+  controller: Dashboard
+  action: register
+  roles: 
+    - Admin
+
+/create-registerpage:
+  controller: Dashboard
+  action: createRegister
+  roles:
+    - Admin 
+
+/loginpage: 
+  controller: Dashboard
+  action: login
+  roles:
+    - Admin
+
+/create-loginpage:
+  controller: Dashboard
+  action: createLogin
+  roles:
+    - Admin
+
+/profilpage:
+  controller: Dashboard
+  action: profil 
+  roles:
+    - Admin
+
+/create-profilpage:
+  controller: Dashboard
+  action: createProfil
+  roles: 
+    - Admin
+
+
+/recipes-bo:
   controller: Recipes
   action: allRecipesBO
+  roles: 
+    - Admin
+    - Editeur
+
+/create-recipe:
+  controller: Recipes
+  action: createRecipe
   roles:
     - Admin
     - Editeur
 
-/back-office/recipe:
+/recipe-bo:
   controller: Recipes
   action: recipeBO
   roles:
@@ -81,14 +195,28 @@
     - Editeur
 # yes, une route dynamique
 
-/back-office/articles:
+/delete-recipe:
+  controller: Recipes
+  action: delete
+  roles:
+    - Admin
+    - Editeur
+
+/articles-bo:
   controller: Articles
   action: allArticlesBO
   roles:
     - Admin
     - Editeur
 
-/back-office/article:
+/create-article:
+  controller: Articles 
+  action: createArticle
+  roles:
+    - Admin
+    - Editeur
+
+/article-bo:
   controller: Articles
   action: articleBO
   roles:
@@ -96,17 +224,67 @@
     - Editeur
 # yes, une route dynamique
 
-/back-office/comments:
+/delete-article:
+  controller: Articles
+  action: delete
+  roles:
+    - Admin
+    - Editeur
+
+/users-bo:
+  controller: Users
+  action: show
+  roles:
+    - Admin
+
+/update-user:
+  controller: Users
+  action: update
+  roles:
+    - Admin
+
+/create-user:
+  controller: Users
+  action: create
+  roles:
+    - Admin
+
+/delete-user:
+  controller: Users
+  action: delete
+  roles:
+    - Admin
+
+/comments-bo:
   controller: Dashboard
   action: comments
   roles:
     - Admin
     - Moderateur
 
-/back-office/contact:
+/valid-comments:
   controller: Dashboard
-  action: contact
+  action: validComment
+  roles:
+    - Admin
+    - Moderateur
+
+/delete-comments:
+  controller: Dashboard
+  action: deleteComment
+  roles:
+    - Admin
+    - Moderateur
+
+/show-images:
+  controller: Dashboard
+  action: showImages
   roles:
     - Admin
 
+/delete-image:
+  controller: Dashboard
+  action: deleteImage
+  roles:
+    - Admin
 # -----------------BACK SIDE----------------------------

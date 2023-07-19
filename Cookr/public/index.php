@@ -26,9 +26,14 @@ spl_autoload_register(function ($class) {
 //Nettoyer la donnée
 //S'il y a des paramètres dans l'url il faut les enlever :
 $uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
+
 $uri = rtrim(strtolower(trim($uriExploded[0])), "/");
+$uriParameters = isset($uriExploded[1]) ? explode("&",$uriExploded[1]) : null;
+
 //Dans le cas ou nous sommes à la racine $uri sera vide du coup je remets /
 $uri = (empty($uri)) ? "/" : $uri;
+// $slug = isset($uriParameters) ? explode("slug=", $uriParameters[0])[1] : null;
+// $id = isset($uriParameters) ? explode("id=", $uriParameters[1])[1] : null;
 
 //Créer un fichier yaml contenant le route du type :
 // /login:
@@ -50,7 +55,6 @@ if (!file_exists("../app/config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
 $session = Session::getInstance();
-
 $routes = yaml_parse_file("../app/config/routes.yml");
 
 if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
@@ -83,18 +87,18 @@ if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || em
 
     if (isset($routes[$uri]["roles"])) {
         $roles = $routes[$uri]["roles"];
+        $isAuthorized = false;
         foreach ($roles as $role) {
-            if($session->role == getenv($role)) {
+            if ($session->role == getenv($role)) {
                 $isAuthorized = true;
                 break;
             }
-            $isAuthorized = false;
         }
-        if($isAuthorized) {
-            $objet->$action;
+        if ($isAuthorized) {
+            $objet->$action();
         } else {
             http_response_code(404);
-            View::getInstance("404/404", "front"); 
+            View::getInstance("404/404", "front");
         }
     } else {
         $objet->$action();

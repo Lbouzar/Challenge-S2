@@ -18,28 +18,11 @@
   .input-regular {
     width: 100% !important;
   }
-  .img-previews {
-    fieldset {
-      width: 30%;
-      height: 300px;
-      position: relative;
-    }
-    input[type="file"] {
-      position: relative;
-      border: 2px solid $light-brown;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-    }
-    #imgPreview1, #imgPreview2, #imgPreview3 {
-      position: absolute;
-      top: 28px;
-      width: calc(100% - 2px);
-      height: calc(100% - 30px);
-      object-fit: cover;
-      overflow: hidden;
-      z-index: 1;
-    }
+  input[type="file"] {
+    width: 50% !important;
+  }
+  #imgPreview {
+    width: 50% !important;
   }
   .manage-buttons {
     margin-top: 32px;

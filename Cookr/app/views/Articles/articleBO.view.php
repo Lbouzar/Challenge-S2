@@ -1,4 +1,4 @@
-<script>
+ <script>
   function uploadImg(input, img) {
     const [file] = input.files
     if (file) {
@@ -6,6 +6,8 @@
     }
   }
 </script>
+
+<!--
 <script>
   tinymce.init({
     selector: '#myTextarea',
@@ -21,39 +23,12 @@
     plugins: 'image',
     toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | image',
   });
-</script>
+</script> -->
 
 <div class="layout-bo articles-bo">
   <h2>Modifier l'article</h2>
-  <form action="">
-    <div class="flex justify-between">
-      <div class="first-col">
-        <fieldset class="flex-column">
-          <label for="title">Titre</label>
-          <input type="text" id="title" name="title" placeholder="Le titre de l'article" class="input-regular">
-        </fieldset>
-        <fieldset class="flex-column">
-          <label for="keywords">Mots-clés</label>
-          <input type="text" id="keywords" name="keywords" placeholder="Séparer les mots clés par des /" class="input-regular">
-        </fieldset>
-      </div>
-      <div class="second-col">
-        <fieldset class="flex-column thumbnail">
-          <label for="thumbnail">Miniature</label>
-          <input type="file" id="thumbnail" name="thumbnail" accept="image/*" onchange="uploadImg(this, imgThumbnail)">
-          <img id="imgThumbnail" src="#" alt="img" />
-        </fieldset>
-      </div>
-    </div>
-    <div>
-      <fieldset class="flex-column">
-        <label for="title">Contenu</label>
-        <textarea name="myTextarea" id="myTextarea" cols="30" rows="10"></textarea>
-      </fieldset>
-    </div>
-    <div class="manage-buttons">
-      <button type="button" class="cta-button delete-button">Supprimer</button>
-      <button type="submit" class="cta-button">Sauvegarder</button>
-    </div>
-  </form>
+  <?php if (isset($formErrors))
+    $this->modal("errors", $formErrors); ?>
+  <?php $this->modal("form", $form); ?>
+  <button class="cta-button delete-account" onclick="window.location.href ='/delete-article?id=<?=$_GET['id']?>';">Supprimer</button>
 </div>

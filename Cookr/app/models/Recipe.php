@@ -6,100 +6,67 @@ use App\Config\Sql;
 
 class Recipe extends Sql
 {
-    protected String $id;
+    protected String $id = " ";
     protected String $title;
     protected String $description; //Les étapes de la recette
-    protected String $difficulty;
-    protected Int $isMain = 0;
-    protected String $category;
+    protected Int $is_main;
+    protected Int $is_active;
     protected String $presentation;
-    protected Int $preparationTime = 0;
-    protected Int $cookingTime = 0;
-    protected Int $price = 0;
+    protected Int $preparation_time;
+    protected Int $cooking_time;
+    protected Int $price;
     protected String $ingredients;
+    protected String $slug;
+    protected String $image;
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param String $id
-     */
     public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return String 
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param String $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = ucfirst(strtolower(trim($title)));
     }
 
-    /**
-     * @return String
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param String $description
-     */
     public function setDescription(string $description): void
     {
         $this->description = trim($description);
     }
 
-    /**
-     * @return String
-     */
-    public function getDifficulty(): string
-    {
-        return $this->difficulty;
-    }
-
-    /**
-     * @param String $difficulty
-     */
-    public function setDifficulty(string $difficulty): void
-    {
-        $this->description = $difficulty;
-    }
-
     public function getIsMain(): int
     {
-        return $this->isMain;
+        return $this->is_main;
     }
 
     public function setIsMain(int $isMain): void
     {
-        $this->isMain = $isMain;
+        $this->is_main = $isMain;
     }
 
-    public function getCategory(): string
+    public function getIsActive(): int
     {
-        return $this->category;
+        return $this->is_active;
     }
 
-    public function setCategory(string $category): void
+    public function setIsActive(int $is_active): void
     {
-        $this->category = $category;
+        $this->is_active = $is_active;
     }
 
     public function getPresentation(): string
@@ -114,22 +81,22 @@ class Recipe extends Sql
 
     public function getPreparationTime(): int
     {
-        return $this->preparationTime;
+        return $this->preparation_time;
     }
 
     public function setPreparationTime(int $preparationTime): void
     {
-        $this->preparationTime = $preparationTime;
+        $this->preparation_time = $preparationTime;
     }
 
-    public function getCookingTime(): int 
+    public function getCookingTime(): int
     {
-        return $this->cookingTime;
+        return $this->cooking_time;
     }
 
-    public function setCookingTime(int $cookingTime): void 
+    public function setCookingTime(int $cookingTime): void
     {
-        $this->cookingTime = $cookingTime;
+        $this->cooking_time = $cookingTime;
     }
 
     public function getPrice(): int
@@ -147,8 +114,28 @@ class Recipe extends Sql
         return $this->ingredients;
     }
 
-    public function setIngredients(string $ingredients): void 
+    public function setIngredients(string $ingredients): void
     {
-        $this->ingredients = '{'.$ingredients.'}';
+        $this->ingredients =  $ingredients;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = ucfirst(strtolower(trim($slug)));
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): void
+    {
+        $this->image = $image;
     }
 }

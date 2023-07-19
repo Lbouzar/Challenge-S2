@@ -1,21 +1,16 @@
-<main id="register" class="justify-between">
-    <aside class="aside-graphic">
-        <img src="public/assets/icons/logo-regular.svg" alt="logo cookr" class="align-self-center">
-        <h1 class="align-self-center">Rejoignez le meilleur site de recettes de cuisine !</h1>
-        <div class="justify-between">
-            <img src="public/assets/icons/orange-dot1.svg" alt="orange-dot1">
-            <img src="public/assets/icons/orange-dot1.svg" alt="orange-dot1">
-        </div>
-        <img src="public/assets/icons/orange-dot1.svg" alt="orange-dot1" class="align-self-center">
-    </aside>
+<?php if (isset($menu) && !empty($menu))
+    $this->modal("navbar", $menu); ?>
+
+<?php if (isset($registerpage) && !empty($registerpage)) : ?>
+<main id="register" class="justify-center">
     <section>
-        <h1 class="ml-0">Inscription</h1>
-            <?php if (isset($formErrors)) 
-                $this->modal("errors", $formErrors); ?>
-            <?php $this->modal("form", $form); ?>
+        <h1 class="ml-0"><?php echo $registerpage[0]["title"] ?></h1>
+        <?php if (isset($formErrors))
+            $this->modal("errors", $formErrors); ?>
+        <?php $this->modal("form", $form); ?>
         <div class="register">
-            <p>Déjà un compte ?</p>
-            <a href="/login">Connectez-vous !</a>
+            <a href="<?php echo $registerpage[0]["link_route"] ?>"><?php echo $registerpage[0]["link_title"] ?></a>
         </div>
     </section>
 </main>
+<?php endif; ?>

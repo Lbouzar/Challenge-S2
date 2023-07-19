@@ -1,34 +1,39 @@
 <main>
-    <?php $this->modal("searchBar", null); ?>
 
-    <!-- Articles sections -->
-    <section class="flex-column justify-between list-card-article mt-7">
-        <h1 class="main-title">Nos derniers articles</h1>
-        <div class="grid index-card articles-grid align-self-center">
-            <?php foreach ($articles as $article) :
-                $this->modal("card", $article);
-            endforeach ?>
-            <button class="more-article cta-button--full cta-button" onclick="window.location.href ='/articles';">
-                Voir plus d'articles
-            </button>
-        </div>
-    </section>
+    <?php if (isset($menu) && !empty($menu))
+        $this->modal("navbar", $menu); ?>
 
-    <!-- Recettes sections -->
-    <section class="flex-column justify-between list-card-recette mt-7 mb-13">
-        <h1 class="main-title">Nos dernières recettes</h1>
-        <h3 class="sub-title">Découvrez notre recette du jour</h3>
-        <div class="container-recipe-of-the-day">
-            <?php $this->modal("main", $mainRecipe); ?>
-        </div>
-        <h3 class="sub-title">Toutes nos recettes</h3>
-        <div class="grid index-card recipes-grid mt-0 justify-items-center">
-            <?php foreach ($recipes as $recipe) :
-                $this->modal("card", $recipe);
-            endforeach ?>
-        </div>
-        <button class="more-article cta-button--full cta-button" onclick="window.location.href ='/recipes';">
-            Voir plus de recettes
-        </button>
-    </section>
+    <?php if (isset($homepage) && !empty($homepage)) : ?>
+        <section id="slogan-logo" class="mt-10">
+            <?php if (!empty($homepage[0]["logo"])) : ?>
+                <img src="public/assets/images/<?= $homepage[0]["logo"] ?>" alt="logo">
+            <?php endif; ?>
+            <h1><?= $homepage[0]["slogan"] ?></h1>
+        </section>
+
+        <!-- Articles sections -->
+        <section class="flex-column justify-between list-card-article mt-7">
+
+            <h1 class="main-title"><?= $homepage[0]["firsttitle"] ?></h1>
+            <div class="grid index-card articles-grid align-self-center">
+                <?php foreach ($articles as $article) : ?>
+                    <a href="">
+                        <?php $this->modal("card", $article); ?>
+                    </a>
+                <?php endforeach ?>
+            </div>
+        </section>
+
+        <!-- Recettes sections -->
+        <section class="flex-column justify-between list-card-recette mt-7 mb-13">
+            <h1 class="main-title"><?= $homepage[0]["secondtitle"] ?></h1>
+            <div class="grid index-card recipes-grid mt-0 justify-items-center">
+                <?php foreach ($recipes as $recipe) : ?>
+                    <a href="">
+                        <?php $this->modal("card", $recipe); ?>
+                    </a>
+                <?php endforeach ?>
+            </div>
+        </section>
 </main>
+<?php endif; ?>
