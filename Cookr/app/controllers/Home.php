@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateHomepage;
 use App\Forms\UpdateHomepage;
@@ -17,6 +18,7 @@ class Home
     private $article;
     private $menu;
     private $homepage;
+    private $image;
 
     public function __construct()
     {
@@ -24,12 +26,14 @@ class Home
         $this->article = Article::getInstance();
         $this->menu = Menu::getInstance();
         $this->homepage = Homepage::getInstance();
+        $this->image = Image::getInstance();
     }
+
     public function index()
     {
         $view = View::getInstance("Home/home", "front");
         //récupérer dans la bdd les articles et recettes
-        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         $view->assign("homepage", $this->homepage->selectWhere(null));
         $view->assign('recipes', $this->recipe->getLatestDataWhere(["is_active" => 1]));
         $view->assign('articles', $this->article->getLatestDataWhere(["is_active" => 1]));
@@ -47,6 +51,10 @@ class Home
             $this->homepage->setSlogan($form->getData("slogan"));
             $this->homepage->setFirsttitle($form->getData("firsttitle"));
             $this->homepage->setSecondtitle($form->getData("secondtitle"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->homepage->setLogo($imagesInfo["logo"]["name"]);
+            }
             $this->homepage->save();
             $form->errors[] = "Mise à jour de la page";
             header("Refresh:$secondsWait");
@@ -66,6 +74,10 @@ class Home
                 $this->homepage->setSlogan($form->getData("slogan"));
                 $this->homepage->setFirsttitle($form->getData("firsttitle"));
                 $this->homepage->setSecondtitle($form->getData("secondtitle"));
+                if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                    $imagesInfo = $form->getData("0");
+                    $this->homepage->setLogo($imagesInfo["logo"]["name"]);
+                }
                 $this->homepage->save();
                 header("Location: homepage");
             }

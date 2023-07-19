@@ -76,6 +76,18 @@
   roles:
     - Admin
 
+/update-menu:
+  controller: Dashboard
+  action: updateMenu
+  roles:
+    - Admin
+
+/delete-menu:
+  controller: Dashboard
+  action: deleteMenu
+  roles:
+    - Admin
+
 /homepage:
   controller: Home
   action: homepage
@@ -225,9 +237,15 @@
   roles:
     - Admin
 
-/user-bo:
+/update-user:
   controller: Users
   action: update
+  roles:
+    - Admin
+
+/create-user:
+  controller: Users
+  action: create
   roles:
     - Admin
 
@@ -244,10 +262,35 @@
     - Admin
     - Moderateur
 
+/valid-comments:
+  controller: Dashboard
+  action: validComment
+  roles:
+    - Admin
+    - Moderateur
+
 /delete-comments:
   controller: Dashboard
   action: deleteComment
   roles:
     - Admin
     - Moderateur
+
+/settings:
+  controller: Dashboard
+  action: settings
+  roles:
+    - Admin
+
+/show-images:
+  controller: Dashboard
+  action: showImages
+  roles:
+    - Admin
+
+/delete-image:
+  controller: Dashboard
+  action: deleteImage
+  roles:
+    - Admin
 # -----------------BACK SIDE----------------------------

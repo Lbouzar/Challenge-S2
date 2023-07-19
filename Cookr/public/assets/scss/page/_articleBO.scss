@@ -15,25 +15,11 @@
   .input-regular {
     width: 100% !important;
   }
-  .thumbnail {
-    width: 100%;
-    height: calc(100% - 20px);
-    position: relative;
-  }
   input[type="file"] {
-    border: 2px solid $light-brown;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
+    width: 50% !important;
   }
-  #imgThumbnail {
-    position: absolute;
-    top: 28px;
-    width: calc(100% - 2px);
-    height: calc(100% - 30px);
-    object-fit: cover;
-    overflow: hidden;
-    z-index: 1;
+  #imgPreview {
+    width: 50% !important;
   }
   .manage-buttons {
     margin-top: 32px;

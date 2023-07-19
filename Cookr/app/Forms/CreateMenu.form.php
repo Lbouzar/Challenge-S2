@@ -21,15 +21,42 @@ class CreateMenu extends Verificator
                 "submit" => "Créer"
             ],
             "inputs" => [
-                "content" => [
-                    "type" => "textarea",
-                    "class" => "text-area",
-                    "minlength" => 2,
-                    "maxlength" => 300,
-                    "cols" => 30,
-                    "rows" => 7,
+                "title" => [
+                    "type" => "text",
+                    "class" => "input-regular",
+                    "placeholder" => "Le titre du menu",
+                    "min" => 2,
+                    "max" => 60,
+                    "error" => "Le titre doit faire entre 2 et 60 caractères",
                     "required" => true,
-                    "label" => "Votre menu"
+                    "label" => "Titre du menu"
+                ],
+                "link_route" => [
+                    "type" => "text",
+                    "class" => "input-regular",
+                    "placeholder" => "Lien du titre",
+                    "min" => 1,
+                    "max" => 60,
+                    "error" => "Le lien doit faire entre 2 et 60 caractères",
+                    "required" => true,
+                    "label" => "Lien du titre"
+                ],
+                "is_active" => [
+                    "type" => "select",
+                    "options" => [
+                        [
+                            "value" => "1",
+                            "name" => "Oui",
+                            "selected" => false
+                        ],
+                        [
+                            "value" => "0",
+                            "name" => "Non",
+                            "selected" => false
+                        ]
+                    ],
+                    "error" => " ",
+                    "label" => "Lien actif ?"
                 ]
             ]
         ];

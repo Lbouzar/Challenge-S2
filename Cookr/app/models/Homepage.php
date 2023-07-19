@@ -10,6 +10,7 @@ class Homepage extends Sql
     protected String $slogan;
     protected String $firsttitle;
     protected String $secondtitle;
+    protected String $logo;
 
     public function getId(): int
     {
@@ -49,5 +50,15 @@ class Homepage extends Sql
     public function setSecondtitle(string $secondtitle): void 
     {
         $this->secondtitle = trim($secondtitle);
+    }
+
+    public function getLogo(): string 
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(string $logo): void
+    {
+        $this->logo = $logo;
     }
 }

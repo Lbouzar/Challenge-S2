@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Image;
 use App\Config\View;
 use App\Models\Article;
 use App\Forms\CreateArticle;
@@ -15,18 +16,20 @@ class Articles
     private $article;
     private $menu;
     private $articlespage;
+    private $image;
 
     public function __construct()
     {
         $this->article = Article::getInstance();
         $this->menu = Menu::getInstance();
         $this->articlespage = Articlespage::getInstance();
+        $this->image = Image::getInstance();
     }
     public function allArticles()
     {
         $view = View::getInstance("Articles/articles", "front");
         // récupérer la data dans la bdd
-        $view->assign("menu", $this->menu->selectWhere(null));
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         $view->assign("articlespage", $this->articlespage->selectWhere(null));
         $view->assign('articles', $this->article->selectWhere(["is_active" => 1]));
     }
@@ -54,6 +57,10 @@ class Articles
             $this->article->setSlug($form->getData("slug"));
             $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->article->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->article->save();
             $form->errors[] = "L'article a été créée";
         }
@@ -75,6 +82,10 @@ class Articles
             $this->article->setSlug($form->getData("slug"));
             $this->article->setContent($form->getData("content"));
             $this->article->setKeywords($form->getData("keywords"));
+            if (!empty($form->getData("0")) && $this->image->addImage($form->getData("0"))) {
+                $imagesInfo = $form->getData("0");
+                $this->article->setImage($imagesInfo["logo"]["name"]);
+            }
             $this->article->save();
             $form->errors[] = "Mise à jour de l'article";
             header("Refresh:$secondsWait");
@@ -87,10 +98,10 @@ class Articles
         if (count($this->article->selectWhere(["id" => $_GET["id"]])) > 0) {
             $this->article->setId($_GET["id"]);
             $this->article->delete();
-    
+
             header("Location: articles-bo");
         } else {
             header("Location: articles-bo");
-        }  
+        }
     }
 }

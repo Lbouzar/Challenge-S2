@@ -1,7 +1,10 @@
-<?php echo $menu[0]["content"] ?>
+<?php if (isset($menu) && !empty($menu))
+    $this->modal("navbar", $menu); ?>
+
+<?php if (isset($registerpage) && !empty($registerpage)) : ?>
 <main id="register" class="justify-center">
     <section>
-        <h1><?php echo $registerpage[0]["title"] ?></h1>
+        <h1 class="ml-0"><?php echo $registerpage[0]["title"] ?></h1>
         <?php if (isset($formErrors))
             $this->modal("errors", $formErrors); ?>
         <?php $this->modal("form", $form); ?>
@@ -10,3 +13,4 @@
         </div>
     </section>
 </main>
+<?php endif; ?>

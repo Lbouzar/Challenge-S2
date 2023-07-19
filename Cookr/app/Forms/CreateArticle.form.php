@@ -15,7 +15,7 @@ class CreateArticle extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "createArticleForm",
                 "class" => "",
                 "submit" => "Créer"
@@ -46,11 +46,13 @@ class CreateArticle extends Verificator
                     "options" => [
                         [
                             "value" => "1",
-                            "name" => "Oui"
+                            "name" => "Oui",
+                            "selected" => false
                         ],
                         [
                             "value" => "0",
-                            "name" => "Non"
+                            "name" => "Non",
+                            "selected" => false
                         ]
                     ],
                     "error" => " ",
@@ -65,6 +67,15 @@ class CreateArticle extends Verificator
                     "error" => "Veuillez mettre des mots-clés",
                     "required" => true,
                     "label" => "Mots-clés"
+                ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Image de couverture",
+                    "error" => "Veuillez saisir une image",
+                    "required" => false,
+                    "label" => "Image de couverture",
+                    "accept" => "image/*",
                 ],
                 "content" => [
                     "id" => "myTextarea",

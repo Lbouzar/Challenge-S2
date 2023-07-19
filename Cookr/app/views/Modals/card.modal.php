@@ -6,7 +6,7 @@
         <h2><?= $config["title"] ?></h2>
     </div>
     <div class="card-body">
-        <?= $config["presentation"] ?? "" ?>
+        <p><?= $config["presentation"] ?? "" ?></p>
     </div>
     <div class="card-footer">
         <span>Posté le : <?= $config["created_at"] ?></span>

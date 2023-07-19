@@ -3,10 +3,32 @@
   background-color: #FFF;
   height: 80px;
   width: 100%;
-  padding: 0 20px 0 48px;
+  padding: 0 48px 0 48px;
   box-shadow: 0px 12px 70px 0px rgba(252, 110, 60, 0.08);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 10;
+  .header-buttons {
+    a:first-child {
+      margin-right: 32px;
+    }
+    button {
+      text-align: center;
+      font-weight: 700;
+      border-radius: 8px; 
+      padding: 10px 20px;
+      border: 2px solid $orange;
+      transition: 0.3s;
+      color: $orange;
+      background-color: $white;
+      font-size: 16px;
+      &:hover{
+        background-color: $orange;
+        border: 2px solid $orange;
+        color: $white;
+      }
+    }
+  }
 }

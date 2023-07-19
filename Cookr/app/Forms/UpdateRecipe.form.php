@@ -15,7 +15,7 @@ class UpdateRecipe extends Verificator
             "config" => [
                 "method" => $this->method,
                 "action" => "",
-                "enctype" => "",
+                "enctype" => "multipart/form-data",
                 "id" => "",
                 "class" => "",
                 "submit" => "Modifier"
@@ -48,11 +48,13 @@ class UpdateRecipe extends Verificator
                     "options" => [
                         [
                             "value" => "0",
-                            "name" => "Non"
+                            "name" => "Non",
+                            "selected" => ($data[0]["is_main"] == 0) ? true : false
                         ],
                         [
                             "value" => "1",
-                            "name" => "Oui"
+                            "name" => "Oui",
+                            "selected" => ($data[0]["is_main"] == 1) ? true : false
                         ]
                     ],
                     "error" => "Status incorrecte",
@@ -63,11 +65,13 @@ class UpdateRecipe extends Verificator
                     "options" => [
                         [
                             "value" => "1",
-                            "name" => "Oui"
+                            "name" => "Oui",
+                            "selected" => ($data[0]["is_active"] == 1) ? true : false
                         ],
                         [
                             "value" => "0",
-                            "name" => "Non"
+                            "name" => "Non",
+                            "selected" => ($data[0]["is_active"] == 0) ? true : false
                         ]
                     ],
                     "error" => " ",
@@ -134,6 +138,15 @@ class UpdateRecipe extends Verificator
                     "label" => "Description de la recette",
                     "value" => $data[0]["description"]
                 ],
+                "logo" => [
+                    "type" => "file",
+                    "class" => "input-regular",
+                    "placeholder" => "Votre logo",
+                    "error" => "Veuillez saisir une image",
+                    "required" => false,
+                    "label" => "Image de couverture",
+                    "accept" => "image/*"
+                ]
             ]
         ];
     }

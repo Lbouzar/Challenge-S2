@@ -10,7 +10,6 @@ class Verificator
 
     private function __construct()
     {
-        
     }
 
     protected function __clone()
@@ -21,7 +20,7 @@ class Verificator
     {
         throw new \Exception("Cannot unserialize a singleton.");
     }
-    
+
     public static function getInstance()
     {
         $subClass = static::class;
@@ -34,10 +33,13 @@ class Verificator
     public function isSubmit(): bool
     {
         $this->data = ($this->method == "POST") ? $_POST : $_GET;
+        if (!empty($_FILES)) {
+            array_push($this->data, $_FILES);
+        }
         return isset($this->data);
     }
 
-    public function getData($key): string
+    public function getData($key): string|array
     {
         return $this->data[$key];
     }
@@ -48,9 +50,9 @@ class Verificator
             $this->errors[] = " ";
         }
         foreach ($this->config["inputs"] as $name => $configInput) {
-            if (!isset($this->data[$name])) {
+            if (!isset($this->data[$name]) && $configInput["type"] != "file") {
                 $this->errors[] = " ";
-            } elseif (isset($configInput["required"]) && self::isEmpty($this->data[$name])) {
+            } elseif (isset($configInput["required"]) && ($configInput["required"] == true) && self::isEmpty($this->data[$name])) {
                 $this->errors[] = "Tous les champs sont obligatoires";
             } elseif (isset($configInput["min"]) && !self::isMinLength($this->data[$name], $configInput["min"])) {
                 $this->errors[] = $configInput["error"];

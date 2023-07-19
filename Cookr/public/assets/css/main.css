@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,7 +7,7 @@
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif !important;
   font-size: 16px;
   overflow-x: hidden;
 }
@@ -73,6 +74,29 @@ input::placeholder {
 
 input:focus {
   outline-color: #443630;
+}
+
+.error {
+  color: red;
+}
+
+select {
+  border-radius: 4px;
+  border: 2px solid #97857E;
+  height: 48px;
+  padding: 0 10px;
+}
+select:focus {
+  border-color: #FC6E3C;
+}
+
+.delete-button {
+  background-color: #dc3545 !important;
+}
+.delete-button:hover {
+  border-color: #dc3545 !important;
+  background-color: #FFFFFF !important;
+  color: #dc3545 !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -654,12 +678,32 @@ header #mobile-nav ul li:last-child {
   background-color: #FFF;
   height: 80px;
   width: 100%;
-  padding: 0 20px 0 48px;
+  padding: 0 48px 0 48px;
   box-shadow: 0px 12px 70px 0px rgba(252, 110, 60, 0.08);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 10;
+}
+.headerBO .header-buttons a:first-child {
+  margin-right: 32px;
+}
+.headerBO .header-buttons button {
+  text-align: center;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: 2px solid #FC6E3C;
+  transition: 0.3s;
+  color: #FC6E3C;
+  background-color: #FFFFFF;
+  font-size: 16px;
+}
+.headerBO .header-buttons button:hover {
+  background-color: #FC6E3C;
+  border: 2px solid #FC6E3C;
+  color: #FFFFFF;
 }
 
 .cta-button {
@@ -717,8 +761,9 @@ header #mobile-nav ul li:last-child {
 }
 .card-image img {
   width: 100%;
-  min-height: 189px;
+  height: 189px;
   transition: 0.3s;
+  object-fit: cover;
 }
 .card-image:hover img {
   transform: scale(1.1);
@@ -752,17 +797,18 @@ header #mobile-nav ul li:last-child {
   padding-left: 12px;
 }
 .card-body p {
-  font-weight: 400;
-  font-size: 14px;
+  color: #000000 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-footer {
+  margin: 20px 0 12px 0;
   padding-left: 12px;
 }
-.card-footer p {
-  margin: 20px 0 12px 0;
+.card-footer span {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
 }
 
 .main-title {
@@ -923,8 +969,8 @@ footer nav h3 {
 }
 @font-face {
   font-family: "fontello";
-  src: url("/../fonts/fontello.eot ");
-  src: url("../../fonts/fontello.eot") format("embedded-opentype"), url("../../fonts/fontello.woff2") format("woff2"), url("../../fonts/fontello.woff") format("woff"), url("../../fonts/fontello.ttf") format("truetype"), url("../../fonts/fontello.svg") format("svg");
+  src: url("/public/assets/fonts/fontello.eot");
+  src: url("/public/assets/fonts/fontello.eot") format("embedded-opentype"), url("/public/assets/fonts/fontello.woff2") format("woff2"), url("/public/assets/fonts/fontello.woff") format("woff"), url("/public/assets/fonts/fontello.ttf") format("truetype"), url("/public/assets/fonts/fontello.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -1297,13 +1343,22 @@ footer nav h3 {
 .sidebarBO {
   background-color: #FAFAFA;
   position: fixed;
-  width: 200px;
+  width: 220px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
+  padding-top: 36px;
   top: 80px;
   z-index: 100;
+}
+.sidebarBO a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
+.sidebarBO a .icon-burger_menu {
+  color: #FC6E3C;
 }
 
 .sidebarBO > div {
@@ -1329,14 +1384,75 @@ footer nav h3 {
 }
 
 .sidebarBO span {
-  margin-left: 20px;
+  margin-left: 16px;
+}
+
+.menu-link {
+  border: 2px solid #FC6E3C;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 80px;
+  margin-top: 20px;
+}
+.menu-link span span {
+  font-weight: 700;
+}
+
+.user-card {
+  border: 2px solid #FC6E3C;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.user-card .infos {
+  display: flex;
+  flex-direction: column;
+}
+.user-card .infos .email, .user-card .infos .role {
+  margin-top: 8px;
+}
+.user-card .infos .name, .user-card .infos .role span {
+  font-weight: 700;
+  font-size: 18px;
+}
+.user-card .infos:last-child {
+  align-items: flex-end;
 }
 
 .layout-bo {
-  padding: 32px 40px;
-  width: 100%;
+  padding: 24px 40px 32px 40px;
+  width: calc(100% - 220px);
   margin-top: 80px;
-  margin-left: 200px;
+  margin-left: 220px;
+}
+.layout-bo .title-bo {
+  font-size: 48px;
+  font-weight: 700;
+}
+.layout-bo .cta-button {
+  margin-top: 20px;
+}
+.layout-bo input[type=file] {
+  height: 300px;
+  padding-top: 10px;
+  z-index: 2;
+}
+.layout-bo #imgPreview[src="#"] {
+  display: none;
+}
+.layout-bo #imgPreview {
+  position: absolute;
+  top: 26px;
+  width: calc(100% - 2px);
+  height: calc(100% - 28px);
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 4px;
 }
 
 #slogan-logo {
@@ -1415,7 +1531,6 @@ footer nav h3 {
 @media screen and (min-width: 768px) {
   .articles-grid {
     grid-template-columns: 1fr 1fr;
-    column-gap: 50px;
     align-self: center;
   }
   .more-articles {
@@ -1453,7 +1568,11 @@ footer nav h3 {
     align-items: center;
   }
   .articles-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-self: auto;
+    padding: 0 64px;
   }
   .more-articles {
     justify-self: end;
@@ -1489,6 +1608,7 @@ footer nav h3 {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 0 64px;
   }
 }
 #article-main {
@@ -1677,8 +1797,15 @@ footer nav h3 {
   margin-top: 40px;
   padding: 0 40px;
 }
+#login section {
+  max-width: 400px;
+}
 #login h1 {
   font-size: 30px;
+}
+#login span {
+  display: block;
+  color: red;
 }
 #login form {
   margin-top: 24px;
@@ -1742,6 +1869,7 @@ footer nav h3 {
   }
   #login section:nth-of-type(1) {
     margin-right: 113px;
+    margin-left: 113px;
   }
   #login .register {
     font-size: 25px;
@@ -1753,6 +1881,13 @@ footer nav h3 {
 }
 #register h1 {
   font-size: 30px;
+}
+#register span {
+  display: block;
+  color: red;
+}
+#register section {
+  max-width: 400px;
 }
 #register form {
   margin-top: 24px;
@@ -1813,10 +1948,10 @@ footer nav h3 {
 }
 @media screen and (min-width: 1280px) {
   #register {
-    justify-content: space-between;
+    justify-content: start;
   }
-  #register form fieldset {
-    margin-top: 0;
+  #register section {
+    margin: 0 auto;
   }
   #register form #form-display {
     display: grid;
@@ -1844,6 +1979,24 @@ footer nav h3 {
   #contact h1 {
     text-align: center;
   }
+}
+#contact span {
+  display: block;
+  color: red;
+  margin-top: 12px;
+  margin-bottom: -24px;
+}
+#contact #message-length {
+  display: inline;
+  color: black;
+  margin-top: initial;
+  margin-bottom: initial;
+}
+#contact #message-length span {
+  display: inline;
+  color: black;
+  margin-top: initial;
+  margin-bottom: initial;
 }
 #contact p {
   margin-top: 24px;
@@ -1895,7 +2048,7 @@ footer nav h3 {
   }
 }
 
-h1 {
+.profile-title {
   margin: 32px auto 0 auto;
   width: 90%;
 }
@@ -1917,6 +2070,7 @@ h1 {
   justify-content: center;
   align-items: center;
   width: 33%;
+  min-width: 240px;
 }
 .profile-container .first-section .img-container {
   width: 100px;
@@ -1988,8 +2142,14 @@ h1 {
   margin-right: 12px;
 }
 .profile-container .second-section {
-  width: 66%;
   padding: 32px 24px 32px 64px;
+}
+.profile-container .second-section span {
+  display: block;
+  color: red;
+}
+.profile-container .second-section fieldset {
+  margin-bottom: 12px;
 }
 .profile-container .second-section .save {
   margin-left: auto;
@@ -2003,6 +2163,17 @@ h1 {
 }
 .profile-container .second-section .grid-infos-user input {
   width: 100% !important;
+}
+.profile-container .third-section {
+  padding: 32px 24px 32px 64px;
+}
+.profile-container .third-section span {
+  display: block;
+  color: red;
+}
+.profile-container .third-section fieldset {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .delete-account {
@@ -2019,6 +2190,7 @@ h1 {
   margin: 32px 0;
   text-align: center;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .not-found > div span {
@@ -2037,6 +2209,10 @@ h1 {
 }
 .dashboard .recipes-list {
   width: 100%;
+  padding: 0 !important;
+}
+.dashboard .recipes-grid {
+  padding: 0 !important;
 }
 .dashboard button {
   margin-left: auto;
@@ -2105,7 +2281,9 @@ h1 {
   height: 100%;
   z-index: 2;
 }
-.recipes-bo .img-previews #imgPreview1, .recipes-bo .img-previews #imgPreview2, .recipes-bo .img-previews #imgPreview3 {
+.recipes-bo .img-previews #imgPreview1,
+.recipes-bo .img-previews #imgPreview2,
+.recipes-bo .img-previews #imgPreview3 {
   position: absolute;
   top: 28px;
   width: calc(100% - 2px);
@@ -2155,6 +2333,11 @@ h1 {
   font-weight: 600;
   margin-bottom: 8px;
 }
+.recipes-bo .list-edit-recipes a .edit-recipe .recipe-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .recipes-bo .list-edit-recipes a .edit-recipe .recipe-infos {
   width: 15%;
   display: flex;
@@ -2190,26 +2373,11 @@ h1 {
 .recipes-bo .input-regular {
   width: 100% !important;
 }
-.recipes-bo .img-previews fieldset {
-  width: 30%;
-  height: 300px;
-  position: relative;
+.recipes-bo input[type=file] {
+  width: 50% !important;
 }
-.recipes-bo .img-previews input[type=file] {
-  position: relative;
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.recipes-bo .img-previews #imgPreview1, .recipes-bo .img-previews #imgPreview2, .recipes-bo .img-previews #imgPreview3 {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
+.recipes-bo #imgPreview {
+  width: 50% !important;
 }
 .recipes-bo .manage-buttons {
   margin-top: 32px;
@@ -2243,26 +2411,6 @@ h1 {
 }
 .articles-bo .input-regular {
   width: 100% !important;
-}
-.articles-bo .thumbnail {
-  width: 100%;
-  height: calc(100% - 20px);
-  position: relative;
-}
-.articles-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-.articles-bo #imgThumbnail {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
 }
 .articles-bo button {
   margin-top: 32px;
@@ -2305,6 +2453,11 @@ h1 {
   font-weight: 600;
   margin-bottom: 8px;
 }
+.articles-bo .list-edit-articles a .edit-article .article-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .articles-bo .list-edit-articles a .edit-article .article-infos {
   width: 15%;
   display: flex;
@@ -2337,25 +2490,11 @@ h1 {
 .articles-bo .input-regular {
   width: 100% !important;
 }
-.articles-bo .thumbnail {
-  width: 100%;
-  height: calc(100% - 20px);
-  position: relative;
-}
 .articles-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
+  width: 50% !important;
 }
-.articles-bo #imgThumbnail {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
+.articles-bo #imgPreview {
+  width: 50% !important;
 }
 .articles-bo .manage-buttons {
   margin-top: 32px;
@@ -2439,25 +2578,6 @@ h1 {
 .homepage-bo .input-regular {
   width: 100% !important;
 }
-.homepage-bo .img-logo {
-  position: relative;
-  height: 300px;
-}
-.homepage-bo input[type=file] {
-  border: 2px solid #97857E;
-  width: 50%;
-  height: 100%;
-  z-index: 2;
-}
-.homepage-bo #imgLogo {
-  position: absolute;
-  top: 28px;
-  width: calc(100% - 2px);
-  height: calc(100% - 30px);
-  object-fit: cover;
-  overflow: hidden;
-  z-index: 1;
-}
 
 .contact-bo h2 {
   font-weight: 700;
@@ -2476,6 +2596,45 @@ h1 {
 .contact-bo button {
   margin-top: 32px;
   margin-left: auto;
+}
+
+.images-view .images-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.images-view .images-grid .card-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #FC6E3C;
+  border-radius: 8px;
+}
+.images-view .images-grid .card-img .card-img-content {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.images-view .images-grid .card-img .card-img-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.images-view .images-grid .card-img .card-img-name {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.images-view .images-grid .card-img .card-img-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.settings select {
+  width: 50%;
 }
 
 /*# sourceMappingURL=main.css.map */

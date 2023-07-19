@@ -17,7 +17,7 @@ class Recipe extends Sql
     protected Int $price;
     protected String $ingredients;
     protected String $slug;
-    protected String $image = "gateau_citron.png";
+    protected String $image;
 
     public function getId(): string
     {

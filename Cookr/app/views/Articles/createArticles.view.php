@@ -6,7 +6,7 @@
 </script>
 
 <div class="layout-bo recipes-bo">
-    <h2>Créer un article</h2>
+    <h2 class="title-bo">Créer un article</h2>
     <?php if (isset($formErrors))
         $this->modal("errors", $formErrors); ?>
     <?php $this->modal("form", $form); ?>
