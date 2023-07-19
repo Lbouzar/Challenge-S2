@@ -10,8 +10,8 @@
 <form method="<?= $config["config"]["method"] ?>" action="<?= $config["config"]["action"] ?>" enctype="<?= $config["config"]["enctype"] ?>" id="<?= $config["config"]["id"] ?>" class="<?= $config["config"]["class"] ?>">
     <?php foreach ($config["inputs"] as $name => $input) : ?>
         <?php if ($input["type"] === "textarea") : ?>
-            <fieldset class="flex-column">
-            <label for="<?= $name ?>"><?= $input["label"] ?></label>
+            <fieldset class="flex-column mt-4">
+            <label class="mb-1" for="<?= $name ?>"><?= $input["label"] ?></label>
             <textarea name="<?= $name ?>" 
             id="<?= $input["id"]?? ""?>"
             class="<?= $input["class"]?>"
@@ -27,8 +27,8 @@
             </span>
             </fieldset>
         <?php elseif ($input["type"] === "select") :?>
-            <fieldset class="flex-column">
-            <label for="<?= $name ?>"><?= $input["label"] ?></label> 
+            <fieldset class="flex-column mt-4">
+            <label class="mb-1" for="<?= $name ?>"><?= $input["label"] ?></label> 
             <select name="<?= $name;?>" id="<?= $input["id"]?? ""?>">
                 <?php foreach ($input["options"] as $option):?>
                     <option value="<?= $option["value"];?>" <?= $option["selected"] ? "selected" : "" ?>>
@@ -38,8 +38,8 @@
             </select>
             </fieldset>
         <?php else : ?>
-            <fieldset class="flex-column" style="position: relative;">
-            <label for="<?= $name ?>"><?= $input["label"] ?></label>
+            <fieldset class="flex-column mt-4" style="position: relative;">
+            <label class="mb-1" for="<?= $name ?>"><?= $input["label"] ?></label>
             <input name="<?= $name ?>"
             id="<?= $input["id"]?? ""?>"  
             type="<?= $input["type"] ?>"
@@ -57,5 +57,5 @@
             </fieldset>
         <?php endif; ?>
     <?php endforeach; ?>
-    <button type="submit" class="cta-button"><?= $config["config"]["submit"] ?></button>
+    <button type="submit" class="cta-button submitSettings"><?= $config["config"]["submit"] ?></button>
 </form>

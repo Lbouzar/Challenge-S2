@@ -52,6 +52,11 @@
             font-weight: 600;
             margin-bottom: 8px;
           }
+          p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
         .article-infos {
           width: 15%;

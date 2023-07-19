@@ -2,15 +2,22 @@
   <h1>Dashboard</h1>
   <h2>Les dernières recettes</h2>
   <div class="grid index-card recipes-grid mt-6 justify-items-between recipes-list">
-    <?php foreach ($recipes as $recipe) : ?>
+    <?php
+    usort($recipes, function ($a, $b) {
+      $dateA = DateTime::createFromFormat('y-m-d', $a['created_at']);
+      $dateB = DateTime::createFromFormat('y-m-d', $b['created_at']);
+      return $dateB <=> $dateA;
+    });
+    $lastRecipes = array_slice($recipes, 0, 3);
+    foreach ($lastRecipes as $recipe) : ?>
       <a href="">
-      <?php $this->modal("card", $recipe); ?>
+        <?php $this->modal("card", $recipe); ?>
       </a>
     <?php endforeach ?>
   </div>
   <button class="cta-button" onclick="window.location.href ='/recipes-bo';">Gérer les recettes</button>
   <h2>Les derniers articles</h2>
-  <div class="grid index-card articles-grid align-self-center">
+  <div class="grid index-card recipes-grid">
     <?php foreach ($articles as $article) : ?>
       <a href="">
       <?php $this->modal("card", $article); ?>
