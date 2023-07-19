@@ -38,7 +38,7 @@
             </select>
             </fieldset>
         <?php else : ?>
-            <fieldset class="flex-column mt-4">
+            <fieldset class="flex-column mt-4" style="position: relative;">
             <label class="mb-1" for="<?= $name ?>"><?= $input["label"] ?></label>
             <input name="<?= $name ?>"
             id="<?= $input["id"]?? ""?>"  

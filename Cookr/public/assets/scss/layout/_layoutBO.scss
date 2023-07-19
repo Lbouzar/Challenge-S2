@@ -10,4 +10,22 @@
   .cta-button {
     margin-top: 20px;
   }
+  input[type="file"] {
+    height: 300px;
+    padding-top: 10px;
+    z-index: 2;
+  }
+  #imgPreview[src="#"] {
+    display: none;
+  }
+  #imgPreview {
+    position: absolute;
+    top: 26px;
+    width: calc(100% - 2px);
+    height: calc(100% - 28px);
+    object-fit: cover;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 4px;
+  }
 }
