@@ -50,9 +50,12 @@
   <div class="layer">
     <span>Commentaires</span>
   </div>
-  <?php if (isset($formErrors))
-    $this->modal("errors", $formErrors); ?>
-  <?php $this->modal("form", $form); ?>
+  <?php if (isset($form)):?>
+    <?php if (isset($formErrors)): ?>
+      $this->modal("errors", $formErrors);
+    <?php endif; ?>
+    <?php $this->modal("form", $form); ?>
+  <?php endif ?>
   <div class="comment-list">
     <?php foreach ($comments as $comment) :
       $this->modal("comment", $comment); ?>

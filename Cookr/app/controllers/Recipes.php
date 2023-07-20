@@ -47,17 +47,19 @@ class Recipes
         $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
         $view->assign("recipespage", $this->recipespage->selectWhere(null));
         $view->assign("recipe", $this->recipe->selectWhere(["id" => $_GET["id"]]));
-        $view->assign('form', $form->getConfig());
+        if ($this->session->__isset("id") && $this->session->__isset("token") && $this->session->__isset("role")) {
+            $view->assign('form', $form->getConfig());
+            if ($form->isSubmit() && $form->isValid()) {
+                $this->comments->setCreator($this->session->id); 
+                $this->comments->setRecipe($_GET["id"]);
+                $this->comments->setValid(0);
+                $this->comments->setDescription($form->getData("message"));
+                $this->comments->save();
+                $form->errors[] = "Le commentaire va être vérifié";
+            }
+        }
         //route dynamique
         $view->assign("comments", $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]));
-        if ($form->isSubmit() && $form->isValid()) {
-            $this->comments->setCreator($this->session->id); 
-            $this->comments->setRecipe($_GET["id"]);
-            $this->comments->setValid(0);
-            $this->comments->setDescription($form->getData("message"));
-            $this->comments->save();
-            $form->errors[] = "Le commentaire va être vérifié";
-        }
     }
 
     public function allRecipesBO()
