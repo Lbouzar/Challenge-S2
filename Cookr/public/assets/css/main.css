@@ -657,7 +657,7 @@ header #mobile-nav ul li:last-child {
   }
   #desktop-nav {
     display: block !important;
-    width: 75%;
+    width: 100%;
   }
   #desktop-nav ul {
     display: flex;
@@ -780,6 +780,9 @@ header #mobile-nav ul li:last-child {
   margin-top: 4px;
   font-weight: 600;
   font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .recipe-card-title {
@@ -794,6 +797,7 @@ header #mobile-nav ul li:last-child {
 }
 
 .card-body {
+  margin-top: 8px;
   padding-left: 12px;
 }
 .card-body p {
@@ -801,6 +805,7 @@ header #mobile-nav ul li:last-child {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .card-footer {
@@ -845,7 +850,7 @@ header #mobile-nav ul li:last-child {
 
 footer {
   background-color: #FAFAFA;
-  padding: 40px 20px;
+  padding: 40px;
   margin-top: 68px;
 }
 footer h3 {
@@ -1244,10 +1249,6 @@ footer nav h3 {
   margin-bottom: 0;
 }
 
-.comment-date, .comment-pseudo {
-  font-size: 14px;
-}
-
 #comment-content {
   width: 100%;
 }
@@ -1458,6 +1459,12 @@ footer nav h3 {
 #slogan-logo {
   display: none;
 }
+#slogan-logo #home-logo {
+  width: 50%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 32px;
+}
 
 .grid {
   margin: 40px 0;
@@ -1611,82 +1618,50 @@ footer nav h3 {
     padding: 0 64px;
   }
 }
-#article-main {
-  margin-top: 40px;
+.article-view {
+  margin-top: 48px;
 }
-#article-main #article-content h1 {
-  font-size: 24px;
-  font-weight: bold;
+.article-view h1 {
+  font-size: 40px;
 }
-#article-main #article-content .article-info {
+.article-view section {
+  margin-top: 64px;
   display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 20px 0;
+  justify-content: space-between;
 }
-#article-main #article-content .article-info p, #article-main #article-content .article-info span {
-  margin: 0 10px 0 0;
+.article-view section .first-section {
+  margin-top: -4px;
+  width: 20%;
 }
-#article-main #article-content .article-info p:last-child {
-  margin-right: 0;
-}
-#article-main #article-content .article-info .tags {
-  display: none;
-}
-#article-main #article-content h2 {
-  font-size: 20px;
+.article-view section .first-section .publication-date span {
   font-weight: 600;
 }
-#article-main #article-content h2, #article-main #article-content img, #article-main #article-content p {
-  margin-bottom: 32px;
+.article-view section .first-section .keywords-title {
+  display: block;
+  margin-top: 16px;
 }
-#article-main #article-content .section {
-  width: 100%;
-  position: relative;
+.article-view section .first-section .keyword-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  text-transform: capitalize;
 }
-#article-main #article-content .section img {
+.article-view section .first-section .keyword-content span {
+  font-weight: 600;
+}
+.article-view section .second-section {
+  width: 70%;
+}
+.article-view section .second-section img {
   width: 100%;
+  height: 400px;
   object-fit: cover;
 }
-@media screen and (min-width: 1280px) {
-  #article-main #article-content h1 {
-    position: relative;
-    margin-left: 34px;
-  }
-  #article-main #article-content h1::before {
-    display: inline-flex;
-    width: 28px;
-    height: 6px;
-    margin-right: 4px;
-    background-color: #FC6E3C;
-    position: absolute;
-    top: 50%;
-    transform: translate(-34px, -50%);
-    content: "";
-  }
-  #article-main #article-content .article-design {
-    display: flex;
-    width: 100%;
-    margin-top: 60px;
-  }
-  #article-main #article-content .article-info {
-    flex-direction: column;
-    align-items: start;
-    width: 25%;
-    margin-top: 0;
-  }
-  #article-main #article-content .article-info span {
-    display: none;
-  }
-  #article-main #article-content .article-info .tags {
-    margin-top: 24px;
-    display: block;
-    font-weight: 500;
-    color: black;
-  }
-  #article-main #article-content .article-sections {
-    width: 75%;
-  }
+.article-view section .second-section h1, .article-view section .second-section h2, .article-view section .second-section h3, .article-view section .second-section h4, .article-view section .second-section h5, .article-view section .second-section h6 {
+  margin: 20px 0;
+}
+.article-view section .second-section p {
+  margin: 20px 0;
 }
 
 .display-card .card:nth-child(n+7) {
@@ -1695,6 +1670,13 @@ footer nav h3 {
 
 #link-card {
   color: initial;
+}
+
+.articles-view {
+  margin-top: 48px;
+}
+.articles-view h1 {
+  font-size: 32px;
 }
 
 @media screen and (min-width: 1280px) {
@@ -1781,6 +1763,78 @@ footer nav h3 {
   font-weight: 600;
   font-size: 18px;
 }
+.recipe-view form {
+  margin-top: 24px;
+}
+.recipe-view form .cta-button {
+  margin: 16px 0 0 auto;
+}
+.recipe-view .comment-list {
+  margin-top: 32px;
+}
+.recipe-view .comment-list .comment-wrapper {
+  margin-top: 16px;
+  background-color: #FAFAFA;
+  padding: 16px 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos {
+  display: flex;
+  justify-content: space-between;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos .comment-author {
+  font-weight: 600;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos .comment-date span {
+  font-weight: 600;
+}
+.recipe-view .comment-list .comment-wrapper .comment-content {
+  margin-top: 16px;
+}
+
+.recipes-view-first-section {
+  margin-top: 48px;
+  width: 100%;
+}
+.recipes-view-first-section .sections-title {
+  font-size: 32px;
+}
+.recipes-view-first-section .main-recipe-wrapper {
+  margin: 32px auto 0 auto;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.recipes-view-first-section .main-recipe-wrapper a {
+  width: 45%;
+}
+.recipes-view-first-section .main-recipe-wrapper a article {
+  width: 100%;
+}
+.recipes-view-first-section .main-recipe-wrapper a article img {
+  height: 220px;
+}
+.recipes-view-first-section .main-recipe-wrapper .main-recipe-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 45%;
+}
+.recipes-view-first-section .main-recipe-wrapper .main-recipe-infos button {
+  max-width: unset !important;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.recipes-view-second-section {
+  margin-top: 48px;
+}
+.recipes-view-second-section .sections-title {
+  font-size: 32px;
+}
 
 @media screen and (min-width: 768px) {
   #recettes-display-card {
@@ -1797,11 +1851,12 @@ footer nav h3 {
   margin-top: 40px;
   padding: 0 40px;
 }
-#login section {
-  max-width: 400px;
-}
 #login h1 {
   font-size: 30px;
+  text-align: center;
+}
+#login section {
+  max-width: 400px;
 }
 #login span {
   display: block;
@@ -1868,8 +1923,8 @@ footer nav h3 {
     justify-content: space-between;
   }
   #login section:nth-of-type(1) {
-    margin-right: 113px;
-    margin-left: 113px;
+    margin-right: auto;
+    margin-left: auto;
   }
   #login .register {
     font-size: 25px;
@@ -1881,6 +1936,7 @@ footer nav h3 {
 }
 #register h1 {
   font-size: 30px;
+  text-align: center;
 }
 #register span {
   display: block;
@@ -1973,7 +2029,7 @@ footer nav h3 {
   }
 }
 #contact h1 {
-  font-size: 24px;
+  font-size: 32px;
 }
 @media screen and (min-width: 768px) {
   #contact h1 {
@@ -2027,7 +2083,6 @@ footer nav h3 {
   margin-right: 4px;
 }
 #contact form label {
-  margin-top: 24px;
   font-weight: 500;
 }
 #contact form input[type=email] {
@@ -2049,8 +2104,9 @@ footer nav h3 {
 }
 
 .profile-title {
-  margin: 32px auto 0 auto;
+  margin: 48px auto 0 auto;
   width: 90%;
+  font-size: 32px;
 }
 
 .profile-container {
@@ -2071,6 +2127,18 @@ footer nav h3 {
   align-items: center;
   width: 33%;
   min-width: 240px;
+}
+.profile-container .first-section .user-wrapper {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-container .first-section .user-wrapper svg {
+  transform: scale(1.5);
 }
 .profile-container .first-section .img-container {
   width: 100px;
@@ -2315,7 +2383,7 @@ footer nav h3 {
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .img-container {
   width: 15%;
-  height: 100%;
+  height: 75px;
   overflow: hidden;
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .img-container img {
@@ -2435,7 +2503,7 @@ footer nav h3 {
 }
 .articles-bo .list-edit-articles a .edit-article .img-container {
   width: 15%;
-  height: 100%;
+  height: 75px;
   overflow: hidden;
 }
 .articles-bo .list-edit-articles a .edit-article .img-container img {

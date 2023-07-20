@@ -130,6 +130,7 @@ class Dashboard
         $secondsWait = 2;
         if ($form->isSubmit() && $form->isValid()) {
             $this->recipespage->setId(1);
+            $this->recipespage->setMainRecipeTitle($form->getData("main_recipe_title"));
             $this->recipespage->setTitle($form->getData("title"));
             $this->recipespage->save();
             $form->errors[] = "Mise à jour de la page";
@@ -147,6 +148,7 @@ class Dashboard
             $view = View::getInstance("Recipes/createRecipespage", "back");
             $view->assign("form", $form->getConfig());
             if ($form->isSubmit() && $form->isValid()) {
+                $this->recipespage->setMainRecipeTitle($form->getData("main_recipe_title"));
                 $this->recipespage->setTitle($form->getData("title"));
                 $this->recipespage->save();
                 header("Location: recipespage");

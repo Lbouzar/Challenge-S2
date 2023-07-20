@@ -1,6 +1,7 @@
 .profile-title {
-  margin: 32px auto 0 auto;
+  margin: 48px auto 0 auto;
   width: 90%;
+  font-size: 32px;
 }
 
 .profile-container {
@@ -20,6 +21,18 @@
     align-items: center;
     width: 33%;
     min-width: 240px;
+    .user-wrapper {
+      width: 100px;
+      height: 100px;
+      border: 1px solid $white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        transform: scale(1.5);
+      }
+    }
     .img-container {
       width: 100px;
       height: 100px;

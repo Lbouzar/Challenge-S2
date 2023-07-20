@@ -3,9 +3,14 @@
 
 <?php if (isset($profilpage) && !empty($profilpage)) : ?>
   <main>
-    <h1 class="profile-title"><?php echo $profilpage[0]["firsttitle"] ?></h1>
+    <h1 class="main-title profile-title"><?php echo $profilpage[0]["firsttitle"] ?></h1>
     <div class="profile-container">
       <div class="first-section">
+        <div class="user-wrapper">
+          <svg width="21" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.5 12a6 6 0 1 0 0-12 6 6 0 1 0 0 12Zm4.2 1.5h-.783a8.169 8.169 0 0 1-6.834 0H6.3A6.302 6.302 0 0 0 0 19.8v1.95A2.25 2.25 0 0 0 2.25 24h16.5A2.25 2.25 0 0 0 21 21.75V19.8c0-3.478-2.822-6.3-6.3-6.3Z" fill="#FFF" />
+          </svg>
+        </div>
         <span class="name"><?= $userInfos ?></span>
         <div class="separator"></div>
         <button class="log-out" onclick="window.location.href ='/logout';">

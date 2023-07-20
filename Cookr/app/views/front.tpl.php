@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                 </article>
-                <h3><a href="#">Contactez-nous</a></h3>
+                <h3><a href="/contact">Contactez-nous</a></h3>
                 <article class="flex-column">
                     <h3>Newsletter</h3>
                     <div class="newsletter-input justify-start">

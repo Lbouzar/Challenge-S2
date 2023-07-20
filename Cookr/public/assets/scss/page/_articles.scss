@@ -8,6 +8,13 @@
   color: initial;
 }
 
+.articles-view {
+  margin-top: 48px;
+  h1 {
+    font-size: 32px;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .display-card {
     .card:nth-child(n + 7) {

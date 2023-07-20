@@ -6,6 +6,7 @@
         <span><?= $config["title"] ?></span>
         <p>
             <?= $config["presentation"]?? "" ?>
+            <?= $config["keywords"]?? "" ?>
         </p>
     </div>
     <div class="recipe-infos article-infos">

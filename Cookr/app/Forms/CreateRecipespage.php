@@ -21,15 +21,25 @@ class CreateRecipespage extends Verificator
                 "submit" => "Créer"
             ],
             "inputs" => [
-                "title" => [
+                "main_recipe_title" => [
                     "type" => "text",
                     "class" => "input-regular",
-                    "placeholder" => "Titre de la page",
+                    "placeholder" => "Titre de la recette du jour",
                     "min" => 2,
                     "max" => 60,
                     "error" => "Le titre doit faire entre 2 et 60 caractères",
                     "required" => true,
-                    "label" => "Titre de la page"
+                    "label" => "Titre de la recette du jour"
+                ],
+                "title" => [
+                    "type" => "text",
+                    "class" => "input-regular",
+                    "placeholder" => "Titre de la liste des recettes",
+                    "min" => 2,
+                    "max" => 60,
+                    "error" => "Le titre doit faire entre 2 et 60 caractères",
+                    "required" => true,
+                    "label" => "Titre de la liste des recettes"
                 ]
             ]
         ];

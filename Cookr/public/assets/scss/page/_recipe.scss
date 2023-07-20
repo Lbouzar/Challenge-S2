@@ -74,4 +74,34 @@
       font-size: 18px;
     }
   }
+  form {
+    margin-top: 24px;
+    .cta-button {
+      margin: 16px 0 0 auto;
+    }
+  }
+  .comment-list {
+    margin-top: 32px;
+    .comment-wrapper {
+      margin-top: 16px;
+      background-color: $lightgrey;
+      padding: 16px 32px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      .comment-infos {
+        display: flex;
+        justify-content: space-between;
+        .comment-author {
+          font-weight: 600;
+        }
+        .comment-date span {
+          font-weight: 600;
+        }
+      }
+      .comment-content {
+        margin-top: 16px;
+      }
+    }
+  }
 }

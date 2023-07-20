@@ -1,7 +1,7 @@
-<div class="comment">
-    <div>
-        <span><?= $config["firstname"] ?></span>
-        <span><?= $config["created_at"] ?></span>
+<div class="comment comment-wrapper">
+    <div class="comment-infos">
+        <span class="comment-author"><?= $config["firstname"] ?></span>
+        <span class="comment-date" style="font-weight: 400;">Le : <span><?= $config["created_at"] ?></span></span>
     </div>
-    <p><?= $config["comment"] ?></p>
+    <p class="comment-content"><?= $config["comment"] ?></p>
 </div>

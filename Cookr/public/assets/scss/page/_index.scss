@@ -1,5 +1,11 @@
 #slogan-logo {
-    display: none;
+  display: none;
+  #home-logo {
+    width: 50%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 32px;
+  }
 }
 
 .grid {

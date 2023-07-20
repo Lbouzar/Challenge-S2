@@ -36,6 +36,9 @@ class Articles
 
     public function article()
     {
+        $view = View::getInstance("Articles/article", "front");
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
+        $view->assign("article", $this->article->selectWhere(["id" => $_GET["id"]]));
         //route dynamique 
     }
 

@@ -2,16 +2,9 @@
   <h1>Dashboard</h1>
   <h2>Les dernières recettes</h2>
   <div class="grid index-card recipes-grid mt-6 justify-items-between recipes-list">
-    <?php
-    usort($recipes, function ($a, $b) {
-      $dateA = DateTime::createFromFormat('y-m-d', $a['created_at']);
-      $dateB = DateTime::createFromFormat('y-m-d', $b['created_at']);
-      return $dateB <=> $dateA;
-    });
-    $lastRecipes = array_slice($recipes, 0, 3);
-    foreach ($lastRecipes as $recipe) : ?>
-      <a href="">
-        <?php $this->modal("card", $recipe); ?>
+    <?php foreach ($recipes as $recipe) : ?>
+      <a href="/recipe-bo?slug=<?= $recipe["slug"] ?>&id=<?= $recipe["id"] ?>">
+      <?php $this->modal("card", $recipe); ?>
       </a>
     <?php endforeach ?>
   </div>
@@ -19,7 +12,7 @@
   <h2>Les derniers articles</h2>
   <div class="grid index-card recipes-grid">
     <?php foreach ($articles as $article) : ?>
-      <a href="">
+      <a href="/article-bo?slug=<?= $recipe["slug"] ?>&id=<?= $recipe["id"] ?>">
       <?php $this->modal("card", $article); ?>
       </a>
     <?php endforeach ?>
