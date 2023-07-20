@@ -3,9 +3,6 @@ import BrowserRouter, { BrowserLink } from "./components/BrowserRouter.js";
 import routes from "./routes.js";
 
 // Define your page components
-import Page1 from "./views/Page1";
-import Page2 from "./views/Page2";
-import Page3 from "./views/Page3.js";
 import Page4 from "./views/Page4.js";
 
 // Define your routes
@@ -20,19 +17,7 @@ const navigation = {
   children: [
     {
       type: "li",
-      children: [BrowserLink("Page1", "/")],
-    },
-    {
-      type: "li",
-      children: [BrowserLink("Page2", "/page2")],
-    },
-    {
-      type: "li",
-      children: [BrowserLink("Page3", "/page3")],
-    },
-    {
-      type: "li",
-      children: [BrowserLink("Page4", "/page4")],
+      children: [BrowserLink("Installer", "/page4")],
     },
   ],
 };

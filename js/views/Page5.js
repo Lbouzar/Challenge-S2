@@ -1,9 +1,9 @@
+import Button from "../components/Button";
 import { generateStructure } from "../core/DomRenderer";
 import { BrowserLink } from "../components/BrowserRouter.js";
-import Button from "../components/Button";
 import DomRenderer from "../core/DomRenderer";
 
-export default function Page4() {
+export default function Page5() {
   const installer = {
     type: "form",
     title: "installer",
@@ -22,14 +22,14 @@ export default function Page4() {
         children: [
           {
             type: "label",
-            text: "Nom:",
+            text: "host",
           },
           {
             type: "input",
             attributes: {
               type: "text",
-              placeholder: "Nom",
-              id: "name",
+              placeholder: "Host",
+              id: "host",
               style: { color: "blue", marginTop: "1em" },
             },
           },
@@ -40,13 +40,13 @@ export default function Page4() {
         children: [
           {
             type: "label",
-            text: "Prenom",
+            text: "port",
           },
           {
             type: "input",
             attributes: {
-              id: "prenom",
-              placeholder: "Prénom",
+              id: "port",
+              placeholder: "Port",
               style: { color: "blue", marginTop: "1em" },
             },
           },
@@ -57,15 +57,34 @@ export default function Page4() {
         children: [
           {
             type: "label",
-            text: "Email:",
+            text: "DB_Name",
           },
           {
             type: "input",
-            name: "email",
+            name: "DB_Name",
             attributes: {
-              type: "email",
-              placeholder: "Email",
-              id: "email",
+              type: "text",
+              placeholder: "DB_Name",
+              id: "db_name",
+              style: { color: "blue", marginTop: "1em" },
+            },
+          },
+        ],
+      },
+      {
+        type: "div",
+        children: [
+          {
+            type: "label",
+            text: "DB_User",
+          },
+          {
+            type: "input",
+            name: "db_user",
+            attributes: {
+              type: "text",
+              placeholder: "db_user",
+              id: "db_user",
               style: { color: "blue", marginTop: "1em" },
             },
           },
@@ -83,8 +102,8 @@ export default function Page4() {
             name: "Password",
             attributes: {
               type: "Password",
-              placeholder: "Password",
-              id: "password",
+              placeholder: "DB_Password",
+              id: "db_password",
               style: { color: "blue", marginTop: "1em" },
             },
           },
@@ -98,7 +117,7 @@ export default function Page4() {
           color: "white",
           marginTop: "1em",
         },
-        onClick: handleSubmitUser,
+        onClick: handleSubmitDataBase,
       }),
     ],
   };
@@ -108,21 +127,22 @@ export default function Page4() {
   rootElement.prepend(DomRenderer(installer));
   // generateStructure(installer);
 }
-function handleSubmitUser(event) {
-  window.location.href = "/page5";
+function handleSubmitDataBase(event) {
   event.preventDefault();
 
-  const name = document.getElementById("nom").value;
-  const email = document.getElementById("email").value;
-  const prenom = document.getElementById("prenom").value;
-  const password = document.getElementById("password").value;
+  const host = document.getElementById("host").value;
+  const port = document.getElementById("port").value;
+  const db_name = document.getElementById("db_name").value;
+  const db_user = document.getElementById("db_user").value;
+  const db_password = document.getElementById("db_password").value;
 
   const formData = {
-    formType: "user",
-    name: name,
-    email: email,
-    prenom: prenom,
-    password: password,
+    formType: "database",
+    host: host,
+    port: port,
+    db_name: db_name,
+    db_user: db_user,
+    db_password: db_password,
   };
 
   console.log(formData);

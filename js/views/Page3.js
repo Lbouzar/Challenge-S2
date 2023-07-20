@@ -21,12 +21,16 @@ export default function Page3() {
         type: "li",
         children: [BrowserLink("Page4", "/page4")],
       },
+      {
+        type: "li",
+        children: [BrowserLink("Page5", "/page5")],
+      },
     ],
   };
 
   const structure = {
     type: "div",
-    children: ["Hello index JS", navigation],
+    children: ["Installer", navigation],
   };
 
   // Render the navigation

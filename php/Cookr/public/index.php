@@ -2,8 +2,8 @@
 
 namespace App;
 
-require_once('../app/config/View.php');
-
+use App\Config\View;
+//use App\Config\Session;
 
 $uriExploded = explode("?",$_SERVER["REQUEST_URI"]);
 $uri = rtrim(strtolower(trim($uriExploded[0])),"/");
@@ -12,10 +12,9 @@ if($uri === '/installer'){
     $_POST = json_decode(file_get_contents("php://input"), true);
     include('../app/installer.php');
 }else{
-
 spl_autoload_register(function ($class) {
-    $class = "../" . str_replace("\\", "/", $class);
-    
+    $class = dirname(__DIR__) . "/" . str_replace("\\", "/", $class);
+
     //Config files
     $config = $class . ".php";
 
@@ -33,10 +32,15 @@ spl_autoload_register(function ($class) {
 //Récupérer dans l'url l'uri /login ou /user/toto
 //Nettoyer la donnée
 //S'il y a des paramètres dans l'url il faut les enlever :
-$uriExploded = explode("?",$_SERVER["REQUEST_URI"]);
-$uri = rtrim(strtolower(trim($uriExploded[0])),"/");
+$uriExploded = explode("?", $_SERVER["REQUEST_URI"]);
+
+$uri = rtrim(strtolower(trim($uriExploded[0])), "/");
+$uriParameters = isset($uriExploded[1]) ? explode("&",$uriExploded[1]) : null;
+
 //Dans le cas ou nous sommes à la racine $uri sera vide du coup je remets /
-$uri = (empty($uri))?"/":$uri;
+$uri = (empty($uri)) ? "/" : $uri;
+// $slug = isset($uriParameters) ? explode("slug=", $uriParameters[0])[1] : null;
+// $id = isset($uriParameters) ? explode("id=", $uriParameters[1])[1] : null;
 
 //Créer un fichier yaml contenant le route du type :
 // /login:
@@ -54,47 +58,57 @@ $uri = (empty($uri))?"/":$uri;
 // $controller = new Security();
 // $controller->login();
 
-if(!file_exists("../app/config/routes.yml")) {
+if (!file_exists("../App/Config/routes.yml")) {
     die("Le fichier de routing n'existe pas");
 }
+$session = Session::getInstance();
+$routes = yaml_parse_file("../App/Config/routes.yml");
 
-$routes = yaml_parse_file("../app/config/routes.yml");
-
-//Page 404
-if(empty($routes[$uri])) {
+if (!isset($routes[$uri]["controller"]) || !isset($routes[$uri]["action"]) || empty($routes[$uri]) || empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
     http_response_code(404);
-    new View("404/404","front"); // TODO : fix view not found
+    View::getInstance("404/404", "front");
+} else {
+    $controller = $routes[$uri]["controller"];
+    $action = $routes[$uri]["action"];
+
+    //Vérification de l'existance de la classe
+    if (!file_exists("../App/Controllers/" . $controller . ".php")) {
+        die("Le fichier Controllers/" . $controller . ".php n'existe pas");
+    }
+    include "../App/Controllers/" . $controller . ".php";
+
+    //Le fichier existe mais est-ce qu'il possède la bonne classe
+    //bien penser à ajouter le namespace \App\Controllers\Security
+    $controller = "App\\Controllers\\" . $controller;
+
+    if (!class_exists($controller)) {
+        die("La class " . $controller . " n'existe pas");
+    }
+
+    $objet = new $controller();
+
+    //Est-ce que l'objet contient bien la methode
+    if (!method_exists($objet, $action)) {
+        die("L'action " . $action . " n'existe pas");
+    }
+
+    if (isset($routes[$uri]["roles"])) {
+        $roles = $routes[$uri]["roles"];
+        $isAuthorized = false;
+        foreach ($roles as $role) {
+            if ($session->role == getenv($role)) {
+                $isAuthorized = true;
+                break;
+            }
+        }
+        if ($isAuthorized) {
+            $objet->$action();
+        } else {
+            http_response_code(404);
+            View::getInstance("404/404", "front");
+        }
+    } else {
+        $objet->$action();
+    }
 }
-
-if(empty($routes[$uri]["controller"]) || empty($routes[$uri]["action"])) {
-    die("Absence de controller ou d'action dans le ficher de routing pour la route ".$uri);
-}
-
-$controller = $routes[$uri]["controller"];
-$action = $routes[$uri]["action"];
-
-//Vérification de l'existance de la classe
-if(!file_exists("../app/controllers/".$controller.".php")){
-    die("Le fichier Controllers/".$controller.".php n'existe pas");
-}
-
-include "../app/controllers/".$controller.".php";
-
-//Le fichier existe mais est-ce qu'il possède la bonne classe
-//bien penser à ajouter le namespace \App\Controllers\Security
-$controller = "App\\Controllers\\".$controller;
-
-if(!class_exists($controller)){
-    die("La class ".$controller." n'existe pas");
-}
-
-$objet = new $controller();
-
-//Est-ce que l'objet contient bien la methode
-if(!method_exists($objet, $action)){
-    die("L'action ".$action." n'existe pas");
-}
-
-$objet->$action();
-
 }
