@@ -10,6 +10,7 @@ use App\Config\Session;
 use App\Forms\UpdateArticle;
 use App\Models\Menu;
 use App\Models\Articlespage;
+use App\Models\Article_History;
 
 class Articles
 {
@@ -17,6 +18,7 @@ class Articles
     private $menu;
     private $articlespage;
     private $image;
+    private $history;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class Articles
         $this->menu = Menu::getInstance();
         $this->articlespage = Articlespage::getInstance();
         $this->image = Image::getInstance();
+        $this->history = Article_History::getInstance();
     }
     public function allArticles()
     {
@@ -73,10 +76,15 @@ class Articles
         $form = UpdateArticle::getInstance();
         $view = View::getInstance("Articles/articleBO", "back");
         $view->assign("form", $form->getConfig($this->article->selectWhere(["id" => $_GET["id"]])));
-
+        $view->assign("history", $this->history->selectWhere(null));
+        $oldVersion = $this->article->selectWhere(["id" => $_GET["id"]]);
+        // die(print_r($oldVersion));
         $secondsWait = 2;
 
         if ($form->isSubmit() && $form->isValid()) {
+            //vérification pour l'insertion dans l'historique
+            die(print_r($_POST));
+            self::addToHistory($oldVersion, $_POST);
             $this->article->setId($_GET["id"]);
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
@@ -102,6 +110,15 @@ class Articles
             header("Location: articles-bo");
         } else {
             header("Location: articles-bo");
+        }
+    }
+
+    public static function addToHistory($oldVersion, $newVersion): void 
+    {
+        $history = Article_History::getInstance();
+        $history->setRecipe($oldVersion[0]["id"]);
+        if($oldVersion[0]["title"]!= $newVersion) {
+            $history->save();
         }
     }
 }

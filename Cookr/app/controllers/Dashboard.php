@@ -380,7 +380,6 @@ class Dashboard
         if ($form->isSubmit() && $form->isValid()) {
             $this->settings->setId(1);
             $this->settings->setFont($form->getData("font"));
-            // $this->settings->setColor($form->getData("color"));
             $this->settings->save();
             $form->errors[] = "Mise à jour de la page";
             header("Refresh:$secondsWait");
