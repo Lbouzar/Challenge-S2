@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config\Session;
 use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateRecipe;
@@ -19,6 +20,7 @@ class Recipes
     private $recipespage;
     private $image;
     private $comments;
+    private $session;
 
     public function __construct()
     {
@@ -27,6 +29,7 @@ class Recipes
         $this->recipespage = Recipespage::getInstance();
         $this->image = Image::getInstance();
         $this->comments = Comment_Recipe::getInstance();
+        $this->session = session::getInstance();
     }
     public function allRecipes()
     {
@@ -48,8 +51,8 @@ class Recipes
         //route dynamique
         $view->assign("comments", $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]));
         if ($form->isSubmit() && $form->isValid()) {
-            $this->comments->setCreator($user->id); // PAS BON
-            $this->comments->setRecipe($recipe->id); // PAS BON
+            $this->comments->setCreator($this->session->id); 
+            $this->comments->setRecipe($_GET["id"]);
             $this->comments->setValid(0);
             $this->comments->setDescription($form->getData("message"));
             $this->comments->save();

@@ -67,7 +67,7 @@ class Dashboard
         $view = View::getInstance("Dashboard/dashboard", "back");
         $view->assign("recipes", $this->recipe->getLatestData(3));
         $view->assign("articles", $this->article->getLatestData(3));
-        $view->assign("comments", $this->comments->getLatestData(3));
+        $view->assign("comments", $this->comments->getLatestDataComments(3));
     }
 
     public function menu()
