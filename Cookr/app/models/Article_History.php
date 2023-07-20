@@ -41,7 +41,7 @@ class Article_History extends Sql
 
     public function setTitle(string $title): void 
     {
-        $this->title = $title;
+        $this->title = ucfirst(strtolower(trim($title)));
     }
 
     public function getKeywords() : string
@@ -51,7 +51,7 @@ class Article_History extends Sql
 
     public function setKeywords(string $keywords): void 
     {
-        $this->keywords = $keywords;
+        $this->keywords = trim($keywords);
     }
 
     public function getContent(): string
@@ -61,7 +61,7 @@ class Article_History extends Sql
 
     public function setContent(string $content): void 
     {
-        $this->content = $content;
+        $this->content = trim($content);
     }
 
     public function getSlug(): string 
@@ -71,7 +71,7 @@ class Article_History extends Sql
 
     public function setSlug(string $slug): void
     {
-        $this->slug = $slug;
+        $this->slug =ucfirst(strtolower(trim($slug)));
     }
 
     public function getImage(): string 

@@ -88,7 +88,7 @@ class UpdateArticle extends Verificator
                     "maxlength" => 300,
                     "cols" => 30,
                     "rows" => 10,
-                    "required" => true,
+                    "required" => false,
                     "label" => "Contenu de l'article",
                     "value" => $data[0]["content"]
                 ]
