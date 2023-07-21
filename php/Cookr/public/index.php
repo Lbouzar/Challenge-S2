@@ -10,7 +10,7 @@ $uri = rtrim(strtolower(trim($uriExploded[0])),"/");
 
 if($uri === '/installer'){
     $_POST = json_decode(file_get_contents("php://input"), true);
-    include('../app/installer.php');
+    include('../App/installer.php');
 }else{
 spl_autoload_register(function ($class) {
     $class = dirname(__DIR__) . "/" . str_replace("\\", "/", $class);

@@ -1,4 +1,5 @@
 import { generateStructure } from "../core/DomRenderer";
+import { type_check_v1 } from "../components/type-check";
 import { BrowserLink } from "../components/BrowserRouter.js";
 import Button from "../components/Button";
 import DomRenderer from "../core/DomRenderer";
@@ -82,7 +83,7 @@ export default function Page4() {
             type: "input",
             name: "Password",
             attributes: {
-              type: "Password",
+              type: "password",
               placeholder: "Password",
               id: "password",
               style: { color: "blue", marginTop: "1em" },
@@ -109,10 +110,9 @@ export default function Page4() {
   // generateStructure(installer);
 }
 function handleSubmitUser(event) {
-  window.location.href = "/page5";
   event.preventDefault();
 
-  const name = document.getElementById("nom").value;
+  const name = document.getElementById("name").value;
   const email = document.getElementById("email").value;
   const prenom = document.getElementById("prenom").value;
   const password = document.getElementById("password").value;
@@ -125,23 +125,34 @@ function handleSubmitUser(event) {
     password: password,
   };
 
-  console.log(formData);
-  fetch("http://localhost:80/installer", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      console.log(response);
-      if (response.ok) {
-        console.log("Form submitted successfully");
-      } else {
-        console.error("Form submission failed");
-      }
+  if (
+    type_check_v1(formData.name, "string") &&
+    type_check_v1(formData.email, "string") &&
+    formData.email.includes("@") &&
+    type_check_v1(formData.prenom, "string") &&
+    type_check_v1(formData.password, "string") &&
+    formData.password.length >= 8
+  ) {
+    fetch("http://localhost:80/installer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .catch((error) => {
-      console.error("An error occurred:", error);
-    });
+      .then((response) => {
+        //console.log(response);
+        if (response.ok) {
+          console.log("Form submitted successfully");
+        } else {
+          console.error("Form submission failed");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+    window.location.href = "/page5";
+  } else {
+    window.alert("Format non valide. Veuillez réessayer");
+  }
 }

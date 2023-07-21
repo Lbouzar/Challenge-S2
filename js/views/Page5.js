@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import { generateStructure } from "../core/DomRenderer";
 import { BrowserLink } from "../components/BrowserRouter.js";
+import { type_check_v1 } from "../components/type-check";
 import DomRenderer from "../core/DomRenderer";
 
 export default function Page5() {
@@ -83,7 +84,7 @@ export default function Page5() {
             name: "db_user",
             attributes: {
               type: "text",
-              placeholder: "db_user",
+              placeholder: "DB_user",
               id: "db_user",
               style: { color: "blue", marginTop: "1em" },
             },
@@ -101,7 +102,7 @@ export default function Page5() {
             type: "input",
             name: "Password",
             attributes: {
-              type: "Password",
+              type: "password",
               placeholder: "DB_Password",
               id: "db_password",
               style: { color: "blue", marginTop: "1em" },
@@ -145,23 +146,38 @@ function handleSubmitDataBase(event) {
     db_password: db_password,
   };
 
-  console.log(formData);
-  fetch("http://localhost:80/installer", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => {
-      console.log(response);
-      if (response.ok) {
-        console.log("Form submitted successfully");
-      } else {
-        console.error("Form submission failed");
-      }
+  if (
+    type_check_v1(formData.host, "string") &&
+    type_check_v1(formData.port, "string") &&
+    type_check_v1(formData.db_name, "string") &&
+    type_check_v1(formData.db_user, "string") &&
+    type_check_v1(formData.db_password, "string") &&
+    formData.db_password.length >= 8
+  ) {
+    fetch("http://localhost:80/installer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .catch((error) => {
-      console.error("An error occurred:", error);
-    });
+      .then((response) => {
+        console.log(response);
+        if (response.ok) {
+          console.log("Form submitted successfully");
+        } else {
+          console.error("Form submission failed");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+  } else {
+    console.log(
+      type_check_v1(formData.db_password, "string"),
+      "paaaaaaaaaasss"
+    );
+    console.log(type_check_v1(formData.port, "string"), "porttttt");
+    window.alert("Format non valide. Veuillez réesseyer");
+  }
 }
