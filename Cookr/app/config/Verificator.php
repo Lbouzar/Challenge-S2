@@ -50,6 +50,9 @@ class Verificator
             $this->errors[] = " ";
         }
         foreach ($this->config["inputs"] as $name => $configInput) {
+            if (isset($this->data[$name]) && $this->containsScriptTag($this->data[$name])) {
+                $this->errors[] = "Les balises scripts sont interdites";
+            }
             if (!isset($this->data[$name]) && $configInput["type"] != "file") {
                 $this->errors[] = " ";
             } elseif (isset($configInput["required"]) && ($configInput["required"] == true) && self::isEmpty($this->data[$name])) {
@@ -101,5 +104,11 @@ class Verificator
         }
 
         return false;
+    }
+
+    public static function containsScriptTag(string $input): bool
+    {
+        $pattern = '/<script\b[^>]*>(.*?)<\/script>/is';
+        return preg_match($pattern, $input) === 1;
     }
 }

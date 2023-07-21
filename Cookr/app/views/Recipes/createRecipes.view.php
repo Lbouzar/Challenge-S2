@@ -8,7 +8,7 @@
 </script>
 
 <div class="layout-bo recipes-bo">
-    <h2>Créer une recette</h2>
+    <h2 class="title-bo">Créer une recette</h2>
     <?php if (isset($formErrors))
         $this->modal("errors", $formErrors); ?>
     <?php $this->modal("form", $form); ?>

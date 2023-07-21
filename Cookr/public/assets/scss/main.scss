@@ -20,6 +20,7 @@
 @import "./components/aside-graphic";
 @import "./components/collapse";
 @import "./components/sidebarBO";
+@import "./components/menu-link-bo";
 @import "./components/user-card";
 
 @import "./layout/layoutBO";
@@ -27,6 +28,7 @@
 @import "./page/index";
 @import "./page/article";
 @import "./page/articles";
+@import "./page/recipe";
 @import "./page/recipes";
 @import "./page/login";
 @import "./page/register";
@@ -42,3 +44,4 @@
 @import "./page/homepageBO";
 @import "./page/contactBO";
 @import "./page/imagesBO";
+@import "./page/settings";

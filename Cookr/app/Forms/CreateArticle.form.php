@@ -16,7 +16,7 @@ class CreateArticle extends Verificator
                 "method" => $this->method,
                 "action" => "",
                 "enctype" => "multipart/form-data",
-                "id" => "",
+                "id" => "createArticleForm",
                 "class" => "",
                 "submit" => "Créer"
             ],
@@ -77,17 +77,17 @@ class CreateArticle extends Verificator
                     "label" => "Image de couverture",
                     "accept" => "image/*",
                 ],
-                // "content" => [
-                //     "id" => "myTextarea",
-                //     "type" => "textarea",
-                //     "class" => "text-area",
-                //     "minlength" => 2,
-                //     "maxlength" => 300,
-                //     "cols" => 30,
-                //     "rows" => 10,
-                //     "required" => true,
-                //     "label" => "Contenu de l'article"
-                // ]
+                "content" => [
+                    "id" => "myTextarea",
+                    "type" => "textarea",
+                    "class" => "text-area",
+                    "minlength" => 2,
+                    "maxlength" => 300,
+                    "cols" => 30,
+                    "rows" => 10,
+                    "required" => false,
+                    "label" => "Contenu de l'article"
+                ]
             ]
         ];
     }

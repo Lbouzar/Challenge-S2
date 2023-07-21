@@ -2,7 +2,7 @@
     $this->modal("navbar", $menu); ?>
 
 <?php if (isset($loginpage) && !empty($loginpage)) : ?>
-<main id="login" class="justify-between">
+<main id="login">
     <section>
         <h1 class="ml-0"><?php echo $loginpage[0]["title"] ?></h1>
         <?php if (isset($formErrors))

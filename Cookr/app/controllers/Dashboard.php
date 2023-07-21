@@ -18,6 +18,7 @@ use App\Forms\UpdateContact;
 use App\Forms\UpdateLogin;
 use App\Forms\UpdateProfil;
 use App\Forms\UpdateRegister;
+use App\Forms\Settings;
 use App\Models\Article;
 use App\Models\Comment_Recipe;
 use App\Models\Menu;
@@ -28,6 +29,7 @@ use App\Models\Contactpage;
 use App\Models\Loginpage;
 use App\Models\Profilpage;
 use App\Models\Registerpage;
+use App\Models\Settings as Style;
 
 class Dashboard
 {
@@ -41,6 +43,7 @@ class Dashboard
     private $registerpage;
     private $loginpage;
     private $profilpage;
+    private $settings;
     private $image;
 
     public function __construct()
@@ -55,6 +58,7 @@ class Dashboard
         $this->registerpage = Registerpage::getInstance();
         $this->loginpage = Loginpage::getInstance();
         $this->profilpage = Profilpage::getInstance();
+        $this->settings = Style::getInstance();
         $this->image = Image::getInstance();
     }
 
@@ -63,7 +67,7 @@ class Dashboard
         $view = View::getInstance("Dashboard/dashboard", "back");
         $view->assign("recipes", $this->recipe->getLatestData(3));
         $view->assign("articles", $this->article->getLatestData(3));
-        $view->assign("comments", $this->comments->getLatestData(3));
+        $view->assign("comments", $this->comments->getLatestDataComments(3));
     }
 
     public function menu()
@@ -126,6 +130,7 @@ class Dashboard
         $secondsWait = 2;
         if ($form->isSubmit() && $form->isValid()) {
             $this->recipespage->setId(1);
+            $this->recipespage->setMainRecipeTitle($form->getData("main_recipe_title"));
             $this->recipespage->setTitle($form->getData("title"));
             $this->recipespage->save();
             $form->errors[] = "Mise à jour de la page";
@@ -143,6 +148,7 @@ class Dashboard
             $view = View::getInstance("Recipes/createRecipespage", "back");
             $view->assign("form", $form->getConfig());
             if ($form->isSubmit() && $form->isValid()) {
+                $this->recipespage->setMainRecipeTitle($form->getData("main_recipe_title"));
                 $this->recipespage->setTitle($form->getData("title"));
                 $this->recipespage->save();
                 header("Location: recipespage");
@@ -360,6 +366,28 @@ class Dashboard
         } else {
             header("Location: comments-bo");
         }
+    }
+
+    public function settings()
+    {
+        $form = Settings::getInstance();
+        $view = View::getInstance("Dashboard/settings", "back");
+        $view->assign('settings', $this->settings->selectWhere(null));
+
+        $fontFamily = $this->settings->getFont();
+        $view->assign('fontFamily', $fontFamily);
+
+        $view->assign('form', $form->getConfig($this->settings->selectWhere(null)));
+        $secondsWait = 2;
+        if ($form->isSubmit() && $form->isValid()) {
+            $this->settings->setId(1);
+            $this->settings->setFont($form->getData("font"));
+            // $this->settings->setColor($form->getData("color"));
+            $this->settings->save();
+            $form->errors[] = "Mise à jour de la page";
+            header("Refresh:$secondsWait");
+        }
+        $view->assign("formErrors", $form->errors);
     }
 
     public function showImages()

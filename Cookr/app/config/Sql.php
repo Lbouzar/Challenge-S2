@@ -49,7 +49,7 @@ class Sql
         $columns = array_diff_key($columns, $columnsToDeleted);
         unset($columns["id"]);
 
-        if ((is_string($this->getId()) && $this->getId() !== " " && preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $this->getId())) || (is_numeric($this->getId()) && $this->getId()>0)) {
+        if ((is_string($this->getId()) && $this->getId() !== " " && preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $this->getId())) || (is_numeric($this->getId()) && $this->getId() > 0)) {
             $columnsUpdate = [];
             foreach ($columns as $key => $value) {
                 $columnsUpdate[] = $key . "=:" . $key;
@@ -110,9 +110,9 @@ class Sql
     public function getLatestData(?Int $limit): array
     {
         if (isset($limit)) {
-            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " ORDER BY created_at DESC LIMIT ". $limit);
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " ORDER BY created_at DESC LIMIT " . $limit);
         } else {
-            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table ." ORDER BY created_at DESC");
+            $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " ORDER BY created_at DESC");
         }
         $queryPrepared->execute();
 
@@ -125,24 +125,36 @@ class Sql
         foreach ($array as $column => $value) {
             $where[] = $column . " = :" . $column;
         }
-        $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " WHERE " . implode(" AND ", $where). " ORDER BY created_at DESC LIMIT 3");
+        $queryPrepared = $this->PDO->prepare("SELECT * FROM " . $this->table . " WHERE " . implode(" AND ", $where) . " ORDER BY created_at DESC LIMIT 3");
         $queryPrepared->execute($array);
         return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getCommentsOfRecipe(?array $array): array
     {
-        if(isset($array)) {
+        if (isset($array)) {
             $where = [];
             foreach ($array as $column => $value) {
                 $where[] = $column . " = :" . $column;
             }
-            $queryPrepared = $this->PDO->prepare("SELECT " .$this->table.".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator WHERE " . implode(" AND ", $where));
+            $queryPrepared = $this->PDO->prepare("SELECT " . $this->table . ".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator WHERE " . implode(" AND ", $where));
             $queryPrepared->execute($array);
         } else {
-            $queryPrepared = $this->PDO->prepare("SELECT " .$this->table.".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator");
+            $queryPrepared = $this->PDO->prepare("SELECT " . $this->table . ".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator");
             $queryPrepared->execute();
         }
+        return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getLatestDataComments(?Int $limit): array
+    {
+        if (isset($limit)) {
+            $queryPrepared = $this->PDO->prepare("SELECT " . $this->table . ".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator ORDER BY created_at DESC LIMIT " .$limit);
+        } else {
+            $queryPrepared = $this->PDO->prepare("SELECT " . $this->table . ".*, ckr_user.firstname FROM " . $this->table . " INNER JOIN ckr_user ON ckr_user.id = " . $this->table . ".creator ORDER BY created_at DESC");
+        }
+        $queryPrepared->execute();
+
         return $queryPrepared->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -73,6 +74,29 @@ input::placeholder {
 
 input:focus {
   outline-color: #443630;
+}
+
+.error {
+  color: red;
+}
+
+select {
+  border-radius: 4px;
+  border: 2px solid #97857E;
+  height: 48px;
+  padding: 0 10px;
+}
+select:focus {
+  border-color: #FC6E3C;
+}
+
+.delete-button {
+  background-color: #dc3545 !important;
+}
+.delete-button:hover {
+  border-color: #dc3545 !important;
+  background-color: #FFFFFF !important;
+  color: #dc3545 !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -633,7 +657,7 @@ header #mobile-nav ul li:last-child {
   }
   #desktop-nav {
     display: block !important;
-    width: 75%;
+    width: 100%;
   }
   #desktop-nav ul {
     display: flex;
@@ -654,12 +678,32 @@ header #mobile-nav ul li:last-child {
   background-color: #FFF;
   height: 80px;
   width: 100%;
-  padding: 0 20px 0 48px;
+  padding: 0 48px 0 48px;
   box-shadow: 0px 12px 70px 0px rgba(252, 110, 60, 0.08);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   z-index: 10;
+}
+.headerBO .header-buttons a:first-child {
+  margin-right: 32px;
+}
+.headerBO .header-buttons button {
+  text-align: center;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 20px;
+  border: 2px solid #FC6E3C;
+  transition: 0.3s;
+  color: #FC6E3C;
+  background-color: #FFFFFF;
+  font-size: 16px;
+}
+.headerBO .header-buttons button:hover {
+  background-color: #FC6E3C;
+  border: 2px solid #FC6E3C;
+  color: #FFFFFF;
 }
 
 .cta-button {
@@ -736,6 +780,9 @@ header #mobile-nav ul li:last-child {
   margin-top: 4px;
   font-weight: 600;
   font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .recipe-card-title {
@@ -750,20 +797,23 @@ header #mobile-nav ul li:last-child {
 }
 
 .card-body {
+  margin-top: 8px;
   padding-left: 12px;
 }
 .card-body p {
-  font-weight: 400;
-  font-size: 14px;
+  color: #000000 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .card-footer {
+  margin: 20px 0 12px 0;
   padding-left: 12px;
 }
-.card-footer p {
-  margin: 20px 0 12px 0;
+.card-footer span {
   color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
 }
 
 .main-title {
@@ -800,7 +850,7 @@ header #mobile-nav ul li:last-child {
 
 footer {
   background-color: #FAFAFA;
-  padding: 40px 20px;
+  padding: 40px;
   margin-top: 68px;
 }
 footer h3 {
@@ -1199,10 +1249,6 @@ footer nav h3 {
   margin-bottom: 0;
 }
 
-.comment-date, .comment-pseudo {
-  font-size: 14px;
-}
-
 #comment-content {
   width: 100%;
 }
@@ -1298,13 +1344,22 @@ footer nav h3 {
 .sidebarBO {
   background-color: #FAFAFA;
   position: fixed;
-  width: 200px;
+  width: 220px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
+  padding-top: 36px;
   top: 80px;
   z-index: 100;
+}
+.sidebarBO a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
+.sidebarBO a .icon-burger_menu {
+  color: #FC6E3C;
 }
 
 .sidebarBO > div {
@@ -1330,7 +1385,20 @@ footer nav h3 {
 }
 
 .sidebarBO span {
-  margin-left: 20px;
+  margin-left: 16px;
+}
+
+.menu-link {
+  border: 2px solid #FC6E3C;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 80px;
+  margin-top: 20px;
+}
+.menu-link span span {
+  font-weight: 700;
 }
 
 .user-card {
@@ -1357,10 +1425,10 @@ footer nav h3 {
 }
 
 .layout-bo {
-  padding: 32px 40px;
-  width: 100%;
+  padding: 24px 40px 32px 40px;
+  width: calc(100% - 220px);
   margin-top: 80px;
-  margin-left: 200px;
+  margin-left: 220px;
 }
 .layout-bo .title-bo {
   font-size: 48px;
@@ -1390,6 +1458,12 @@ footer nav h3 {
 
 #slogan-logo {
   display: none;
+}
+#slogan-logo #home-logo {
+  width: 50%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 32px;
 }
 
 .grid {
@@ -1464,7 +1538,6 @@ footer nav h3 {
 @media screen and (min-width: 768px) {
   .articles-grid {
     grid-template-columns: 1fr 1fr;
-    column-gap: 50px;
     align-self: center;
   }
   .more-articles {
@@ -1502,7 +1575,11 @@ footer nav h3 {
     align-items: center;
   }
   .articles-grid {
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-self: auto;
+    padding: 0 64px;
   }
   .more-articles {
     justify-self: end;
@@ -1538,84 +1615,53 @@ footer nav h3 {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    padding: 0 64px;
   }
 }
-#article-main {
-  margin-top: 40px;
+.article-view {
+  margin-top: 48px;
 }
-#article-main #article-content h1 {
-  font-size: 24px;
-  font-weight: bold;
+.article-view h1 {
+  font-size: 40px;
 }
-#article-main #article-content .article-info {
+.article-view section {
+  margin-top: 64px;
   display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.6);
-  margin: 20px 0;
+  justify-content: space-between;
 }
-#article-main #article-content .article-info p, #article-main #article-content .article-info span {
-  margin: 0 10px 0 0;
+.article-view section .first-section {
+  margin-top: -4px;
+  width: 20%;
 }
-#article-main #article-content .article-info p:last-child {
-  margin-right: 0;
-}
-#article-main #article-content .article-info .tags {
-  display: none;
-}
-#article-main #article-content h2 {
-  font-size: 20px;
+.article-view section .first-section .publication-date span {
   font-weight: 600;
 }
-#article-main #article-content h2, #article-main #article-content img, #article-main #article-content p {
-  margin-bottom: 32px;
+.article-view section .first-section .keywords-title {
+  display: block;
+  margin-top: 16px;
 }
-#article-main #article-content .section {
-  width: 100%;
-  position: relative;
+.article-view section .first-section .keyword-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  text-transform: capitalize;
 }
-#article-main #article-content .section img {
+.article-view section .first-section .keyword-content span {
+  font-weight: 600;
+}
+.article-view section .second-section {
+  width: 70%;
+}
+.article-view section .second-section img {
   width: 100%;
+  height: 400px;
   object-fit: cover;
 }
-@media screen and (min-width: 1280px) {
-  #article-main #article-content h1 {
-    position: relative;
-    margin-left: 34px;
-  }
-  #article-main #article-content h1::before {
-    display: inline-flex;
-    width: 28px;
-    height: 6px;
-    margin-right: 4px;
-    background-color: #FC6E3C;
-    position: absolute;
-    top: 50%;
-    transform: translate(-34px, -50%);
-    content: "";
-  }
-  #article-main #article-content .article-design {
-    display: flex;
-    width: 100%;
-    margin-top: 60px;
-  }
-  #article-main #article-content .article-info {
-    flex-direction: column;
-    align-items: start;
-    width: 25%;
-    margin-top: 0;
-  }
-  #article-main #article-content .article-info span {
-    display: none;
-  }
-  #article-main #article-content .article-info .tags {
-    margin-top: 24px;
-    display: block;
-    font-weight: 500;
-    color: black;
-  }
-  #article-main #article-content .article-sections {
-    width: 75%;
-  }
+.article-view section .second-section h1, .article-view section .second-section h2, .article-view section .second-section h3, .article-view section .second-section h4, .article-view section .second-section h5, .article-view section .second-section h6 {
+  margin: 20px 0;
+}
+.article-view section .second-section p {
+  margin: 20px 0;
 }
 
 .display-card .card:nth-child(n+7) {
@@ -1626,11 +1672,170 @@ footer nav h3 {
   color: initial;
 }
 
+.articles-view {
+  margin-top: 48px;
+}
+.articles-view h1 {
+  font-size: 32px;
+}
+
 @media screen and (min-width: 1280px) {
   .display-card .card:nth-child(n+7) {
     display: block;
   }
 }
+.recipe-view {
+  width: 100%;
+  padding: 64px 20px;
+}
+@media screen and (min-width: 1024px) {
+  .recipe-view {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+.recipe-view h1 {
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-weight: 700;
+  font-size: 36px;
+}
+.recipe-view .img-container {
+  width: 100%;
+  margin-top: 32px;
+}
+.recipe-view .img-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.recipe-view .presentation {
+  margin-top: 24px;
+}
+.recipe-view .ingredients {
+  margin-top: 24px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background-color: #FAFAFA;
+  border-radius: 8px;
+}
+.recipe-view .indications {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+.recipe-view .indications .indication {
+  background-color: #FAFAFA;
+  padding: 8px;
+  border-radius: 4px;
+  margin-right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+}
+.recipe-view .indications .indication .indication-title {
+  font-weight: bold;
+}
+.recipe-view .indications .indication:last-child {
+  margin-right: 0;
+}
+.recipe-view .description {
+  margin-top: 24px;
+  background-color: #FAFAFA;
+  border-radius: 8px;
+  padding: 12px;
+}
+.recipe-view .layer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+  background-color: #FC6E3C;
+  border-radius: 8px;
+}
+.recipe-view .layer span {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 18px;
+}
+.recipe-view form {
+  margin-top: 24px;
+}
+.recipe-view form .cta-button {
+  margin: 16px 0 0 auto;
+}
+.recipe-view .comment-list {
+  margin-top: 32px;
+}
+.recipe-view .comment-list .comment-wrapper {
+  margin-top: 16px;
+  background-color: #FAFAFA;
+  padding: 16px 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos {
+  display: flex;
+  justify-content: space-between;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos .comment-author {
+  font-weight: 600;
+}
+.recipe-view .comment-list .comment-wrapper .comment-infos .comment-date span {
+  font-weight: 600;
+}
+.recipe-view .comment-list .comment-wrapper .comment-content {
+  margin-top: 16px;
+}
+
+.recipes-view-first-section {
+  margin-top: 48px;
+  width: 100%;
+}
+.recipes-view-first-section .sections-title {
+  font-size: 32px;
+}
+.recipes-view-first-section .main-recipe-wrapper {
+  margin: 32px auto 0 auto;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.recipes-view-first-section .main-recipe-wrapper a {
+  width: 45%;
+}
+.recipes-view-first-section .main-recipe-wrapper a article {
+  width: 100%;
+}
+.recipes-view-first-section .main-recipe-wrapper a article img {
+  height: 220px;
+}
+.recipes-view-first-section .main-recipe-wrapper .main-recipe-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 45%;
+}
+.recipes-view-first-section .main-recipe-wrapper .main-recipe-infos button {
+  max-width: unset !important;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.recipes-view-second-section {
+  margin-top: 48px;
+}
+.recipes-view-second-section .sections-title {
+  font-size: 32px;
+}
+
 @media screen and (min-width: 768px) {
   #recettes-display-card {
     column-gap: 50px;
@@ -1646,11 +1851,12 @@ footer nav h3 {
   margin-top: 40px;
   padding: 0 40px;
 }
-#login section {
-  max-width: 400px;
-}
 #login h1 {
   font-size: 30px;
+  text-align: center;
+}
+#login section {
+  max-width: 400px;
 }
 #login span {
   display: block;
@@ -1717,8 +1923,8 @@ footer nav h3 {
     justify-content: space-between;
   }
   #login section:nth-of-type(1) {
-    margin-right: 113px;
-    margin-left: 113px;
+    margin-right: auto;
+    margin-left: auto;
   }
   #login .register {
     font-size: 25px;
@@ -1730,6 +1936,7 @@ footer nav h3 {
 }
 #register h1 {
   font-size: 30px;
+  text-align: center;
 }
 #register span {
   display: block;
@@ -1822,7 +2029,7 @@ footer nav h3 {
   }
 }
 #contact h1 {
-  font-size: 24px;
+  font-size: 32px;
 }
 @media screen and (min-width: 768px) {
   #contact h1 {
@@ -1876,7 +2083,6 @@ footer nav h3 {
   margin-right: 4px;
 }
 #contact form label {
-  margin-top: 24px;
   font-weight: 500;
 }
 #contact form input[type=email] {
@@ -1897,9 +2103,10 @@ footer nav h3 {
   }
 }
 
-h1 {
-  margin: 32px auto 0 auto;
+.profile-title {
+  margin: 48px auto 0 auto;
   width: 90%;
+  font-size: 32px;
 }
 
 .profile-container {
@@ -1920,6 +2127,18 @@ h1 {
   align-items: center;
   width: 33%;
   min-width: 240px;
+}
+.profile-container .first-section .user-wrapper {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-container .first-section .user-wrapper svg {
+  transform: scale(1.5);
 }
 .profile-container .first-section .img-container {
   width: 100px;
@@ -2039,6 +2258,7 @@ h1 {
   margin: 32px 0;
   text-align: center;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .not-found > div span {
@@ -2057,6 +2277,10 @@ h1 {
 }
 .dashboard .recipes-list {
   width: 100%;
+  padding: 0 !important;
+}
+.dashboard .recipes-grid {
+  padding: 0 !important;
 }
 .dashboard button {
   margin-left: auto;
@@ -2125,7 +2349,9 @@ h1 {
   height: 100%;
   z-index: 2;
 }
-.recipes-bo .img-previews #imgPreview1, .recipes-bo .img-previews #imgPreview2, .recipes-bo .img-previews #imgPreview3 {
+.recipes-bo .img-previews #imgPreview1,
+.recipes-bo .img-previews #imgPreview2,
+.recipes-bo .img-previews #imgPreview3 {
   position: absolute;
   top: 28px;
   width: calc(100% - 2px);
@@ -2157,7 +2383,7 @@ h1 {
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .img-container {
   width: 15%;
-  height: 100%;
+  height: 75px;
   overflow: hidden;
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .img-container img {
@@ -2174,6 +2400,11 @@ h1 {
 .recipes-bo .list-edit-recipes a .edit-recipe .recipe-dscp span {
   font-weight: 600;
   margin-bottom: 8px;
+}
+.recipes-bo .list-edit-recipes a .edit-recipe .recipe-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .recipes-bo .list-edit-recipes a .edit-recipe .recipe-infos {
   width: 15%;
@@ -2272,7 +2503,7 @@ h1 {
 }
 .articles-bo .list-edit-articles a .edit-article .img-container {
   width: 15%;
-  height: 100%;
+  height: 75px;
   overflow: hidden;
 }
 .articles-bo .list-edit-articles a .edit-article .img-container img {
@@ -2289,6 +2520,11 @@ h1 {
 .articles-bo .list-edit-articles a .edit-article .article-dscp span {
   font-weight: 600;
   margin-bottom: 8px;
+}
+.articles-bo .list-edit-articles a .edit-article .article-dscp p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .articles-bo .list-edit-articles a .edit-article .article-infos {
   width: 15%;
@@ -2463,6 +2699,10 @@ h1 {
 .images-view .images-grid .card-img .card-img-button {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.settings select {
+  width: 50%;
 }
 
 /*# sourceMappingURL=main.css.map */

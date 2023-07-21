@@ -276,6 +276,12 @@
     - Admin
     - Moderateur
 
+/settings:
+  controller: Dashboard
+  action: settings
+  roles:
+    - Admin
+
 /show-images:
   controller: Dashboard
   action: showImages

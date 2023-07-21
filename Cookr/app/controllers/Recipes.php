@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Config\Session;
 use App\Config\Image;
 use App\Config\View;
 use App\Forms\CreateRecipe;
 use App\Forms\UpdateRecipe;
+use App\Forms\Comment;
 use App\Models\Comment_Recipe;
 use App\Models\Recipe;
 use App\Models\Menu;
@@ -18,6 +20,7 @@ class Recipes
     private $recipespage;
     private $image;
     private $comments;
+    private $session;
 
     public function __construct()
     {
@@ -26,6 +29,7 @@ class Recipes
         $this->recipespage = Recipespage::getInstance();
         $this->image = Image::getInstance();
         $this->comments = Comment_Recipe::getInstance();
+        $this->session = session::getInstance();
     }
     public function allRecipes()
     {
@@ -38,8 +42,24 @@ class Recipes
 
     public function recipe()
     {
+        $form = Comment::getInstance();
+        $view = View::getInstance("Recipes/recipe", "front");
+        $view->assign("menu", $this->menu->selectWhere(["is_active" => 1]));
+        $view->assign("recipespage", $this->recipespage->selectWhere(null));
+        $view->assign("recipe", $this->recipe->selectWhere(["id" => $_GET["id"]]));
+        if ($this->session->__isset("id") && $this->session->__isset("token") && $this->session->__isset("role")) {
+            $view->assign('form', $form->getConfig());
+            if ($form->isSubmit() && $form->isValid()) {
+                $this->comments->setCreator($this->session->id); 
+                $this->comments->setRecipe($_GET["id"]);
+                $this->comments->setValid(0);
+                $this->comments->setDescription($form->getData("message"));
+                $this->comments->save();
+                $form->errors[] = "Le commentaire va être vérifié";
+            }
+        }
         //route dynamique
-        $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]);
+        $view->assign("comments", $this->comments->getCommentsOfRecipe(["is_valid" => 1, "recipe" => $_GET["id"]]));
     }
 
     public function allRecipesBO()
@@ -56,6 +76,7 @@ class Recipes
         if ($form->isSubmit() && $form->isValid()) {
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
+            $this->recipe->setIsMain($form->getData("is_main"));
             $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
@@ -86,6 +107,7 @@ class Recipes
             $this->recipe->setId($_GET["id"]);
             $this->recipe->setTitle($form->getData("title"));
             $this->recipe->setSlug($form->getData("slug"));
+            $this->recipe->setIsMain($form->getData("is_main"));
             $this->recipe->setIsActive($form->getData("is_active"));
             $this->recipe->setPreparationTime($form->getData("preparation_time"));
             $this->recipe->setCookingTime($form->getData("cooking_time"));
