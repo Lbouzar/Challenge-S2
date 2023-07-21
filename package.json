@@ -1,0 +1,17 @@
+{
+  "name": "CHALLENGE-S2",
+  "version": "1.0.0",
+  "description": "CHALLENGE-S2",
+  "scripts": {
+    "dev": "cd js && vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [
+    "framework",
+    "javascript"
+  ],
+  "devDependencies": {
+    "vite": "^2.9.16"
+  }
+}

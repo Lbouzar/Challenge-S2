@@ -1,0 +1,35 @@
+.homepage-bo {
+  h2 {
+    font-weight: 700;
+    font-size: 48px;
+  }
+  fieldset {
+    margin-top: 20px;
+    width: 50%;
+  }
+  label {
+    margin-bottom: 4px;
+  }
+  .input-regular {
+    width: 100% !important;
+  }
+  // .img-logo {
+  //   position: relative;
+  //   height: 300px;
+  // }
+  // input[type="file"] {
+  //   border: 2px solid $light-brown;
+  //   width: 50%;
+  //   height: 100%;
+  //   z-index: 2;
+  // }
+  // #imgLogo {
+  //   position: absolute;
+  //   top: 28px;
+  //   width: calc(100% - 2px);
+  //   height: calc(100% - 30px);
+  //   object-fit: cover;
+  //   overflow: hidden;
+  //   z-index: 1;
+  // }
+}

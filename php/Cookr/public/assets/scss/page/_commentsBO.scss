@@ -1,0 +1,52 @@
+.comments-bo {
+  h2 {
+    font-weight: 700;
+    font-size: 48px;
+  }
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    margin: 32px 0;
+    .comment {
+      margin-bottom: 16px;
+      background-color: $white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 1px solid $orange;
+      div {
+        display: flex;
+        justify-content: space-between;
+        span {
+          font-weight: 700;
+        }
+      }
+      p {
+        margin-top: 16px;
+      }
+      .where-posted {
+        margin-top: 16px;
+        display: flex;
+        justify-content: end;
+        span {
+          font-weight: 700;
+        }
+      }
+    }
+    .comment:last-child {
+      margin-bottom: 0;
+    }
+    .delete-button {
+      background-color: #dc3545;
+      margin-left: auto;
+      margin-bottom: 32px;
+    }
+    .delete-button:hover {
+      color: #dc3545;
+      background-color: unset;
+      border: 2px solid #dc3545;
+    }
+    .delete-button:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

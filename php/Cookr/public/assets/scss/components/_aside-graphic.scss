@@ -1,0 +1,33 @@
+.aside-graphic {
+    display: none;
+    width: 700px;
+    margin-right: 9px;
+    h1 {
+        width: 483px;
+    }
+    div {
+        img {
+            &:nth-of-type(1) {
+                width: 200px;
+                align-self: self-end;
+            }
+            &:nth-of-type(2) {
+                width: 247px;
+            }
+        }
+    }
+    img {
+        width: 320px;
+        &:nth-of-type(1) {
+            margin-bottom: 27px;
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .aside-graphic {
+      display: flex;
+      flex-direction: column;
+
+    }
+}

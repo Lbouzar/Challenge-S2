@@ -1,0 +1,84 @@
+footer {
+  background-color: $white-light;
+  padding: 40px;
+  margin-top: 68px;
+  h3 {
+    font-size: 18px;
+    margin: 24px 0 20px 0;
+  }
+  .first-title {
+    margin-top: 0px;
+  }
+
+  .newsletter-input {
+    .input-regular--small {
+      margin-right: 4px;
+      height: 40px;
+    }
+    button {
+      height: initial;
+    }
+  }
+
+  .bottom-footer {
+    display: flex;
+    flex-direction: column;
+    .socials {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      a {
+        margin-right: 40px;
+      }
+      a:last-child {
+        margin-right: 0;
+      }
+    }
+    .conditions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+    }
+    .copyright {
+      text-align: center;
+      font-weight: 500;
+      margin-top: 20px;
+    }
+  }
+}
+
+footer nav h3 {
+  margin-top: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .hidden {
+    display: none;
+  }
+
+  footer nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .footer-menu {
+      display: block;
+      height: max-content !important;
+    }
+  }
+
+  .conditions a:first-of-type {
+    margin-right: 300px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .bottom-footer {
+    flex-direction: row-reverse !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

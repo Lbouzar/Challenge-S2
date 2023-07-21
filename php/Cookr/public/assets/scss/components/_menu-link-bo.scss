@@ -1,0 +1,12 @@
+.menu-link {
+  border: 2px solid $orange;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 80px;
+  margin-top: 20px;
+  span span {
+    font-weight: 700;
+  }
+}
