@@ -20,11 +20,6 @@
             cols="<?= $input["cols"]?>" 
             rows="<?= $input["rows"]?>"
             <?= $input["required"] ? "required" : "" ?>><?= $input["value"]?? ""?></textarea>
-            <span class="length" id="message-length">
-                <span>0</span>
-                <span>/</span>
-                <span>300</span>
-            </span>
             </fieldset>
         <?php elseif ($input["type"] === "select") :?>
             <fieldset class="flex-column mt-4">
