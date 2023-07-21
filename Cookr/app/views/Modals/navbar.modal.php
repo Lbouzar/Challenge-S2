@@ -1,4 +1,4 @@
-<header class="justify-between align-center mt-4 ml-8 mr-8">
+<header class="justify-between align-center mt-4">
     <nav id="mobile-nav">
         <i id="close-icon" class="icon-close" aria-label="close"></i>
         <ul>
