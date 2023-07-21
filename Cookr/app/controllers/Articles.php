@@ -7,9 +7,11 @@ use App\Config\View;
 use App\Models\Article;
 use App\Forms\CreateArticle;
 use App\Config\Session;
+use App\Forms\History;
 use App\Forms\UpdateArticle;
 use App\Models\Menu;
 use App\Models\Articlespage;
+use App\Models\Article_History;
 
 class Articles
 {
@@ -17,6 +19,7 @@ class Articles
     private $menu;
     private $articlespage;
     private $image;
+    private $history;
 
     public function __construct()
     {
@@ -24,6 +27,7 @@ class Articles
         $this->menu = Menu::getInstance();
         $this->articlespage = Articlespage::getInstance();
         $this->image = Image::getInstance();
+        $this->history = Article_History::getInstance();
     }
     public function allArticles()
     {
@@ -74,12 +78,17 @@ class Articles
     {
         //route dynamique
         $form = UpdateArticle::getInstance();
+        $historyForm = History::getInstance();
         $view = View::getInstance("Articles/articleBO", "back");
         $view->assign("form", $form->getConfig($this->article->selectWhere(["id" => $_GET["id"]])));
-
+        $view->assign("historyForm", $historyForm->getConfig($this->history->selectWhere(["recipe" => $_GET["id"]])));
+        $view->assign("history", $this->history->selectWhere(["recipe" => $_GET["id"]]));
+        $oldVersion = $this->article->selectWhere(["id" => $_GET["id"]]);
         $secondsWait = 2;
 
         if ($form->isSubmit() && $form->isValid()) {
+            //vérification pour l'insertion dans l'historique
+            self::addToHistory($oldVersion, $_POST);
             $this->article->setId($_GET["id"]);
             $this->article->setTitle($form->getData("title"));
             $this->article->setSlug($form->getData("slug"));
@@ -94,6 +103,18 @@ class Articles
             header("Refresh:$secondsWait");
         }
         $view->assign("formErrors", $form->errors);
+
+        if ($historyForm->isSubmit() && $historyForm->isValid()) {
+            $rebuild = $this->history->selectWhere(["id" => $historyForm->getData("versionId")]);
+            $this->article->setId($rebuild[0]["recipe"]);
+            $this->article->setTitle($rebuild[0]["title"]);
+            $this->article->setKeywords($rebuild[0]["keywords"]);
+            $this->article->setContent($rebuild[0]["content"]);
+            $this->article->save();
+            $historyForm->errors[] = "Mise à jour de l'article";
+            header("Refresh:$secondsWait");
+        }
+        $view->assign("historyErrors", $historyForm->errors);
     }
 
     public function delete(): void
@@ -105,6 +126,24 @@ class Articles
             header("Location: articles-bo");
         } else {
             header("Location: articles-bo");
+        }
+    }
+
+    public static function addToHistory($oldVersion, $newVersion): void
+    {
+        $history = Article_History::getInstance();
+        $history->setRecipe($oldVersion[0]["id"]);
+        if (
+            $oldVersion[0]["title"] != ucfirst(strtolower(trim($newVersion["title"])))
+            || $oldVersion[0]["slug"] != ucfirst(strtolower(trim($newVersion["slug"])))
+            || $oldVersion[0]["keywords"] != trim($newVersion["keywords"])
+            || $oldVersion[0]["content"] != trim($newVersion["content"])
+        ) {
+            $history->setTitle($newVersion["title"]);
+            $history->setSlug($newVersion["slug"]);
+            $history->setKeywords($newVersion["keywords"]);
+            $history->setContent($newVersion["content"]);
+            $history->save();
         }
     }
 }
